@@ -50,9 +50,7 @@ public class PushDataService {
 			return ;
 		}
 		for(IPushDataThread _t : _threadList) {
-			Thread _d = new Thread(_t);
-			_d.start();
-			_t.setIsRunning(true);
+			_t.start();
 		}
 		System.out.println("开启数据推送线程成功");
 	}
@@ -65,9 +63,7 @@ public class PushDataService {
 			System.out.println("没有要关闭的线程");
 		}
 		for(IPushDataThread _t : _threadList) {
-			Thread _d = new Thread(_t);
-			_d.start();
-			_t.setIsRunning(false);
+			_t.start();
 		}
 	}
 	
