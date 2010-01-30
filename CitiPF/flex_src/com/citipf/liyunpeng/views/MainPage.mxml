@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	 minHeight="800" minWidth="1000" 
+	 horizontalScrollPolicy="auto" verticalScrollPolicy="auto"
+	 initialize="init()">
+	<mx:Script>
+		<![CDATA[
+			import com.citipf.liyunpeng.models.ViewModel;
+			import mx.containers.Panel;
+			import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
+			import flash.utils.getDefinitionByName;
+			import com.citipf.liyunpeng.views.*;
+			private function init() : void
+			{
+				for each(var obj : Object in mainViews.views) 
+				{
+					try {
+						var disObj : Panel = new (getDefinitionByName(obj.className)) as Panel; 
+						disObj.label = obj.lable;
+						trace("加载" + obj.label + "模块");
+						mainViewStack.addChild(disObj);
+					} catch ( re : ReferenceError ) {
+						trace("引用模块“" + obj.label + "”类名未定义或定义错误----Reference Class name not found");
+					}
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Model id="mainViews" source="../configs/viewsConfig.xml" />
+	<mx:ApplicationControlBar height="70" width="100%" />
+	
+	<mx:HBox width="100%" height="100%" styleName="navButtonBox" >
+		<mx:VBox width="{ViewModel.getInstance()._navButtonWidth}" >
+			<mx:ToggleButtonBar dataProvider="{mainViews.views}" labelField="label" childIndexChange="{mainViewStack.selectedIndex = event.newIndex}" direction="vertical" />
+		</mx:VBox>
+		<mx:ViewStack id="mainViewStack" width="100%" height="100%" />
+	</mx:HBox>
+</mx:VBox>
