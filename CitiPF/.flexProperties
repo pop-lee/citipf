@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexProperties flexServerType="8" flexWarLocation="D:/DTools/blazeds.war" serverContextRoot="/WebContent" serverRoot="D:/DWorks/Graduation/CitiPF/WebContent" serverRootURL="http://localhost:8888/CitiPF" toolCompile="true" useServerFlexSDK="false" version="1"/>
+<flexProperties flexServerType="8" flexWarLocation="D:/DTools/blazeds.war" serverContextRoot="/CitiPF" serverRoot="D:/DWorks/Graduation/CitiPF/WebContent" serverRootURL="http://localhost:8888/CitiPF" toolCompile="true" useServerFlexSDK="false" version="1"/>
