@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
-
-
-
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" viewSourceURL="srcview/index.html" height="100%" width="100%"
+				xmlns:views="com.citipf.liyunpeng.views.*"
+				initialize="init()">
+	<mx:Script>
+		<![CDATA[
+			import com.citipf.liyunpeng.models.ViewModel;
+			ViewModel.getInstance();
+			private function init() : void
+			{
+				StyleManager.loadStyleDeclarations(viewConfig.cssfiles.cssfile[0]);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Model id="viewConfig" source="configs/viewsConfig.xml" />
+	
+	<views:MainPage />
 </mx:Application>
