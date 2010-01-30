@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<views>
+		<label>财经新闻</label>
+		<className>com.citipf.liyunpeng.views.finaNews.FinaNewsMain</className>
+	</views>
+	<views>
+		<label>风险偏好测试</label>
+		<className>com.citipf.liyunpeng.views.iPrefTest.IPrefTestMain</className>
+	</views>
+	<views>
+		<label>购房规划</label>
+		<className>com.citipf.liyunpeng.views.purcPlan.PurcPlanMain</className>
+	</views>
+	<views>
+		<label>购车规划</label>
+		<className>com.citipf.liyunpeng.views.carPlan.CarPlanMain</className>
+	</views>
+	<views>
+		<label>子女教育规划</label>
+		<className>com.citipf.liyunpeng.views.chiEduPlan.ChiEduPlanMain</className>
+	</views>
+	<views>
+		<label>养老规划</label>
+		<className>com.citipf.liyunpeng.views.persPlan.PersPlanMain</className>
+	</views>
+	<views>
+		<label>寿险规划</label>
+		<className>com.citipf.liyunpeng.views.lifeInsuPlan.LifeInsuPlanMain</className>
+	</views>
+	
+	<cssfiles>
+		<cssfile>./assets/mainStyle.swf</cssfile>
+		<cssfile></cssfile>
+	</cssfiles>
+</configs>
