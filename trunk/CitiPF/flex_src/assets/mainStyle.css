@@ -1,0 +1,33 @@
+/* CSS file */
+
+.global {
+	fontSize : 15;
+	backgroundColor : #cecece
+}
+
+Button
+{
+	theme-color: #474747;
+	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
+}
+/******************************导航按钮容器属性****************************/
+ToggleButtonBar {
+	buttonStyleName : "myToggleButtonStyle";
+}
+
+.myToggleButtonStyle {
+	theme-color: #474747;
+	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
+}
+
+.navButtonBox {
+	paddingLeft : 5 ;
+	paddingRight : 5 ;
+}
+/**************************************************************************/
