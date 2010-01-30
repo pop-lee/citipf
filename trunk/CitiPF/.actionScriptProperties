@@ -13,5 +13,7 @@
     <application path="CitiPF.mxml"/>
   </applications>
   <modules/>
-  <buildCSSFiles/>
+  <buildCSSFiles>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="flex_src/assets/mainStyle.css"/>
+  </buildCSSFiles>
 </actionScriptProperties>
