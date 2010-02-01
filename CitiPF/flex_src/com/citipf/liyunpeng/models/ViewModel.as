@@ -8,19 +8,19 @@ package com.citipf.liyunpeng.models
 	import com.citipf.liyunpeng.views.persPlan.PersPlanMain;
 	import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
 	
-	import mx.styles.StyleManager;
-	
 	public class ViewModel
 	{
 		
-		private static var instance : ViewModel = new ViewModel();
+		private static var instance : ViewModel = new ViewModel(new SingletonClass());
 		
 		/**
 		 * 导航按钮宽度
 		 */
 		public const _navButtonWidth : uint = 280;
 		
-		public function ViewModel()
+		public static function getInstance() : ViewModel { return instance; }
+		
+		public function ViewModel(cons : SingletonClass)
 		{
 //			StyleManager.loadStyleDeclarations("./assets/mainStyle.swf");
 			new CarPlanMain();
@@ -33,9 +33,6 @@ package com.citipf.liyunpeng.models
 			new IPrefTestMain();
 		}
 		
-		public static function getInstance() : ViewModel
-		{
-			return instance;
-		}
 	}
 }
+class SingletonClass {}
