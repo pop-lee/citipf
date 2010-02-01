@@ -3,7 +3,6 @@
 	<name>CitiPF</name>
 	<comment></comment>
 	<projects>
-		<project>CitiPF_RateCore</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
