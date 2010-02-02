@@ -34,7 +34,6 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 当监听到指定频道推送数据时触发执行
 		 * @param event 参数为数据推送监听触发的时间
-		 * 
 		 */		
 		private function messageHandle(event : MessageEvent) : void
 		{
@@ -49,7 +48,6 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 股指访问期方法 
 		 * @return 返回存储股指的数组容器
-		 * 
 		 */		
 		public function get stockArr() : ArrayCollection
 		{
