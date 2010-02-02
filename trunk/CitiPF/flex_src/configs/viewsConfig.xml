@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
+	<!-- 视图反射显示配置 -->
 	<views>
 		<label>财经新闻</label>
 		<className>com.citipf.liyunpeng.views.finaNews.FinaNewsMain</className>
@@ -29,6 +30,7 @@
 		<className>com.citipf.liyunpeng.views.lifeInsuPlan.LifeInsuPlanMain</className>
 	</views>
 	
+	<!-- 样式加载CSS样式 -->
 	<cssfiles>
 		<cssfile>./assets/mainStyle.swf</cssfile>
 		<cssfile></cssfile>
