@@ -3,12 +3,14 @@
 */
 package com.citipf.liyunpeng.models
 {
+	import com.citipf.liyunpeng.valueObject.StockVO;
+	
 	import mx.collections.ArrayCollection;
 	import mx.messaging.ChannelSet;
 	import mx.messaging.Consumer;
 	import mx.messaging.events.MessageEvent;
 	
-	public class StockModel
+	public class StockModel extends FormateModel
 	{
 		/**
 		 * 数据推送Consumer组建 
@@ -22,11 +24,11 @@ package com.citipf.liyunpeng.models
 		
 		public function StockModel()
 		{
-//			consumer.destination = "stock-data-feed";
-//			consumer.subtopic = "stock";
-//			consumer.channelSet = new ChannelSet(["my-streaming-amf"]);
-//			consumer.addEventListener(MessageEvent.MESSAGE,messageHandle);
-//			consumer.subscribe();
+			consumer.destination = "stock-data-feed";
+			consumer.subtopic = "stock";
+			consumer.channelSet = new ChannelSet(["my-streaming-amf"]);
+			consumer.addEventListener(MessageEvent.MESSAGE,messageHandle);
+			consumer.subscribe();
 		}
 		
 		/**
@@ -36,7 +38,12 @@ package com.citipf.liyunpeng.models
 		 */		
 		private function messageHandle(event : MessageEvent) : void
 		{
-			trace(event.message.body);
+			var _stockVO : StockVO = event.message.body as StockVO;
+			trace(_stockVO.stockIndex);
+			if(_stockArr.length > 50) {
+				_stockArr.removeItemAt(0);
+			}
+			_stockArr.addItem(_stockVO);
 		}
 		
 		/**
