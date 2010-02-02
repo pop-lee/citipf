@@ -1,5 +1,6 @@
 package com.citipf.liyunpeng.valueObject
 {
+	[RemoteClass(alias="com.citipf.liyunpeng.valueObject.StockVO")]
 	public class StockVO
 	{
 		private var _stockIndex : Number ;
