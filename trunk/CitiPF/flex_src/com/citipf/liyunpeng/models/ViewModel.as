@@ -8,10 +8,12 @@ package com.citipf.liyunpeng.models
 	import com.citipf.liyunpeng.views.persPlan.PersPlanMain;
 	import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
 	
+	import flash.errors.IllegalOperationError;
+	
 	public class ViewModel
 	{
 		
-		private static var instance : ViewModel = new ViewModel(new SingletonClass());
+		private static var instance : ViewModel = new ViewModel();
 		
 		/**
 		 * 导航按钮宽度
@@ -20,8 +22,13 @@ package com.citipf.liyunpeng.models
 		
 		public static function getInstance() : ViewModel { return instance; }
 		
-		public function ViewModel(cons : SingletonClass)
+		public function ViewModel()
 		{
+			if(instance != null) {
+				throw new IllegalOperationError(
+				"This is a singleton class,you can call the getInstall() method!" + 
+				"--这是一个单例类,您可以调用getInstance方法获取实例！");
+			}
 //			StyleManager.loadStyleDeclarations("./assets/mainStyle.swf");
 			new CarPlanMain();
 			new ChiEduPlanMain();
@@ -35,4 +42,3 @@ package com.citipf.liyunpeng.models
 		
 	}
 }
-class SingletonClass {}
