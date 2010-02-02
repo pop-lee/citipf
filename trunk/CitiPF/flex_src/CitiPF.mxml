@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
-				viewSourceURL="srcview/index.html"
-				height="100%" width="100%"
 				xmlns:views="com.citipf.liyunpeng.views.*" 
-				initialize="init()">
+				height="100%" width="100%"
+				initialize="init()" 
+				viewSourceURL="srcview/index.html">
 	<mx:Script>
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.models.ViewModel;
 			ViewModel.getInstance();
+			Model.getInstance();
 			private function init() : void
 			{
 				StyleManager.loadStyleDeclarations(viewConfig.cssfiles.cssfile[0]);
@@ -16,8 +17,9 @@
 			
 		]]>
 	</mx:Script>
-	
+	<!-- 读取页面显示配置文件viewsConfig.xml -->
 	<mx:Model id="viewConfig" source="configs/viewsConfig.xml" />
 	
+	<!-- 主页面 -->
 	<views:MainPage />
 </mx:Application>
