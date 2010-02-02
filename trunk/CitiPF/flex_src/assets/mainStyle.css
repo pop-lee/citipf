@@ -16,9 +16,13 @@ Button
 /******************************导航按钮容器属性****************************/
 ToggleButtonBar {
 	buttonStyleName : "myToggleButtonStyle";
+	selectedButtonTextStyleName : "myToggleButtonStyle";
+	firstButtonStyleName : "myToggleButtonStyle";
+	lastButtonStyleName : "myToggleButtonStyle";
 }
 
 .myToggleButtonStyle {
+	cornerRadius : 0;
 	theme-color: #474747;
 	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
 	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
