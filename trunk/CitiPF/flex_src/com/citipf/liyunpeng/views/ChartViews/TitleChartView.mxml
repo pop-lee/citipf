@@ -2,14 +2,20 @@
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
 	<mx:Script>
 		<![CDATA[
+			import mx.charts.chartClasses.IAxis;
+			import mx.collections.ArrayCollection;
+			import com.citipf.liyunpeng.models.Model;
+			
+			[Bindable]
+			private var model : Model = Model.getInstance();
+			
 			private function linearAxis_labelFunc(item:Object, prevValue:Object, axis:IAxis):String { 
-//				return currFormatter.format(item); 
 				return Number(item).toFixed(2);
 			} 
 			
 			private function formatTime(ategoryValue:Object,previousCategoryValue:Object,axis:CategoryAxis,categoryItem:Object) : String
 			{
-				return rdf.format(ategoryValue);//ategoryValue as Date);
+				return model.stockDateFormatter.format(ategoryValue);//ategoryValue as Date);
 			}
 		]]>
 	</mx:Script>
@@ -19,34 +25,31 @@
 	
 	
 	
-	<mx:LineChart dataProvider="{_arr}" height="100%" width="100%">
-            <!--
-            -->
-            <mx:verticalAxis> 
-                <mx:LinearAxis id="linearAxis" 
-                        baseAtZero="false" 
-                        title="Rate" 
-                        minorInterval="0.01" 
-                        interval="0.5" 
-                        maximum="14" minimum="10"
-                        labelFunction="linearAxis_labelFunc" /> 
-            </mx:verticalAxis> 
-            
-             <mx:horizontalAxis> 
-                <mx:CategoryAxis id="ca" 
-                       categoryField="tickTime" labelFunction="formatTime" padding="0" 
-                        title="Date" /> 
-            </mx:horizontalAxis> 
-            <!-- horizontal axis renderer  -->
-            <mx:horizontalAxisRenderers> 
-                <mx:AxisRenderer axis="{ca}" 
-                        canDropLabels="true" /> 
-            </mx:horizontalAxisRenderers> 
-        
-            <mx:series>
-                <mx:LineSeries yField="seqno" displayName="Rate" />
-            </mx:series>
-        </mx:LineChart>
+	<mx:LineChart dataProvider="{model.stockArr}" height="100%" width="100%">
+			<mx:verticalAxis> 
+				<mx:LinearAxis id="linearAxis" 
+						baseAtZero="false" 
+						title="股指" 
+						minorInterval="0.01" 
+						interval="0.5" 
+						maximum="14" minimum="10"
+						labelFunction="linearAxis_labelFunc" /> 
+			</mx:verticalAxis> 
+			 <mx:horizontalAxis> 
+				<mx:CategoryAxis id="ca" 
+						categoryField="StockTime" labelFunction="formatTime" padding="0" 
+						title="Date" /> 
+			</mx:horizontalAxis> 
+			<!-- horizontal axis renderer  -->
+			<mx:horizontalAxisRenderers> 
+				<mx:AxisRenderer axis="{ca}" 
+						canDropLabels="true" /> 
+			</mx:horizontalAxisRenderers> 
+		
+			<mx:series>
+				<mx:LineSeries yField="stockIndex" displayName="股指" />
+			</mx:series>
+		</mx:LineChart>
 	
 	
 </mx:HBox>
