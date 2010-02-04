@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties version="1">
   <includeClasses>
-    <classEntry path="com.citipf.liyunpeng.map.HashMapEntry"/>
-    <classEntry path="com.citipf.liyunpeng.map.IMap"/>
-    <classEntry path="com.citipf.liyunpeng.map.IHashMapEntry"/>
     <classEntry path="assets.skins.flexraysButtonSkin"/>
     <classEntry path="com.citipf.liyunpeng.map.HashMap"/>
+    <classEntry path="com.citipf.liyunpeng.map.HashMapEntry"/>
+    <classEntry path="com.citipf.liyunpeng.map.IHashMapEntry"/>
+    <classEntry path="com.citipf.liyunpeng.map.IMap"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
