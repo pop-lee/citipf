@@ -10,7 +10,8 @@ package com.citipf.liyunpeng.models
 	
 	import flash.errors.IllegalOperationError;
 	
-	public class ViewModel
+	[Bindable]
+	public class ViewModel extends WindowManagerModel
 	{
 		
 		private static var instance : ViewModel = new ViewModel();
@@ -18,7 +19,7 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 导航按钮宽度
 		 */
-		public const _navButtonWidth : uint = 280;
+		public const NAV_BUTTON_WIDTH : uint = 280;
 		
 		public static function getInstance() : ViewModel { return instance; }
 		
