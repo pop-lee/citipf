@@ -1070,7 +1070,7 @@ package com.citipf.liyunpeng.mdi.managers
 		{
 			// this prevents retiling of windows yet to be unMinimized()
 			tiledWindows.removeAll();			
-			
+			winList.removeAll();
 			for each(var window:MDIWindow in windowList)
 			{
 				if(window.minimized)
