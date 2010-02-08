@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
-	 xmlns:ChartViews="com.citipf.liyunpeng.views.ChartViews.*"
+	 xmlns:ChartViews="com.citipf.liyunpeng.views.chartViews.*"
+	 xmlns:flexlib="com.citipf.liyunpeng.mdi.containers.*"
 	 width="100%" height="100%"
 	 horizontalScrollPolicy="auto" verticalScrollPolicy="auto"
 	 initialize="init()" >
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.mdi.SuperWindow;
 			import com.citipf.liyunpeng.models.ViewModel;
-			import mx.containers.Panel;
 			import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
+			import mx.containers.Panel;
+			import mx.managers.PopUpManager;
 			import flash.utils.getDefinitionByName;
-			import com.citipf.liyunpeng.views.*;
+			
+			[Bindable]
+			private var viewModel : ViewModel = ViewModel.getInstance();
+			
 			private function init() : void
 			{
 				for each(var obj : Object in mainViews.views) 
@@ -22,9 +28,20 @@
 						mainViewStack.addChild(disObj);
 					} catch ( re : ReferenceError ) {
 						trace("引用模块---“" + obj.label + "”---类名未定义或定义错误" + 
-								"----Reference Class name not found");
+								"---Reference Class name not found");
 					}
 				}
+			}
+			
+			private function abc() : void
+			{
+				mainVBox.windowManager.add(new SuperWindow("abc"));
+			}
+			
+			private function winDGDoubleClick_Handle() : void
+			{
+				(viewModel.windowList.getItemAt(winDG.selectedIndex).win as SuperWindow).unMinimize();
+				viewModel.windowList.removeItemAt(winDG.selectedIndex);
 			}
 		]]>
 	</mx:Script>
@@ -32,13 +49,22 @@
 	<mx:ApplicationControlBar height="70" width="100%" >
 		<mx:HBox width="100%" height="100%" >
 			<ChartViews:TitleChartView />
+			<mx:Button label="Win" width="50" click="abc()" />
 		</mx:HBox>
 	</mx:ApplicationControlBar>
 	
-	<mx:HBox width="100%" height="100%" styleName="navButtonBox" >
-		<mx:VBox width="{ViewModel.getInstance()._navButtonWidth}" >
-			<mx:ToggleButtonBar dataProvider="{mainViews.views}" labelField="label" direction="vertical" />
-		</mx:VBox>
-		<mx:ViewStack id="mainViewStack" width="100%" height="100%" />
-	</mx:HBox>
+	<flexlib:MDICanvas id="mainVBox" width="100%" height="100%" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+		<mx:HBox id="mainBox" width="100%" height="100%" styleName="navButtonBox"
+			x="0" y="0" >
+			<mx:VBox width="{viewModel.NAV_BUTTON_WIDTH}" height="100%" >
+				<mx:ToggleButtonBar id="navButton" dataProvider="{mainViews.views}" labelField="label" direction="vertical" />
+				<mx:Spacer height="100%" />
+				<mx:DataGrid id="winDG" width="{navButton.width}" height="200" dataProvider="{viewModel.windowList}"
+					doubleClickEnabled="true" 
+					doubleClick="winDGDoubleClick_Handle()" />
+			</mx:VBox>
+			<mx:ViewStack id="mainViewStack" width="100%" height="100%" />
+		</mx:HBox>
+	</flexlib:MDICanvas>
 </mx:VBox>
