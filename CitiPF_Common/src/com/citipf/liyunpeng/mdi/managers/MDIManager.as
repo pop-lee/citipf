@@ -24,6 +24,15 @@ SOFTWARE.
 
 package com.citipf.liyunpeng.mdi.managers
 {
+	import com.citipf.liyunpeng.map.HashMap;
+	import com.citipf.liyunpeng.map.IMap;
+	import com.citipf.liyunpeng.mdi.containers.MDIWindow;
+	import com.citipf.liyunpeng.mdi.effects.IMDIEffectsDescriptor;
+	import com.citipf.liyunpeng.mdi.effects.effectClasses.MDIGroupEffectItem;
+	import com.citipf.liyunpeng.mdi.effects.effectsLib.MDIVistaEffects;
+	import com.citipf.liyunpeng.mdi.events.MDIManagerEvent;
+	import com.citipf.liyunpeng.mdi.events.MDIWindowEvent;
+	
 	import flash.display.DisplayObject;
 	import flash.events.ContextMenuEvent;
 	import flash.events.Event;
@@ -32,13 +41,6 @@ package com.citipf.liyunpeng.mdi.managers
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
 	import flash.utils.Dictionary;
-	
-	import com.citipf.liyunpeng.mdi.containers.MDIWindow;
-	import com.citipf.liyunpeng.mdi.effects.IMDIEffectsDescriptor;
-	import com.citipf.liyunpeng.mdi.effects.effectClasses.MDIGroupEffectItem;
-	import com.citipf.liyunpeng.mdi.effects.effectsLib.MDIVistaEffects;
-	import com.citipf.liyunpeng.mdi.events.MDIManagerEvent;
-	import com.citipf.liyunpeng.mdi.events.MDIWindowEvent;
 	
 	import mx.collections.ArrayCollection;
 	import mx.core.Application;
@@ -188,6 +190,9 @@ package com.citipf.liyunpeng.mdi.managers
 
 		[Bindable]
 		public static var winList : ArrayCollection = new ArrayCollection();
+		[Bindable]
+		public static var winMap : IMap = new HashMap();
+		
 		
 		private var tiledWindows:ArrayCollection;
 		public var tileMinimize:Boolean = true;
@@ -537,7 +542,7 @@ package com.citipf.liyunpeng.mdi.managers
 			}			
 		}
 		
-		private function onMinimizeEffectEnd(event:EffectEvent):void
+		protected function onMinimizeEffectEnd(event:EffectEvent):void
 		{
 			// if this was a composite effect (almost definitely is), we make sure a target was defined on it
 			// since that is optional, we look in its first child if we don't find one
@@ -547,19 +552,22 @@ package com.citipf.liyunpeng.mdi.managers
 			{
 				var compEffect:CompositeEffect = event.effectInstance.effect as CompositeEffect;
 				targetWindow = Effect(compEffect.children[0]).target as MDIWindow;
-			}			
+			}
 			
 			targetWindow.visible = false;
+			/***添加窗口列表**************************************/
 			winList.addItem({title:targetWindow.title,win:targetWindow});
+			/****************************************************/
 			tiledWindows.addItem(targetWindow);
 			reTileWindows();
 		}
 		
-		private function onCloseEffectEnd(event:EffectEvent):void
+		protected function onCloseEffectEnd(event:EffectEvent):void
 		{
 			remove(event.effectInstance.target as MDIWindow);
+			winMap.remove((event.effectInstance.target as MDIWindow).title);
 		}
-				
+		
 		
 		/**
 		 * Handles resizing of container to reposition elements
