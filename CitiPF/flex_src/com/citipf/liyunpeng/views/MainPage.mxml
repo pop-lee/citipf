@@ -4,9 +4,13 @@
 	 xmlns:flexlib="com.citipf.liyunpeng.mdi.containers.*"
 	 width="100%" height="100%"
 	 horizontalScrollPolicy="auto" verticalScrollPolicy="auto"
-	 initialize="init()" >
+	 initialize="init()"
+	 creationComplete="createComp()" >
 	<mx:Script>
 		<![CDATA[
+			import mx.effects.easing.Elastic;
+			import mx.effects.easing.Back;
+			import mx.effects.Move;
 			import com.citipf.liyunpeng.mdi.SuperWindow;
 			import com.citipf.liyunpeng.models.ViewModel;
 			import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
@@ -39,14 +43,38 @@
 				viewModel.addWindow(new SuperWindow("abc"));
 			}
 			
+			/**
+			 * 双击窗口列表还原最小化窗口
+			 */
 			private function winDGDoubleClick_Handle() : void
 			{
 				(viewModel.windowList.getItemAt(winDG.selectedIndex).win as SuperWindow).unMinimize();
 				viewModel.windowList.removeItemAt(winDG.selectedIndex);
 			}
+			
+			/**
+			 * 初始化效果函数
+			 */
+			private function createComp() : void
+			{
+				var navButtonMove : Move = new Move(navButton);
+				navButtonMove.easingFunction = Back.easeOut;
+				navButton.y = 0 - navButton.height;
+				navButtonMove.stop();
+				navButtonMove.yTo = 0;
+				navButtonMove.play();
+				
+				var mainViewStackMove : Move = new Move(mainViewStack);
+				mainViewStackMove.easingFunction = Back.easeOut;
+				mainViewStack.y = 0 - mainViewStack.height;
+				mainViewStackMove.stop();
+				mainViewStackMove.yTo = 0;
+				mainViewStackMove.play();
+			}
 		]]>
 	</mx:Script>
 	<mx:Model id="mainViews" source="../configs/viewsConfig.xml" />
+	
 	<mx:ApplicationControlBar height="70" width="100%" >
 		<mx:HBox width="100%" height="100%" >
 			<ChartViews:TitleChartView />
