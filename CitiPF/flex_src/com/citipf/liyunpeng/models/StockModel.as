@@ -10,6 +10,7 @@ package com.citipf.liyunpeng.models
 	import mx.messaging.Consumer;
 	import mx.messaging.events.MessageEvent;
 	
+	[Bindable]
 	public class StockModel extends FormateModel
 	{
 		/**
@@ -20,7 +21,7 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 存储股指的数组容器 
 		 */
-		private var _stockArr : ArrayCollection = new ArrayCollection
+		private var _stockArr : ArrayCollection = new ArrayCollection([new StockVO(11,new Date())]);
 		
 		public function StockModel()
 		{
@@ -53,6 +54,6 @@ package com.citipf.liyunpeng.models
 		{
 			return _stockArr ;
 		}
-
+		
 	}
 }
