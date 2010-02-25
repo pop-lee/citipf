@@ -43,8 +43,10 @@ package com.citipf.liyunpeng.valueObject
 			return _stockTime ;
 		}
 		
-		public function StockVO()
+		public function StockVO(stockIndex : Number = NaN,stockTime : Date = null)
 		{
+			_stockIndex = stockIndex;
+			_stockTime = stockTime;
 		}
 
 	}
