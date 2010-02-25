@@ -19,6 +19,7 @@
     <classEntry path="com.citipf.liyunpeng.mdi.SuperWindow"/>
     <classEntry path="com.citipf.liyunpeng.mdi.containers.MDIWindow"/>
     <classEntry path="com.citipf.liyunpeng.mdi.containers.MDIWindowState"/>
+    <classEntry path="com.citipf.liyunpeng.microCharts.SparkLine"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
