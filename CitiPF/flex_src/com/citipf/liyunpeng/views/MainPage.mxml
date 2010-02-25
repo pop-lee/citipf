@@ -77,8 +77,10 @@
 	
 	<mx:ApplicationControlBar height="70" width="100%" >
 		<mx:HBox width="100%" height="100%" >
+			<mx:Label width="200" />
 			<ChartViews:TitleChartView />
 			<mx:Button label="Win" width="50" click="chartDetail()" />
+			<mx:VBox width="200" height="100%" />
 		</mx:HBox>
 	</mx:ApplicationControlBar>
 	
