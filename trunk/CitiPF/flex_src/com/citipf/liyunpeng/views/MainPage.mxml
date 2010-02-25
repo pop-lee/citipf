@@ -38,11 +38,6 @@
 				}
 			}
 			
-			private function chartDetail() : void
-			{
-				viewModel.addWindow(new SuperWindow("abc"));
-			}
-			
 			/**
 			 * 双击窗口列表还原最小化窗口
 			 */
@@ -79,7 +74,6 @@
 		<mx:HBox width="100%" height="100%" >
 			<mx:Label width="200" />
 			<ChartViews:TitleChartView />
-			<mx:Button label="Win" width="50" click="chartDetail()" />
 			<mx:VBox width="200" height="100%" />
 		</mx:HBox>
 	</mx:ApplicationControlBar>

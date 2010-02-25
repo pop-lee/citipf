@@ -6,6 +6,8 @@
 	>
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.mdi.SuperWindow;
+			import com.citipf.liyunpeng.models.ViewModel;
 			import mx.events.CollectionEvent;
 			import mx.events.PropertyChangeEvent;
 			import mx.binding.utils.ChangeWatcher;
@@ -16,6 +18,9 @@
 			[Bindable]
 			private var model : Model = Model.getInstance();
 			
+			[Bindable]
+			private var viewModel : ViewModel = ViewModel.getInstance();
+			
 			private function init() : void
 			{
 				model.stockArr.addEventListener(CollectionEvent.COLLECTION_CHANGE,stockChange_Handle);
@@ -24,6 +29,11 @@
 			private function stockChange_Handle(event : CollectionEvent) : void
 			{
 				miniChart.dataProvider = model.stockArr;
+			}
+			
+			private function chartDetail() : void
+			{
+				viewModel.addWindow(new SuperWindow("abc"));
 			}
 			
 //			private function linearAxis_labelFunc(item:Object, prevValue:Object, axis:IAxis):String { 
@@ -71,5 +81,6 @@
 	-->
 	<microCharts:SparkLine id="miniChart" xField="stockIndex" lineColor="0xFF0000"
 		lineThickness="0" width="100%" height="100%" dataProvider="{model.stockArr}" />
+	<mx:Button label="Win" click="chartDetail()" />
 	
 </mx:HBox>
