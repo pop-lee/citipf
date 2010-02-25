@@ -3,7 +3,8 @@
 				xmlns:views="com.citipf.liyunpeng.views.*" 
 				height="100%" width="100%"
 				initialize="init()" 
-				viewSourceURL="srcview/index.html">
+				viewSourceURL="srcview/index.html"
+				pageTitle="网上个人理财">
 	<mx:Script>
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
