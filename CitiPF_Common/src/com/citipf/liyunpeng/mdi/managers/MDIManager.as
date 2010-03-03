@@ -481,6 +481,7 @@ package com.citipf.liyunpeng.mdi.managers
 					
 					case MDIManagerEvent.WINDOW_MAXIMIZE:
 						removeTileInstance(mgrEvent.window);
+						if(mgrEvent.window.visible == false) mgrEvent.window.visible = true;
 						maximizeWindow(mgrEvent.window);
 					break;
 					
