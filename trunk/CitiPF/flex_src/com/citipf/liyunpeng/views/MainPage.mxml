@@ -43,6 +43,7 @@
 			 */
 			private function winDGDoubleClick_Handle() : void
 			{
+				if(winDG.selectedIndex == -1) return;
 				(viewModel.windowList.getItemAt(winDG.selectedIndex).win as SuperWindow).unMinimize();
 				viewModel.windowList.removeItemAt(winDG.selectedIndex);
 			}
