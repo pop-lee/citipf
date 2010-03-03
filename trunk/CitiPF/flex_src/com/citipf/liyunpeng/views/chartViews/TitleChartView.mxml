@@ -33,7 +33,7 @@
 			
 			private function chartDetail() : void
 			{
-				viewModel.addWindow(new SuperWindow("abc"));
+				viewModel.getChartMain();
 			}
 			
 //			private function linearAxis_labelFunc(item:Object, prevValue:Object, axis:IAxis):String { 
