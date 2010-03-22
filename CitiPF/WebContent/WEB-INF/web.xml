@@ -30,6 +30,9 @@
 	<servlet>
 		<servlet-name>PushDataCacheServlet</servlet-name>
 		<servlet-class>com.citipf.liyunpeng.pushdata.PushDataCmd</servlet-class>
+		<!--  -->
+		<load-on-startup>1</load-on-startup>
+		<!--  -->
 	</servlet>
 
 	<!-- servlet - Mapping -->
