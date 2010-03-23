@@ -1,0 +1,9 @@
+
+
+CREATE DATABASE CITI ;
+
+USE CITI;
+
+CREATE TABLE CITI_RateData(
+
+)
