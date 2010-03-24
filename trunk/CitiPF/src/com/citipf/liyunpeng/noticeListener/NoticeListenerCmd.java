@@ -1,5 +1,6 @@
 package com.citipf.liyunpeng.noticeListener;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -46,6 +47,8 @@ public class NoticeListenerCmd extends HttpServlet {
 		Properties p = new Properties();
 		try {
 			p.load(inputStream);
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
