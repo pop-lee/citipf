@@ -107,5 +107,10 @@
              -->
         </redeploy>
     </system>
+    
+    <!-- Spring Factory -->
+    <factories>
+        <factory id="spring" class="com.citipf.liyunpeng.factories.SpringFactory" />
+    </factories>
 
 </services-config>

@@ -7,6 +7,19 @@
 		<param-value>/WEB-INF/flex/hotfixes,/WEB-INF/flex/jars</param-value>
 	</context-param>
 
+	<!-- Spring Config -->
+    <context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+	        classpath*:configs/applicationContext*.xml
+	    </param-value>
+    </context-param>
+
+    <!-- Spring Listener Config -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
 	<!-- Http Flex Session attribute and binding listener support -->
 	<listener>
 		<listener-class>flex.messaging.HttpFlexSession</listener-class>
