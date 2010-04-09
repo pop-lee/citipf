@@ -2,6 +2,7 @@ package com.citipf.liyunpeng.pushdata;
 
 import java.util.Date;
 
+import com.citipf.liyunpeng.CitiPFService;
 import com.citipf.liyunpeng.valueObject.StockVO;
 
 import flex.messaging.MessageBroker;
@@ -12,7 +13,12 @@ public class PushStockThread implements IPushDataThread {
 
 	private static Thread _t ;
 	private boolean _isRunning = false;
-	double _base = 11.5;
+	private double _base = 11.5;
+	
+	/**
+	 * 通过Dao执行IBatis插入数据库
+	 */
+	private CitiPFService cs;
 	
 	/**
 	 * @return 返回该线程是否正在运行
@@ -88,6 +94,9 @@ public class PushStockThread implements IPushDataThread {
 			msg.setMessageId(UUIDUtils.createUUID());
 			msg.setTimestamp(System.currentTimeMillis());
 			msg.setBody(stockVO);
+			
+			//将股指数值插入数据库
+			cs.getStockDao().doAdd(stockVO);
 			
 			msgBroker.routeMessageToService(msg,null);
 			System.out.println(msgBroker.getEndpoint("my-streaming-amf").getUrl());

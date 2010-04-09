@@ -6,9 +6,6 @@
         <wb-resource deploy-path="/" source-path="/bin-debug"/>
         <wb-resource deploy-path="/" source-path="/flex_src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/libs/Spring3.0.2"/>
-        <dependent-module archiveName="CitiPF_JavaCommon.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/CitiPF_JavaCommon/CitiPF_JavaCommon">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="CitiPF"/>
         <property name="java-output-path" value="WebContent/WEB-INF/classes"/>
     </wb-module>
