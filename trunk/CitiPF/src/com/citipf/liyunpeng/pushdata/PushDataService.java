@@ -3,9 +3,6 @@ package com.citipf.liyunpeng.pushdata ;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.citipf.liyunpeng.impl.PushStockThread;
-import com.citipf.liyunpeng.inte.IPushDataThread;
-
 public class PushDataService {
 	/**
 	 * 数据推送服务单例对象

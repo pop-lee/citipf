@@ -1,4 +1,4 @@
-package com.citipf.liyunpeng.inte;
+package com.citipf.liyunpeng.noticeListener;
 
 public interface INoticeListenerThread {
 

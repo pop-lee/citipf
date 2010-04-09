@@ -1,8 +1,6 @@
-package com.citipf.liyunpeng.impl;
+package com.citipf.liyunpeng.noticeListener ;
 
 import java.util.TimerTask;
-
-import com.citipf.liyunpeng.inte.INoticeListenerThread;
 
 public class PlanNoticeListenerThread extends TimerTask implements INoticeListenerThread {
 	

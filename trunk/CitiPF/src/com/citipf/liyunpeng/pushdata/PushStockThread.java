@@ -1,8 +1,7 @@
-package com.citipf.liyunpeng.impl;
+package com.citipf.liyunpeng.pushdata;
 
 import java.util.Date;
 
-import com.citipf.liyunpeng.inte.IPushDataThread;
 import com.citipf.liyunpeng.valueObject.StockVO;
 
 import flex.messaging.MessageBroker;
