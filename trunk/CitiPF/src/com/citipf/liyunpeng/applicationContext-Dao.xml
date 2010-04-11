@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<!-- Ref Properties file -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/com/citipf/liyunpeng/mainConfig.properties</value>
+			</list>
+		</property>
+	</bean>
+ 
+	<!-- DataSource Config -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass"><value>${jdbc.driverClass}</value></property>
+		<property name="jdbcUrl"><value>${jdbc.url}</value></property>
+		<property name="user"><value>${jdbc.user}</value></property>
+		<property name="password"><value>${jdbc.password}</value></property>
+		<property name="initialPoolSize"><value>${jdbc.initialPoolSize}</value></property>
+		<property name="minPoolSize"><value>${jdbc.minPoolSize}</value></property>
+		<property name="maxPoolSize"><value>${jdbc.maxPoolSize}</value></property>
+	</bean>
+	<!-- 
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName">
+            <value>${jdbc.driverClass}</value>
+        </property>
+        <property name="url">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="username">
+            <value>${jdbc.user}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+	 </bean>
+	 -->
+
+	
+	<!-- .Transaction Manager Config -->
+	<!-- 
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		<property name="dataSource"> 
+			<ref local="dataSource"/> 
+		</property> 
+	</bean> 
+	 -->
+	<!-- TransactionProxy Config -->
+	<!-- 
+	<bean id="baseTransactionProxy" abstract="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	 -->
+	<!-- ibatis sqlMapClient Config -->
+	<!-- 
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>/com/citipf/liyunpeng/ibatisConfig.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	 -->
+	<bean id="sqlMapClient" 
+		class="com.citipf.liyunpeng.dao.iBatis.SqlSessionFactoryBean">
+		<property name="configLocation" value="/com/citipf/liyunpeng/ibatisConfig.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Dao Config -->
+	
+	<bean id="stockDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.StockDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- Service -->
+	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">
+		<property name="stockDao" ref="stockDaoImpl" />
+	</bean>
+</beans>
