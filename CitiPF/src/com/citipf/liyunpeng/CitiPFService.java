@@ -9,6 +9,10 @@ public class CitiPFService {
 	public IStockDao<StockVO> getStockDao() {
 		return stockDao;
 	}
+
+	public void setStockDao(IStockDao<StockVO> stockDao) {
+		this.stockDao = stockDao;
+	}
 	
 	
 }
