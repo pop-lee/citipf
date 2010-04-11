@@ -4,14 +4,16 @@ import java.util.List;
 
 public abstract interface IDaoSupport<T> {
 	
-	public List<T> doGetAll() ;
+	public List<T> selectAll() ;
 	
-	public List<T> doGetAll(Object o) ;
+	public List<T> selectList(Object o) ;
 	
-	public void doAdd(T t) ;
+	public void insert(T t) ;
 	
-	public T doGet(Object o) ;
+	public T select(Object o) ;
 	
-	public void doUpdate(Object o) ;
+	public void update(T t) ;
+	
+	public void delete(T t) ;
 	
 }

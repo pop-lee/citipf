@@ -9,6 +9,8 @@ import flex.messaging.MessageBroker;
 import flex.messaging.messages.AsyncMessage;
 import flex.messaging.util.UUIDUtils;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class PushStockThread implements IPushDataThread {
 
 	private static Thread _t ;
@@ -18,7 +20,8 @@ public class PushStockThread implements IPushDataThread {
 	/**
 	 * 通过Dao执行IBatis插入数据库
 	 */
-	private CitiPFService cs;
+	private CitiPFService cs = (CitiPFService) (new ClassPathXmlApplicationContext(
+			"com/citipf/liyunpeng/applicationContext-Dao.xml")).getBean("citiService");
 	
 	/**
 	 * @return 返回该线程是否正在运行
@@ -96,13 +99,14 @@ public class PushStockThread implements IPushDataThread {
 			msg.setBody(stockVO);
 			
 			//将股指数值插入数据库
-			cs.getStockDao().doAdd(stockVO);
+			cs.getStockDao().insert(stockVO);
 			
 			msgBroker.routeMessageToService(msg,null);
 			System.out.println(msgBroker.getEndpoint("my-streaming-amf").getUrl());
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 

@@ -8,27 +8,37 @@ import com.citipf.liyunpeng.valueObject.StockVO;
 public class StockDaoImpl extends IBatisDaoSupport implements IStockDao<StockVO> {
 
 	@Override
-	public void doAdd(StockVO t) {
-		this.getSqlMapClientTemplate().insert("Stock.insertStock", t);
+	public void delete(StockVO t) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public StockVO doGet(Object o) {
+	public void insert(StockVO t) {
+		this.getSqlSessionTemplate().insert("Stock.insertStock", t);
+	}
+
+	@Override
+	public StockVO select(Object o) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<StockVO> doGetAll() {
+	public List<StockVO> selectAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<StockVO> doGetAll(Object o) {
+	public List<StockVO> selectList(Object o) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void doUpdate(Object o) {
+	public void update(StockVO t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
