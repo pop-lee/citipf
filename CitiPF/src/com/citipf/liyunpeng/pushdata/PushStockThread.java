@@ -2,13 +2,15 @@ package com.citipf.liyunpeng.pushdata;
 
 import java.util.Date;
 
-import com.citipf.liyunpeng.CitiPFService;
+import com.citipf.liyunpeng.dao.Iface.IStockDao;
+import com.citipf.liyunpeng.dao.iBatis.StockDaoImpl;
 import com.citipf.liyunpeng.valueObject.StockVO;
 
 import flex.messaging.MessageBroker;
 import flex.messaging.messages.AsyncMessage;
 import flex.messaging.util.UUIDUtils;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class PushStockThread implements IPushDataThread {
@@ -20,8 +22,9 @@ public class PushStockThread implements IPushDataThread {
 	/**
 	 * 通过Dao执行IBatis插入数据库
 	 */
-	private CitiPFService cs = (CitiPFService) (new ClassPathXmlApplicationContext(
-			"com/citipf/liyunpeng/applicationContext-Dao.xml")).getBean("citiService");
+	private ApplicationContext context = new ClassPathXmlApplicationContext(
+			"com/citipf/liyunpeng/applicationContext*.xml");
+	private IStockDao<StockVO> dao = context.getBean("stockDaoImpl",StockDaoImpl.class);
 	
 	/**
 	 * @return 返回该线程是否正在运行
@@ -99,7 +102,7 @@ public class PushStockThread implements IPushDataThread {
 			msg.setBody(stockVO);
 			
 			//将股指数值插入数据库
-			cs.getStockDao().insert(stockVO);
+			dao.insert(stockVO);
 			
 			msgBroker.routeMessageToService(msg,null);
 			System.out.println(msgBroker.getEndpoint("my-streaming-amf").getUrl());

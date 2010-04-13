@@ -39,15 +39,12 @@
 
 	
 	<!-- .Transaction Manager Config -->
-	<!-- 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
 		<property name="dataSource"> 
 			<ref local="dataSource"/> 
 		</property> 
 	</bean> 
-	 -->
 	<!-- TransactionProxy Config -->
-	<!-- 
 	<bean id="baseTransactionProxy" abstract="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
 			<ref bean="transactionManager" />
@@ -61,7 +58,6 @@
 			</props>
 		</property>
 	</bean>
-	 -->
 	<!-- ibatis sqlMapClient Config -->
 	<!-- 
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
@@ -73,6 +69,7 @@
 		</property>
 	</bean>
 	 -->
+	<!-- iBatis 3 SqlSessionFactory -->
 	<bean id="sqlMapClient" 
 		class="com.citipf.liyunpeng.dao.iBatis.SqlSessionFactoryBean">
 		<property name="configLocation" value="/com/citipf/liyunpeng/ibatisConfig.xml"></property>
@@ -85,8 +82,4 @@
 		<property name="sqlSessionFactory" ref="sqlMapClient" />
 	</bean>
 	
-	<!-- Service -->
-	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">
-		<property name="stockDao" ref="stockDaoImpl" />
-	</bean>
 </beans>
