@@ -1,5 +1,5 @@
-#Fri Apr 09 18:13:18 CST 2010
+#Sat Apr 10 14:44:09 CST 2010
 eclipse.preferences.version=1
-encoding//configs/jdbc.properties=UTF-8
+encoding//WebContent/WEB-INF/classes/com/citipf/liyunpeng/mainConfig.properties=UTF-8
 encoding//src/com/citipf/liyunpeng/mainConfig.properties=UTF-8
 encoding/<project>=UTF-8

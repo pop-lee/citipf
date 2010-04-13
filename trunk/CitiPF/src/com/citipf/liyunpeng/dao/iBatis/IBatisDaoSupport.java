@@ -1,5 +1,6 @@
 package com.citipf.liyunpeng.dao.iBatis;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -10,7 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import org.springframework.util.Assert;
 import org.springframework.dao.support.DaoSupport;
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+//import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public abstract class IBatisDaoSupport extends DaoSupport {
 
@@ -50,7 +51,14 @@ public abstract class IBatisDaoSupport extends DaoSupport {
 				Object result = action.doInSession(session);
 				return result;
 			}finally {
-				if(session != null) session.close();
+				if(session != null) {
+					try {
+						session.getConnection().close();
+						session.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 		
