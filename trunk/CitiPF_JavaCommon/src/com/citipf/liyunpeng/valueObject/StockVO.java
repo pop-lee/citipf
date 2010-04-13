@@ -38,5 +38,4 @@ public class StockVO {
 		this.stockTime = stockTime;
 	}
 	
-	
 }
