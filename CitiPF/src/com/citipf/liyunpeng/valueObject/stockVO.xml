@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Stock">
+
+	<!-- 
+ 
+	<resultMap id="result_map_stock" class="stockVO" >
+		<result property="stockIndex"   column="RD_STOCKINDEX"  javaType="Double"/>
+		<result property="stockTime"  column="RD_STOCKDATE"  javaType="Date"/>
+	</resultMap>
+
+	-->
+	<insert id="insertStock" parameterType="StockVO">
+		insert into Citi_Ratedata(RD_STOCKINDEX,RD_STOCKDATE) values(#{stockIndex},#{stockTime});
+	</insert>
+	
+</mapper>
