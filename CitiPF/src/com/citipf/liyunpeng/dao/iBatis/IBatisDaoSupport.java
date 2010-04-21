@@ -43,73 +43,83 @@ public abstract class IBatisDaoSupport extends DaoSupport {
 		public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 			this.sqlSessionFactory = sqlSessionFactory;
 		}
-
-		public Object execute(SqlSessionCallback action)  {
-			SqlSession session = null;
-			try {
-				session = sqlSessionFactory.openSession();
-				Object result = action.doInSession(session);
-				return result;
-			}finally {
-				if(session != null) {
-					try {
-						session.getConnection().close();
-						session.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+		
+		private SqlSession openSqlSession() {
+			return sqlSessionFactory.openSession();
+		}
+		
+		private void sqlSessionClose(SqlSession session) {
+			if(session != null) {
+				try {
+					session.getConnection().close();
+					session.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 			}
 		}
 		
-		public Object selectOne(final String statement,final Object parameter) {
-			return execute(new SqlSessionCallback() {
-				public Object doInSession(SqlSession session) {
-					return session.selectOne(statement, parameter);
-				}
-			});
+		public Object selectOne(final String statement,Object parameter) {
+			SqlSession session = null;
+			try {
+				session = openSqlSession();
+				return session.selectOne(statement, parameter);
+			} finally {
+				sqlSessionClose(session);
+			}
 		}
 		
 		@SuppressWarnings("unchecked")
-		public List selectList(final String statement,final Object parameter,final int offset,final int limit) {
-			return (List)execute(new SqlSessionCallback() {
-				public Object doInSession(SqlSession session) {
-					return session.selectList(statement, parameter, new RowBounds(offset,limit));
-				}
-			});
+		public List selectList(final String statement,Object parameter,int offset,int limit) {
+			SqlSession session = null;
+			try {
+				session = openSqlSession();
+				return session.selectList(statement, parameter, new RowBounds(offset,limit));
+			} finally {
+				sqlSessionClose(session);
+			}
 		}
 		
-		
-		public int delete(final String statement,final Object parameter) {
-			return (Integer)execute(new SqlSessionCallback() {
-				public Object doInSession(SqlSession session) {
-					return session.delete(statement, parameter);
-				}
-			});
+		@SuppressWarnings("unchecked")
+		public List selectList(final String statement,Object parameter) {
+			SqlSession session = null;
+			try {
+				session = openSqlSession();
+				return session.selectList(statement, parameter);
+			} finally {
+				sqlSessionClose(session);
+			}
 		}
 		
-		public int update(final String statement,final Object parameter) {
-			return (Integer)execute(new SqlSessionCallback() {
-				public Object doInSession(SqlSession session) {
-					return session.update(statement, parameter);
-				}
-			});
+		public int delete(final String statement,Object parameter) {
+			SqlSession session = null;
+			try {
+				session = openSqlSession();
+				return session.delete(statement, parameter);
+			} finally {
+				sqlSessionClose(session);
+			}
 		}
 		
-		public int insert(final String statement,final Object parameter) {
-			return (Integer)execute(new SqlSessionCallback() {
-				public Object doInSession(SqlSession session) {
-					return session.insert(statement, parameter);
-				}
-			});
+		public int update(final String statement,Object parameter) {
+			SqlSession session = null;
+			try {
+				session = openSqlSession();
+				return session.update(statement, parameter);
+			} finally {
+				sqlSessionClose(session);
+			}
+		}
+		
+		public int insert(final String statement,Object parameter) {
+			SqlSession session = null;
+			try {
+				session = openSqlSession();
+				return session.insert(statement, parameter);
+			} finally {
+				sqlSessionClose(session);
+			}
 		}
 	} 
-	
-	public static interface SqlSessionCallback {
-		
-		public Object doInSession(SqlSession session);
-		
-	}
-	
 	
 }
