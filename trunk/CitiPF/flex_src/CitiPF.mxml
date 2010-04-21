@@ -9,6 +9,7 @@
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.models.ViewModel;
+			
 			ViewModel.getInstance();
 			Model.getInstance();
 			private function init() : void
