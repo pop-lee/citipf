@@ -5,19 +5,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 <mapper namespace="Stock">
 
 	<!-- 
+	-->
  
-	<resultMap id="result_map_stock" class="stockVO" >
+	<resultMap id="resultMap_stock" type="StockVO" >
 		<result property="stockIndex"   column="RD_STOCKINDEX"  javaType="Double"/>
 		<result property="stockTime"  column="RD_STOCKDATE"  javaType="Date"/>
 	</resultMap>
 
-	-->
 	<insert id="insertStock" parameterType="StockVO">
 		insert into Citi_Ratedata(RD_STOCKINDEX,RD_STOCKDATE) values(#{stockIndex},#{stockTime});
 	</insert>
 	
-	<select id="selectListStock" resultType="list" parameterType="int">
-		select * from CITI_RATEDATA order by RD_STOCKDATE desc limit #{1};
+	<select id="selectListStock" resultType="list" resultMap="resultMap_stock" parameterType="int">
+		select RD_STOCKINDEX,RD_STOCKINDEX from CITI_RATEDATA order by RD_STOCKDATE desc limit #{1};
 	</select>
 	
 </mapper>

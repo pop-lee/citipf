@@ -3,8 +3,10 @@
 <beans>
 
 	<!-- Service -->
-	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">
+	<bean id="baseService" class="com.citipf.liyunpeng.BaseService">
 		<property name="stockDao" ref="stockDaoImpl" />
 	</bean>
+	
+	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService" parent="baseService" />
 	
 </beans>
