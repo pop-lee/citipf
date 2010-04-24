@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
 				xmlns:views="com.citipf.liyunpeng.views.*" 
+				xmlns:controls="com.citipf.liyunpeng.controls.*" 
+				xmlns:business="com.citipf.liyunpeng.business.*"
 				height="100%" width="100%"
 				initialize="init()" 
 				viewSourceURL="srcview/index.html"
-				pageTitle="网上个人理财">
+				pageTitle="网上个人理财" 
+				>
 	<mx:Script>
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
@@ -21,6 +24,10 @@
 	</mx:Script>
 	<!-- 读取页面显示配置文件viewsConfig.xml -->
 	<mx:Model id="viewConfig" source="configs/viewsConfig.xml" />
+	
+	<business:CitiPFServices />
+	
+	<controls:CitiPFControls />
 	
 	<!-- 主页面 -->
 	<views:MainPage />
