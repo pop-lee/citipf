@@ -110,7 +110,7 @@
     
     <!-- Spring Factory -->
     <factories>
-        <factory id="spring" class="com.citipf.liyunpeng.factories.SpringFactory" />
+        <factory id="springFactory" class="com.citipf.liyunpeng.factories.SpringFactory" />
     </factories>
 
 </services-config>
