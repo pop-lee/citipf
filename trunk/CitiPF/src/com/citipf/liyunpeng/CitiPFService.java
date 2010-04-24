@@ -15,7 +15,7 @@ public class CitiPFService {
 	static {
 		try {
 			InputStream inputStream = CitiPFService.class.getClassLoader().getResourceAsStream(
-			"com/citipf/liyunpeng/mainConfig.properties");
+			"/mainConfig.properties");
 			p.load(inputStream);
 		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
@@ -34,5 +34,8 @@ public class CitiPFService {
 		this.stockDao = stockDao;
 	}
 	
+	public void getStockVOList() {
+		stockDao.selectList(new Object());
+	}
 	
 }

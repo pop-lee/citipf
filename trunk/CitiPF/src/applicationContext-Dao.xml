@@ -5,7 +5,7 @@
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>/com/citipf/liyunpeng/mainConfig.properties</value>
+				<value>classpath*:mainConfig.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -72,7 +72,7 @@
 	<!-- iBatis 3 SqlSessionFactory -->
 	<bean id="sqlMapClient" 
 		class="com.citipf.liyunpeng.dao.iBatis.SqlSessionFactoryBean">
-		<property name="configLocation" value="/com/citipf/liyunpeng/ibatisConfig.xml"></property>
+		<property name="configLocation" value="classpath:ibatisConfig.xml"></property>
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
@@ -81,5 +81,11 @@
 	<bean id="stockDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.StockDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlMapClient" />
 	</bean>
+	<!-- Service -->
+	<!-- 
+	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">
+		<property name="stockDao" ref="stockDaoImpl" />
+	</bean>
+	 -->
 	
 </beans>
