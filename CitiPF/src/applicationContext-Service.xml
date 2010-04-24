@@ -6,4 +6,5 @@
 	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">
 		<property name="stockDao" ref="stockDaoImpl" />
 	</bean>
+	
 </beans>

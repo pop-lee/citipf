@@ -48,7 +48,7 @@ public class NoticeListenerCmd extends HttpServlet {
 		_date.setSeconds(0);
 		timer.scheduleAtFixedRate(new PlanNoticeListenerThread(), _date, 
 				Integer.parseInt(CitiPFService.p.getProperty("selSeptumTime"))*60*60*1000);
-		System.out.println("start listen the Notice");
+		System.out.println("开始监听通知时间");
 	}
 	
 	
