@@ -6,6 +6,8 @@
 	>
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.events.GetStockVOListEvent;
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
 			import com.citipf.liyunpeng.mdi.SuperWindow;
 			import com.citipf.liyunpeng.models.ViewModel;
 			import mx.events.CollectionEvent;
@@ -23,6 +25,7 @@
 			
 			private function init() : void
 			{
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GetStockVOListEvent());
 				model.stockArr.addEventListener(CollectionEvent.COLLECTION_CHANGE,stockChange_Handle);
 			}
 			
