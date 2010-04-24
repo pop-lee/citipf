@@ -67,6 +67,7 @@
 				mainViewStackMove.yTo = 0;
 				mainViewStackMove.play();
 			}
+			
 		]]>
 	</mx:Script>
 	<mx:Model id="mainViews" source="../configs/viewsConfig.xml" />
