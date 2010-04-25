@@ -13,7 +13,7 @@
     <destination id="citiPFService">
          <properties>
              <factory>springFactory</factory>
-             <source>citiService</source> <!--此处注入IOC注入-->
+             <source>citiPFService</source> <!--此处注入IOC注入-->
          </properties>
     </destination>
 </service>

@@ -23,6 +23,12 @@ package com.citipf.liyunpeng.models
 		 */
 		private var _stockArr : ArrayCollection = new ArrayCollection([new StockVO(11,new Date())]);
 		
+		/**
+		 * 股指数组存储的长度
+		 * @default 50
+		 */		
+		private var _stockArrSize : int = 50;
+		
 		public function StockModel()
 		{
 			consumer.destination = "stock-data-feed";
@@ -40,7 +46,7 @@ package com.citipf.liyunpeng.models
 		{
 			var _stockVO : StockVO = event.message.body as StockVO;
 			trace(_stockVO.stockIndex);
-			if(_stockArr.length > 50) {
+			if(_stockArr.length > _stockArrSize) {
 				_stockArr.removeItemAt(0);
 			}
 			_stockArr.addItem(_stockVO);
@@ -53,6 +59,22 @@ package com.citipf.liyunpeng.models
 		public function get stockArr() : ArrayCollection
 		{
 			return _stockArr ;
+		}
+		public function set stockArr(arr : ArrayCollection) : void
+		{
+			_stockArr = arr;
+		}
+		
+		/**
+		 * 股指数组存储的长度访问器方法
+		 */		
+		public function get stockArrSize() : int
+		{
+			return _stockArrSize
+		}
+		public function set stockArrSize(size : int) : void
+		{
+			_stockArrSize = size;
 		}
 		
 	}
