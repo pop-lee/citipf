@@ -2,11 +2,11 @@ package com.citipf.liyunpeng.commands
 {
 	import com.adobe.cairngorm.commands.ICommand;
 	import com.adobe.cairngorm.control.CairngormEvent;
-	import com.citipf.liyunpeng.valueObject.StockVO;
 	
 	import mx.collections.ArrayCollection;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.IResponder;
+	import mx.rpc.events.FaultEvent;
 
 	public class GetStockVOCommand extends BaseCommands implements ICommand, IResponder
 	{
@@ -16,17 +16,19 @@ package com.citipf.liyunpeng.commands
 
 		public function execute(event:CairngormEvent):void
 		{
-			var call : AsyncToken = service.getStockVOList();
+			var call : AsyncToken = service.selectStockVOList();
 			call.addResponder(this);
 		}
 		
 		public function result(data:Object):void
 		{
-			trace(((data.result as ArrayCollection).getItemAt(0) as StockVO).stockIndex);
+			model.stockArrSize = (data.result as ArrayCollection).length;
+			model.stockArr = (data.result as ArrayCollection);
 		}
 		
 		public function fault(info:Object):void
 		{
+			var faultEvent : FaultEvent = FaultEvent(info);
 		}
 		
 	}

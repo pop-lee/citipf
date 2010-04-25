@@ -13,7 +13,7 @@ Button
 	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
 	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
 }
-/******************************导航按钮容器属性****************************/
+/****导航按钮容器属性******************************************************/
 ToggleButtonBar {
 	buttonStyleName : "myToggleButtonStyle";
 	selectedButtonTextStyleName : "myToggleButtonStyle";
@@ -34,4 +34,12 @@ ToggleButtonBar {
 	paddingLeft : 5 ;
 	paddingRight : 5 ;
 }
+/**************************************************************************/
+
+/****Title Chart***********************************************************/
+.titleChartColor {
+	paddingLeft : -1;
+	
+}
+
 /**************************************************************************/

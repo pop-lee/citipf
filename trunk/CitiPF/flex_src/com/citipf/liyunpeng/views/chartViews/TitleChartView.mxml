@@ -3,6 +3,7 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:microCharts="com.citipf.liyunpeng.microCharts.*"
 	creationComplete="init()"
+	styleName="titleChartColor"
 	>
 	<mx:Script>
 		<![CDATA[
@@ -25,8 +26,8 @@
 			
 			private function init() : void
 			{
-				CairngormEventDispatcher.getInstance().dispatchEvent(new GetStockVOListEvent());
 				model.stockArr.addEventListener(CollectionEvent.COLLECTION_CHANGE,stockChange_Handle);
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GetStockVOListEvent());
 			}
 			
 			private function stockChange_Handle(event : CollectionEvent) : void
@@ -82,8 +83,10 @@
 		</mx:LineChart>
 	
 	-->
-	<microCharts:SparkLine id="miniChart" xField="stockIndex" lineColor="0xFF0000"
-		lineThickness="0" width="100%" height="100%" dataProvider="{model.stockArr}" />
+	<microCharts:SparkLine id="miniChart" xField="stockIndex" 
+		lineColor="#FF0000"
+		lineThickness="1"
+		width="100%" height="100%" dataProvider="{model.stockArr}" />
 	<mx:Button label="Win" click="chartDetail()" />
 	
 </mx:HBox>
