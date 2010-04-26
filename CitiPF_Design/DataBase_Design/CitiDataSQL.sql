@@ -15,6 +15,9 @@ CREATE TABLE CITI_RateData(
 	RD_STOCKDATE DATETIME NOT NULL,
 	PRIMARY KEY(RD_ID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+--测试SQL语句
 insert into CITI_RateData value(null,'01',1.01,now());
+/**
+ * 查询后50条数据
+ */
 select * from CITI_RATEDATA order by RD_STOCKDATE desc limit 50;
