@@ -66,8 +66,8 @@ package com.citipf.liyunpeng.microCharts
 			if (_renderDirty){
 				drawSparkLine(unscaledWidth, unscaledHeight);
 				_renderDirty = false;
-			}   
-				   
+			}
+			
 		  }
 		  
 		private function drawSparkLine(unscaledWidth:Number, unscaledHeight:Number):void{
