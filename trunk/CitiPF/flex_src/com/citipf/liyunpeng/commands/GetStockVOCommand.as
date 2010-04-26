@@ -23,7 +23,7 @@ package com.citipf.liyunpeng.commands
 		public function result(data:Object):void
 		{
 			model.stockArrSize = (data.result as ArrayCollection).length;
-			model.stockArr = (data.result as ArrayCollection);
+			model.stockArr = data.result as ArrayCollection;
 		}
 		
 		public function fault(info:Object):void

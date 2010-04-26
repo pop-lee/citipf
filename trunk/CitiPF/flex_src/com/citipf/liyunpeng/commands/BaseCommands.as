@@ -5,9 +5,9 @@ package com.citipf.liyunpeng.commands
 	
 	public class BaseCommands
 	{
-		protected static var model : Model ;
+		protected var model : Model ;
 		
-		protected static var service : Object ;
+		protected var service : Object ;
 		
 		public function BaseCommands()
 		{

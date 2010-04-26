@@ -13,11 +13,27 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<insert id="insertStock" parameterType="StockVO">
-		insert into Citi_Ratedata(RD_STOCKINDEX,RD_STOCKDATE) values(#{stockIndex},#{stockTime});
+		insert into
+			Citi_Ratedata(RD_STOCKINDEX,RD_STOCKDATE) 
+		values
+			(#{stockIndex},#{stockTime});
 	</insert>
 	
 	<select id="selectListStock" resultType="list" resultMap="resultMap_stock" parameterType="int">
-		select RD_STOCKINDEX,RD_STOCKINDEX from CITI_RATEDATA order by RD_STOCKDATE desc limit #{1};
+	select 
+		* 
+	from (
+		select 
+			RD_STOCKINDEX,RD_STOCKDATE 
+		from 
+			CITI_RATEDATA 
+		order by 
+			RD_STOCKDATE 
+		desc limit 
+			#{1}
+		) as stockOrdertemp
+	order by 
+		RD_STOCKDATE;
 	</select>
 	
 </mapper>

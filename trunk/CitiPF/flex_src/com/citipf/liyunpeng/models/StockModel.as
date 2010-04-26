@@ -3,6 +3,8 @@
 */
 package com.citipf.liyunpeng.models
 {
+	import com.adobe.cairngorm.control.CairngormEventDispatcher;
+	import com.citipf.liyunpeng.events.GetStockVOListEvent;
 	import com.citipf.liyunpeng.valueObject.StockVO;
 	
 	import mx.collections.ArrayCollection;
@@ -21,13 +23,13 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 存储股指的数组容器 
 		 */
-		private var _stockArr : ArrayCollection = new ArrayCollection([new StockVO(11,new Date())]);
+		public var stockArr : ArrayCollection = new ArrayCollection([new StockVO(11,new Date())]);
 		
 		/**
 		 * 股指数组存储的长度
 		 * @default 50
 		 */		
-		private var _stockArrSize : int = 50;
+		private var _stockArrSize : int = 150;
 		
 		public function StockModel()
 		{
@@ -46,24 +48,25 @@ package com.citipf.liyunpeng.models
 		{
 			var _stockVO : StockVO = event.message.body as StockVO;
 			trace(_stockVO.stockIndex);
-			if(_stockArr.length > _stockArrSize) {
-				_stockArr.removeItemAt(0);
+			if(stockArr.length > _stockArrSize) {
+				stockArr.removeItemAt(0);
 			}
-			_stockArr.addItem(_stockVO);
+			CairngormEventDispatcher.getInstance().dispatchEvent(new GetStockVOListEvent());
+			stockArr.addItem(_stockVO);
 		}
 		
 		/**
 		 * 股指访问期方法 
 		 * @return 返回存储股指的数组容器
 		 */		
-		public function get stockArr() : ArrayCollection
-		{
-			return _stockArr ;
-		}
-		public function set stockArr(arr : ArrayCollection) : void
-		{
-			_stockArr = arr;
-		}
+//		public function get stockArr() : ArrayCollection
+//		{
+//			return _stockArr ;
+//		}
+//		public function set stockArr(arr : ArrayCollection) : void
+//		{
+//			_stockArr = arr;
+//		}
 		
 		/**
 		 * 股指数组存储的长度访问器方法

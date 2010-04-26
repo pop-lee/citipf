@@ -2,7 +2,7 @@
 <mx:HBox width="100%" height="100%" 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:microCharts="com.citipf.liyunpeng.microCharts.*"
-	creationComplete="init()"
+	initialize="init()" 
 	styleName="titleChartColor"
 	>
 	<mx:Script>
@@ -11,12 +11,12 @@
 			import com.adobe.cairngorm.control.CairngormEventDispatcher;
 			import com.citipf.liyunpeng.mdi.SuperWindow;
 			import com.citipf.liyunpeng.models.ViewModel;
+			import com.citipf.liyunpeng.models.Model;
 			import mx.events.CollectionEvent;
 			import mx.events.PropertyChangeEvent;
 			import mx.binding.utils.ChangeWatcher;
 			import mx.charts.chartClasses.IAxis;
 			import mx.collections.ArrayCollection;
-			import com.citipf.liyunpeng.models.Model;
 			
 			[Bindable]
 			private var model : Model = Model.getInstance();
@@ -27,7 +27,6 @@
 			private function init() : void
 			{
 				model.stockArr.addEventListener(CollectionEvent.COLLECTION_CHANGE,stockChange_Handle);
-				CairngormEventDispatcher.getInstance().dispatchEvent(new GetStockVOListEvent());
 			}
 			
 			private function stockChange_Handle(event : CollectionEvent) : void
@@ -84,8 +83,8 @@
 	
 	-->
 	<microCharts:SparkLine id="miniChart" xField="stockIndex" 
-		lineColor="#FF0000"
-		lineThickness="1"
+		lineColor="#FF0000" 
+		lineThickness="0"
 		width="100%" height="100%" dataProvider="{model.stockArr}" />
 	<mx:Button label="Win" click="chartDetail()" />
 	
