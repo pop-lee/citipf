@@ -23,7 +23,7 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 存储股指的数组容器 
 		 */
-		public var stockArr : ArrayCollection = new ArrayCollection([new StockVO(11,new Date())]);
+		public var _stockArr : ArrayCollection = new ArrayCollection([new StockVO(11,new Date())]);
 		
 		/**
 		 * 股指数组存储的长度
@@ -67,6 +67,21 @@ package com.citipf.liyunpeng.models
 //		{
 //			_stockArr = arr;
 //		}
+		
+		/**
+		 * 存储股指的数组容器访问器方法
+		 * @return 存储股指的数组容器
+		 * 
+		 */		
+		public function get stockArr() : ArrayCollection
+		{
+			return _stockArr;
+		}
+		public function set stockArr(arr : ArrayCollection) : void
+		{
+			_stockArr = arr;
+		}
+		
 		
 		/**
 		 * 股指数组存储的长度访问器方法
