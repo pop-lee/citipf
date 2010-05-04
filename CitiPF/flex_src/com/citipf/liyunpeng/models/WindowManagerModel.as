@@ -11,22 +11,42 @@ package com.citipf.liyunpeng.models
 	
 	public class WindowManagerModel
 	{
+		/**
+		 * MDI窗口打开列表
+		 */		
 		[Bindable]
 		public var windowList : ArrayCollection = MDIManager.winList;
 		
+		/**
+		 * MDI窗口打开的Map
+		 */		
 		[Bindable]
 		public var windowMap : IMap = MDIManager.winMap;
 		
+		/**
+		 * 主面板中MDI的窗口主容器
+		 */		
 		public var mainVBox : MDICanvas ;
 		
+		/**
+		 * 打开窗口的内部子容器
+		 */		
 		private var tempWindow : UIComponent;
 		
+		/**
+		 * 当前窗口
+		 */		
 		private var currentWindow : SuperWindow;
+		
 		
 		public function WindowManagerModel()
 		{
 		}
 		
+		/**
+		 * 添加股指窗口方法
+		 * 
+		 */		
 		public function getChartMain() : void
 		{
 			if(windowMap.getValue("股指详细") == null) {
@@ -40,6 +60,11 @@ package com.citipf.liyunpeng.models
 			
 		}
 		
+		/**
+		 * 添加窗口方法
+		 * @param 要添加的窗口
+		 * 
+		 */		
 		private function addWindow(win : SuperWindow) : void
 		{
 			mainVBox.windowManager.add(win);
