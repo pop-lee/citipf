@@ -1,5 +1,6 @@
 package com.citipf.liyunpeng.valueObject
 {
+	[Bindable]
 	[RemoteClass(alias="com.citipf.liyunpeng.valueObject.StockVO")]
 	public class StockVO
 	{
