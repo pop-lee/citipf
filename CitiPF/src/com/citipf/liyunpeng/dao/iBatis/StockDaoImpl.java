@@ -19,7 +19,7 @@ public class StockDaoImpl extends IBatisDaoSupport implements IStockDao<StockVO>
 	}
 
 	@Override
-	public StockVO select(Object o) {
+	public StockVO select(StockVO o) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,7 +32,7 @@ public class StockDaoImpl extends IBatisDaoSupport implements IStockDao<StockVO>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<StockVO> selectList(Object o) {
+	public List<StockVO> selectList(StockVO o) {
 		int limit = Integer.parseInt(CitiPFService.p.getProperty("stock.num"));
 		return this.getSqlSessionTemplate().selectList("Stock.selectListStock", limit);
 	}

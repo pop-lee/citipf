@@ -6,11 +6,11 @@ public abstract interface IDaoSupport<T> {
 	
 	public List<T> selectAll() ;
 	
-	public List<T> selectList(Object o) ;
+	public List<T> selectList(T o) ;
 	
 	public void insert(T t) ;
 	
-	public T select(Object o) ;
+	public T select(T o) ;
 	
 	public void update(T t) ;
 	
