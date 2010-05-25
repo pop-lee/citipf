@@ -7,7 +7,7 @@ import com.citipf.liyunpeng.valueObject.StockVO;
 public class CitiPFService extends BaseService {
 	
 	public List<StockVO> selectStockVOList() {
-		return getStockDao().selectList(new Object());
+		return getStockDao().selectList(null);
 	}
 	
 	public void insertStockVO(StockVO stockVO) {
