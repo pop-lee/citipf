@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="User">
+	<resultMap type="UserVO" id="resultMap_UserVO">
+		<result property="ui_infoId" column="UI_INFOID" javaType="int"/>
+		<result property="ui_bankId" column="UI_BANKID" javaType="String"/>
+		<result property="ui_name" column="UI_NAME" javaType="String"/>
+		<result property="ui_id" column="UI_ID" javaType="String"/>
+		<result property="ui_passw" column="UI_PASSW" javaType="String"/>
+	</resultMap>
+	
+	<sql id="userColumns">UI_BANKID,UI_NAME,UI_ID,UI_PASSW</sql>
+	
+	<insert id="insertUserVO" parameterType="UserVO">
+		insert into
+			citi_userinfo(
+			<include refid="userColumns"/>
+			)
+		values
+			(#{ui_bankId},#{ui_name},#{ui_id},#{ui_passw});
+	</insert>
+	
+	<select id="selectUserVOByBankID" resultType="list" resultMap="resultMap_UserVO" parameterType="String" >
+		select * from citi_userinfo
+		where
+			UI_BANKID = #{ui_bankId};
+	</select>
+</mapper>
