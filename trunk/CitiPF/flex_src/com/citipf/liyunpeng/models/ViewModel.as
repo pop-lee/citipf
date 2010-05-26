@@ -19,7 +19,7 @@ package com.citipf.liyunpeng.models
 		/**
 		 * 导航按钮宽度
 		 */
-		public const NAV_BUTTON_WIDTH : uint = 280;
+		public const NAV_BUTTON_WIDTH : uint = 250;
 		
 		public static function getInstance() : ViewModel { return instance; }
 		

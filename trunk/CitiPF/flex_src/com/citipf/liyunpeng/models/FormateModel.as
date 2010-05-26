@@ -2,7 +2,7 @@ package com.citipf.liyunpeng.models
 {
 	import mx.formatters.DateFormatter;
 	
-	public class FormateModel
+	public class FormateModel extends DispatchEventModel
 	{
 		private var _stockDateFormatter : DateFormatter = new DateFormatter();
 		

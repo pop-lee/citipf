@@ -3,14 +3,19 @@
 	 xmlns:ChartViews="com.citipf.liyunpeng.views.chartViews.*"
 	 xmlns:flexlib="com.citipf.liyunpeng.mdi.containers.*"
 	 width="100%" height="100%"
+	 minWidth="800" minHeight="600"
 	 horizontalScrollPolicy="auto" verticalScrollPolicy="auto"
 	 initialize="init()"
-	 creationComplete="createComp()" >
+	 creationComplete="createComp()" xmlns:login="com.citipf.liyunpeng.views.login.*">
 	<mx:Script>
 		<![CDATA[
+			import mx.events.CloseEvent;
+			import com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert;
+			import mx.events.IndexChangedEvent;
 			import mx.effects.easing.Elastic;
 			import mx.effects.easing.Back;
 			import mx.effects.Move;
+			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.mdi.SuperWindow;
 			import com.citipf.liyunpeng.models.ViewModel;
 			import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
@@ -20,6 +25,9 @@
 			
 			[Bindable]
 			private var viewModel : ViewModel = ViewModel.getInstance();
+			
+			[Bindable]
+			private var model : Model = Model.getInstance();
 			
 			private function init() : void
 			{
@@ -53,30 +61,84 @@
 			 */
 			private function createComp() : void
 			{
+				navButton.y = 0 - navButton.height;
 				var navButtonMove : Move = new Move(navButton);
 				navButtonMove.easingFunction = Back.easeOut;
-				navButton.y = 0 - navButton.height;
 				navButtonMove.stop();
 				navButtonMove.yTo = 0;
 				navButtonMove.play();
 				
+				mainViewStack.y = 0 - mainViewStack.height;
 				var mainViewStackMove : Move = new Move(mainViewStack);
 				mainViewStackMove.easingFunction = Back.easeOut;
-				mainViewStack.y = 0 - mainViewStack.height;
 				mainViewStackMove.stop();
 				mainViewStackMove.yTo = 0;
 				mainViewStackMove.play();
+			}
+			
+			/**
+			 * 登录窗口控制
+			 */
+			private function toLogin() : void
+			{
+				var loginBoxMove : Move = new Move(loginBox);
+					loginBoxMove.easingFunction = Back.easeOut;
+					loginBoxMove.stop();
+				
+				if(loginBox.loginViewEnable == false) {
+					loginBox.loginViewEnable = true;
+					
+					loginBoxMove.yTo = -5;
+					loginBoxMove.play();
+					
+					toLoginBtn.label = "返回︿";
+				} else {
+					loginBoxMove.yTo = 0 - loginBox.height - 5;
+					loginBoxMove.play();
+					loginBox.loginViewEnable = false;
+					if(model._curUser == null) {
+						toLoginBtn.label = "登录﹀" ; 
+					} else {
+						toLoginBtn.label = "注销﹀" ;
+					}
+				} 
+			}
+			
+			/**
+			 * 导航所引改变时出发的方法
+			 */
+			private function pageIndexChange(event : IndexChangedEvent) : void
+			{
+				if(model._curUser == null && event.newIndex > 1) {
+					mainBox.enabled = false;
+					CocoaAlert.paddingTop = applicationBar.height + 5;
+					CocoaAlert.show("您暂时还没有登录，\n\n所以暂时还不能做理财规划，\n\n请先登录 ^_^", "未登录提示", 0x4, mainBox, false, notLoginAlert);
+				}
+				if(event.newIndex > 2) {
+					
+				}
+			}
+			/**
+			 * 没有登录提示错误
+			 */
+			private function notLoginAlert(event : CloseEvent) : void 
+			{ 
+				toLogin();
+				mainViewStack.selectedIndex = 0;
+				mainBox.enabled = true;
 			}
 			
 		]]>
 	</mx:Script>
 	<mx:Model id="mainViews" source="../configs/viewsConfig.xml" />
 	
-	<mx:ApplicationControlBar height="70" width="100%" >
+	<mx:ApplicationControlBar id="applicationBar" height="70" width="100%" >
 		<mx:HBox width="100%" height="100%" >
 			<mx:Label width="200" />
 			<ChartViews:TitleChartView />
-			<mx:VBox width="200" height="100%" />
+			<mx:VBox width="200" height="100%">
+				<mx:Button id="toLoginBtn" label="登录" click="toLogin()" />
+			</mx:VBox>
 		</mx:HBox>
 	</mx:ApplicationControlBar>
 	
@@ -85,13 +147,19 @@
 		<mx:HBox id="mainBox" width="100%" height="100%" styleName="navButtonBox"
 			x="0" y="0" >
 			<mx:VBox width="{viewModel.NAV_BUTTON_WIDTH}" height="100%" >
-				<mx:ToggleButtonBar id="navButton" dataProvider="{mainViews.views}" labelField="label" direction="vertical" />
+				<mx:ToggleButtonBar id="navButton" width="85%" selectedIndex="{mainViewStack.selectedIndex}"
+					 dataProvider="{mainViews.views}" labelField="label" direction="vertical" />
+				<!--
 				<mx:Spacer height="100%" />
-				<mx:DataGrid id="winDG" width="{navButton.width}" height="200" dataProvider="{viewModel.windowList}"
+				-->
+				<mx:DataGrid id="winDG" width="{navButton.width}" height="100%" dataProvider="{viewModel.windowList}"
 					doubleClickEnabled="true" 
 					doubleClick="winDGDoubleClick_Handle()" />
 			</mx:VBox>
-			<mx:ViewStack id="mainViewStack" width="100%" height="100%" />
+			<mx:ViewStack id="mainViewStack" width="100%" height="100%" change="pageIndexChange(event)"
+				selectedIndex="{navButton.selectedIndex}" />
 		</mx:HBox>
+		<login:LoginBox id="loginBox" x="{this.width - loginBox.width - 15}" y="{0 - loginBox.height - 5}"
+			closeLoginView="toLogin()"/>
 	</flexlib:MDICanvas>
 </mx:VBox>
