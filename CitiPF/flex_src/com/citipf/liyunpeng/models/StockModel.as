@@ -51,7 +51,7 @@ package com.citipf.liyunpeng.models
 			if(stockArr.length > _stockArrSize) {
 				stockArr.removeItemAt(0);
 			}
-			CairngormEventDispatcher.getInstance().dispatchEvent(new GetStockVOListEvent());
+			getStockListVO();
 			stockArr.addItem(_stockVO);
 		}
 		

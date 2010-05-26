@@ -25,10 +25,12 @@
 	<!-- 读取页面显示配置文件viewsConfig.xml -->
 	<mx:Model id="viewConfig" source="configs/viewsConfig.xml" />
 	
+	<!-- 服务  -->
 	<business:CitiPFServices />
 	
+	<!-- 控制层  -->
 	<controls:CitiPFControls />
 	
-	<!-- 主页面 -->
+	<!-- 主页面  -->
 	<views:MainPage />
 </mx:Application>
