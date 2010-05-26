@@ -6,6 +6,7 @@
 	<bean id="baseService" class="com.citipf.liyunpeng.BaseService">
 		<property name="stockDao" ref="stockDaoImpl" />
 		<property name="userDao" ref="userDaoImpl" />
+		<property name="uInveDao" ref="uInveDaoImpl" />
 	</bean>
 	
 	<bean id="citiPFService" class="com.citipf.liyunpeng.CitiPFService" parent="baseService" />

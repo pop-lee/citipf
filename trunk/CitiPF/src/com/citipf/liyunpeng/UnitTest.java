@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.citipf.liyunpeng.dao.Iface.*;
 import com.citipf.liyunpeng.dao.iBatis.StockDaoImpl;
+import com.citipf.liyunpeng.dao.iBatis.UInveDaoImpl;
 import com.citipf.liyunpeng.dao.iBatis.UserDaoImpl;
 import com.citipf.liyunpeng.valueObject.*;
 
@@ -19,11 +20,13 @@ public class UnitTest extends TestCase {
 		"applicationContext*.xml");
 	private IStockDao<StockVO> dao = context.getBean("stockDaoImpl",StockDaoImpl.class);
 	private IUserDao<UserVO> userdao = context.getBean("userDaoImpl",UserDaoImpl.class);
+	private IUInveDao<UInveVO> uinvedao = context.getBean("uInveDaoImpl",UInveDaoImpl.class);
 	
 	public static void main(String[] args) {
 		UnitTest ut = new UnitTest();
 		ut.test();
 		ut.test01();
+		ut.test02();
 	}
 
 	@Test
@@ -46,6 +49,13 @@ public class UnitTest extends TestCase {
 		vo.setUi_bankId("1");
 		uvo = userdao.select(vo);
 		System.out.println(uvo);
+	}
+	
+	private void test02() {
+		UInveVO uivo = new UInveVO();
+		uivo.setIp_infId(2);
+		List<UInveVO> list = uinvedao.selectList(uivo);
+		System.out.println(list);
 	}
 	
 }

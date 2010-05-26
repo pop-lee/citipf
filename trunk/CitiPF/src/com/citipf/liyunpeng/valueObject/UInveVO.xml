@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UInve">
+	<resultMap type="com.citipf.liyunpeng.valueObject.UInveVO" id="resultMap_UInvelVO">
+		<result column="IP_INFOID" javaType="int" property="ip_infoId"/>
+		<result column="IP_PREF" javaType="int" property="ip_pref"/>
+	</resultMap>
+	
+	<sql id="uInveColumns">IP_INFOID,IP_PREF</sql>
+	
+	<insert id="insertUInveVO" parameterType="UInveVO">
+		insert into 
+			citi_inve_pref(
+				<include refid="uInveColumns"/>
+			)
+		values
+			(#{ip_infoId},#{ip_pref});
+		)
+	</insert>
+	
+	<select id="selectListUInvevo" resultMap="resultMap_UInvelVO" parameterType="int">
+		select * from citi_inve_pref
+		where IP_INFOID = #{ip_infoId};
+	</select>
+</mapper>

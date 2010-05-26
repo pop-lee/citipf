@@ -3,6 +3,7 @@ package com.citipf.liyunpeng;
 import java.util.List;
 
 import com.citipf.liyunpeng.valueObject.StockVO;
+import com.citipf.liyunpeng.valueObject.UserVO;
 
 public class CitiPFService extends BaseService {
 	
@@ -12,5 +13,9 @@ public class CitiPFService extends BaseService {
 	
 	public void insertStockVO(StockVO stockVO) {
 		getStockDao().insert(stockVO);
+	}
+	
+	public UserVO selectUserVO(UserVO o) {
+		return getUserDao().select(o);
 	}
 }
