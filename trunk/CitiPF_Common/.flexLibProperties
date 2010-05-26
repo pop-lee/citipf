@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties version="1">
   <includeClasses>
-    <classEntry path="com.citipf.liyunpeng.mdi.effects.IMDIEffectsDescriptor"/>
+    <classEntry path="assets.skins.flexraysButtonSkin"/>
+    <classEntry path="com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert"/>
+    <classEntry path="com.citipf.liyunpeng.MacPopUp.effects.BackgroundFade"/>
+    <classEntry path="com.citipf.liyunpeng.MacPopUp.effects.BackgroundFadeInstance"/>
+    <classEntry path="com.citipf.liyunpeng.MacPopUp.effects.BackgroundFadePopupBlocker"/>
+    <classEntry path="com.citipf.liyunpeng.MacPopUp.managers.CocoaPopUpManager"/>
+    <classEntry path="com.citipf.liyunpeng.interfaceFiles.IWindow"/>
+    <classEntry path="com.citipf.liyunpeng.map.HashMap"/>
+    <classEntry path="com.citipf.liyunpeng.map.HashMapEntry"/>
     <classEntry path="com.citipf.liyunpeng.map.IHashMapEntry"/>
     <classEntry path="com.citipf.liyunpeng.map.IMap"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.events.MDIManagerEvent"/>
-    <classEntry path="com.citipf.liyunpeng.map.HashMap"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.events.MDIWindowEvent"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.effects.effectClasses.MDIGroupEffectItem"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.containers.MDICanvas"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.managers.MDIManager"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.effects.MDIEffectsDescriptorBase"/>
-    <classEntry path="com.citipf.liyunpeng.map.HashMapEntry"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.effects.effectsLib.MDIVistaEffects"/>
-    <classEntry path="assets.skins.flexraysButtonSkin"/>
-    <classEntry path="com.citipf.liyunpeng.interfaceFiles.IWindow"/>
-    <classEntry path="com.citipf.liyunpeng.mdi.containers.MDIWindowControlsContainer"/>
     <classEntry path="com.citipf.liyunpeng.mdi.SuperWindow"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.containers.MDICanvas"/>
     <classEntry path="com.citipf.liyunpeng.mdi.containers.MDIWindow"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.containers.MDIWindowControlsContainer"/>
     <classEntry path="com.citipf.liyunpeng.mdi.containers.MDIWindowState"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.effects.IMDIEffectsDescriptor"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.effects.MDIEffectsDescriptorBase"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.effects.effectClasses.MDIGroupEffectItem"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.effects.effectsLib.MDIVistaEffects"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.events.MDIManagerEvent"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.events.MDIWindowEvent"/>
+    <classEntry path="com.citipf.liyunpeng.mdi.managers.MDIManager"/>
     <classEntry path="com.citipf.liyunpeng.microCharts.SparkLine"/>
   </includeClasses>
   <includeResources/>
