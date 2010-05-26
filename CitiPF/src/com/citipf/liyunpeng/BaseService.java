@@ -33,6 +33,7 @@ public class BaseService {
 	/****************************************************************************/
 	private IStockDao<StockVO> stockDao ;
 	private IUserDao<UserVO> userDao ;
+	private IUInveDao<UInveVO> uInveDao;
 
 	public IStockDao<StockVO> getStockDao() {
 		return stockDao;
@@ -49,6 +50,15 @@ public class BaseService {
 	public void setUserDao(IUserDao<UserVO> userDao) {
 		this.userDao = userDao;
 	}
+
+	public IUInveDao<UInveVO> getUInveDao() {
+		return uInveDao;
+	}
+
+	public void setUInveDao(IUInveDao<UInveVO> inveDao) {
+		uInveDao = inveDao;
+	}
+	
 	
 	
 }

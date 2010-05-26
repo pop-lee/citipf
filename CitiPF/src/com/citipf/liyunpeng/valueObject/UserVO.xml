@@ -25,6 +25,6 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<select id="selectUserVOByBankID" resultType="list" resultMap="resultMap_UserVO" parameterType="String" >
 		select * from citi_userinfo
 		where
-			UI_BANKID = #{ui_bankId};
+			UI_BANKID = #{ui_bankId} and UI_PASSW = #{ui_passw};
 	</select>
 </mapper>

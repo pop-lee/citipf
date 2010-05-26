@@ -84,6 +84,9 @@
 	<bean id="userDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.UserDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlMapClient"></property>
 	</bean>
+	<bean id="uInveDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.UInveDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlMapClient"></property>
+	</bean>
 	<!-- Service -->
 	<!-- 
 	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">
