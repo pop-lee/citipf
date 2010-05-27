@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="530" backgroundAlpha="0" 
+	xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ItemClickEvent;
+			import mx.controls.Menu;
+			import mx.events.MenuEvent;
+			import mx.controls.Alert;
+		
+			public var _one:Number;
+			public var _two:Number;
+			public var _three:Number;
+			public var _four:Number;
+			public var _five:Number;
+			public var _six:Number;
+			public var _seven:Number;
+			public var _eight:Number;
+			public var _nine:Number;
+			public var _ten:Number;
+			public var _eleven:Number;
+			public var _twelve:Number;
+			public var _thirteen:Number;
+			
+			private var _bOne:Boolean = false;
+			private var _bTwo:Boolean = false;
+			private var _bThree:Boolean = false;
+			private var _bFour:Boolean = false;
+			private var _bFive:Boolean = false;
+			private var _bSix:Boolean = false;
+			private var _bSeven:Boolean = false;
+			private var _bEight:Boolean = false;
+			private var _bNine:Boolean = false;
+			private var _bTen:Boolean = false;
+			private var _bEleven:Boolean = false;
+			private var _bTwelve:Boolean = false;
+			private var _bThirteen:Boolean = false;
+			
+			public var _main:Boolean = false;
+			
+			public static var sum:Number;
+		
+			private function firstQuestion():void {
+				this._one = Number(this.one.selectedValue);
+				this._bOne = true;
+				
+			}
+			
+			private function secondQuestion():void {
+				this._two = Number(this.two.selectedValue);
+				this._bTwo = true;
+			}
+			
+			private function thirdQuestion():void {
+				this._three = Number(this.three.selectedValue);
+				this._bThree = true;
+			}
+			
+			private function fourthQuestion():void {
+				this._four = Number(this.four.selectedValue);
+				this._bFour = true;
+			}
+			
+			private function fifthQuestion():void {
+				this._five = Number(this.five.selectedValue);
+				this._bFive = true;
+			}
+			
+			private function sixthQuestion():void {
+				this._six = Number(this.six.selectedValue);
+				this._bSix = true;
+			}
+			
+			private function seventhQuestion():void {
+				this._seven = Number(this.seven.selectedValue);
+				this._bSeven = true;
+			}
+			
+			private function eighthQuestion():void {
+				this._eight = Number(this.eight.selectedValue);
+				this._bEight = true;
+			}
+			
+			private function ninthQuestion():void {
+				this._nine = Number(this.nine.selectedValue);
+				this._bNine = true;
+			}
+			
+			private function tenthQuestion():void {
+				this._ten = Number(this.ten.selectedValue);
+				this._bTen = true;
+			}
+			
+			private function eleventhQuestion():void {
+				this._eleven = Number(this.eleven.selectedValue);
+				this._bEleven = true;
+			}
+			
+			private function twelvethQuestion():void {
+				this._twelve = Number(this.twelve.selectedValue);
+				this._bTwelve = true;
+			}
+			
+			private function thirteenthQuestion():void {
+				this._thirteen = Number(this.thirteen.selectedValue);
+				this._bThirteen = true;
+			}
+			
+			private function getSecondPage():void {
+				if (this._bOne==true&&this._bTwo==true&&this._bThree==true) {
+					this.riskTest.selectedIndex = 1;
+				} else {
+					Alert.show("请完成填写.")
+				}
+			}
+			
+			private function getThirdPage():void {
+				if (this._bFive==true&&this._bSix==true&&this._bSeven==true&&this._bEight==true) {
+					this.riskTest.selectedIndex = 2;
+				} else {
+					Alert.show("请完成填写.")
+				}
+			}
+			
+			private function getFourthPage():void {
+				if (this._bNine==true&&this._bTen==true&&this._bEleven==true) {
+					this.riskTest.selectedIndex = 3;
+				} else {
+					Alert.show("请完成填写.")
+				}
+			}
+			
+			private function achieveHandler():void {
+				if (this._bTwelve==true||this._bThirteen==true) {
+					sum = this._one + this._two + this._three + this._four + this._five + this._six + this._seven
+						+ this._eight + this._nine + this._ten + this._eleven + this._twelve + this._thirteen;
+					if (sum<21) {
+						this.riskStyle.selectedValue = "g";
+						this.itemClickHandler();
+					} else if (sum>=21&&sum<=35) {
+						this.riskStyle.selectedValue = "m";
+						this.itemClickHandler();
+					} else if (sum>35) {
+						this.riskStyle.selectedValue = "r";
+						this.itemClickHandler();
+					}
+					this.main.selectedIndex = 0;
+				} else {
+					Alert.show("请完成填写.")
+				}
+			}
+			
+			private function itemClickHandler():void {
+				if (this.riskStyle.selectedValue=="g") {
+					this.advice.text = "您的风险偏好为偏向保守类型";
+				} else if (this.riskStyle.selectedValue=="m") {
+					this.advice.text = "您的风险偏好为风格中庸类型";
+				} else if (this.riskStyle.selectedValue=="r") {
+					this.advice.text = "您的风险偏好为投资激进类型";
+				}
+				this._main = true;	
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:XMLList id="style">
+		<node label="偏向保守"/>
+		<node label="风格中庸"/>
+		<node label="投资激进"/>
+	</mx:XMLList>
+	
+	<viewStackEffects:Slide id="slide" duration="1000" direction="up"/>
+	<viewStackEffects:FlipPapervision3D id="fp" duration="1000"/>
+	
+	<mx:ViewStack width="100%" height="100%" id="main">
+		<mx:Canvas width="100%" height="100%" showEffect="{fp}" hideEffect="{fp}" backgroundColor="#000000">
+			<mx:Panel width="100%" height="100%" title="风险偏好" fontSize="14" textAlign="center">
+				<mx:VBox width="100%" height="100%">
+					<mx:Label width="100%" height="20" fontSize="12" textAlign="center" text="如果您对您自己的风险偏好比较了解,可以直接选择您的风险偏好类型:"/>
+					<mx:Canvas width="100%">
+						<mx:RadioButtonGroup id="riskStyle" itemClick="itemClickHandler();"/>
+       						<mx:RadioButton groupName="riskStyle" id="guard" value="g" label="偏向保守" width="75" horizontalCenter="0" fontSize="12" top="0"/>
+        					<mx:RadioButton groupName="riskStyle" id="mean" value="m" label="风格中庸" width="75" horizontalCenter="0" fontSize="12" top="20"/>
+        					<mx:RadioButton groupName="riskStyle" id="radicalness" value="r" label="投资激进" width="75" horizontalCenter="0" fontSize="12" top="40"/>
+					</mx:Canvas>
+					<mx:Label id="advice" fontSize="12" textAlign="center" width="100%" height="20"/>
+					<mx:Spacer width="100%" height="30"/>
+					<mx:Label width="100%" height="20" fontSize="12" textAlign="center" text="如果您对自己的风险偏好不是很了解，建议您进行风险偏好测试:"/>
+					<mx:Canvas width="100%">
+						<mx:Button fontSize="12" label="进行风险偏好测试" horizontalCenter="0" verticalCenter="0" click="main.selectedIndex=1"/>
+					</mx:Canvas>
+					<mx:Spacer width="100%" height="231"/>
+				    <mx:Canvas width="100%">
+                        <mx:LinkButton label="上一页" left="100" fontSize="12" id="toBi"/>
+                        <mx:LinkButton label="下一页" right="100" fontSize="12" id="toAc"/>
+                    </mx:Canvas>
+				</mx:VBox>
+			</mx:Panel>
+		</mx:Canvas>
+		<mx:Canvas width="100%" height="100%" showEffect="{fp}" hideEffect="{fp}" backgroundColor="#000000">
+			<mx:ViewStack width="100%" height="100%" id="riskTest">
+				<mx:Canvas id="firstPage" width="100%" height="100%" backgroundColor="#000000" showEffect="{slide}" hideEffect="{slide}">
+					<mx:Panel width="100%" height="100%" title="风险偏好测试表(一)" fontSize="14" textAlign="center">
+						<mx:VBox width="100%" height="100%">
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      风险测试表能够帮助投资朋友准确的对自我风险承受能力,投资理念,投资性格等进行专业的自我认知测试,是投资朋友进行投资理财之前重要的准备工作.知己知彼,方能百战不殆,从而控制风险.安全投资,构建适合自己的投资组合,轻松的获取财富,享受生活,分享中国经济成长!因此,请认真回答以下问题:]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Spacer width="100%" height="20"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      1.你购买一项投资,在一个月后跌去了15%的总价值.假设该投资的其他任何基本面要素没有改变,你会?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="one" itemClick="this.firstQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="one" id="a1" value="3" label="坐等投资回到原有价值." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="one" id="b1" value="1" label="卖掉它,以免日后如果它不断跌价,让你寝食难安,夜不成寐." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="one" id="c1" value="4" label="买入更多,因为如果以当初价格购买时认为是个好决定,现在应该看上去机会更好." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="5"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      2.你购买一项投资,在一个月后暴涨了40%.假设你并找不出更多的相关信息,你会?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="two" itemClick="this.secondQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="two" id="a2" value="1" label="卖掉它." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="two" id="b2" value="3" label="继续持有它,期待未来可能更多的收益." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="two" id="c2" value="4" label="买入更多,也许它还会涨的更高." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="5"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      3.你比较愿意做下列哪件事?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="three" itemClick="this.thirdQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="three" id="a3" value="1" label="投资于今后六个月不大上升的激进增长型基金." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="three" id="b3" value="3" label="投资于货币市场基金,但会目睹今后六个月激进增长型基金增长翻番." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="5"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      4.下列哪件事会使你感觉好?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="four" itemClick="this.fourthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="four" id="a4" value="2" label="你的股票翻了一番." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="four" id="b4" value="1" label="你投资于基金,从而避免了因为市场下跌而会造成的你一半投资的损失." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="10"/>
+							<mx:Canvas width="100%">
+								<mx:LinkButton label="下一页" fontSize="12" horizontalCenter="0" verticalCenter="0" click="this.getSecondPage();"/>
+							</mx:Canvas>
+						</mx:VBox>
+					</mx:Panel>	
+				</mx:Canvas>
+				<mx:Canvas id="secondPage" width="100%" height="100%" backgroundColor="#000000" showEffect="{slide}" hideEffect="{slide}">
+					<mx:Panel width="100%" height="100%" title="风险偏好测试表(二)" fontSize="14" textAlign="center">
+						<mx:VBox width="100%" height="100%">
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      5.下列哪件事会使你高兴?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="five" itemClick="this.fifthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="five" id="a5" value="2" label="你在一项竞赛中赢得了10万元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="five" id="b5" value="1" label="你从一个富有的亲戚那里继承了10万元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="five" id="c5" value="4" label="你冒着风险,投资的2000元期权带来了10万元的收益." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="60" groupName="five" id="d5" value="1" label="任何上述一项,你很高兴10万元的收益,无论是通过什么渠道." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="5"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      6.你现在住的公寓马上要改造成酒店式公寓.你可以用8万元买下现在的住处,或把这个买房的权力以2万元卖掉.你改造过的住处的市场价格会是12万元.你知道如果你买下它,可能要至少花六个月才能卖掉,而每个月的养房费要1200元.并且为买下它,你必须向银行按揭支付头期.你不想住在这里了,你会怎么做？]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="six" itemClick="this.sixthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="six" id="a6" value="1" label="以2万元卖掉买房权." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="six" id="b6" value="2" label="先买下房子再卖掉." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="5"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      7.你继承了叔叔价值10万元的房子,已付清了所有的按揭贷款.尽管房子在一个时尚社区,并且会预期已高于通货膨胀率的水平升值,但是房子现在很破旧.目前,房子正在出租,每月有1000元的租金收入.不过,如果房子新装修后,租金可以有1500元.装修费可以用房子来抵押获得贷款.你会?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="seven" itemClick="this.seventhQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="seven" id="a7" value="1" label="卖掉房子." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="seven" id="b7" value="2" label="保持现有租约." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="seven" id="c7" value="3" label="装修它,再出租." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="5"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      8.你获知几家房产开发商正积极地关注某个地区的一片未开发的土地.你现在有个机会来买部分这块土地的期权.期权价格是你两个月的薪水,你估计收益会相当于10个月的薪水.你会?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="eight" itemClick="this.eighthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="eight" id="a8" value="3" label="购买这个期权." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="eight" id="b8" value="1" label="随便它去,你觉得和你没什么关系." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Canvas width="100%">
+								<mx:LinkButton label="下一页" fontSize="12" horizontalCenter="0" verticalCenter="0" click="this.getThirdPage();"/>
+							</mx:Canvas>
+						</mx:VBox>
+					</mx:Panel>
+				</mx:Canvas>
+				<mx:Canvas id="thirdPage" width="100%" height="100%" backgroundColor="#000000" showEffect="{slide}" hideEffect="{slide}">
+					<mx:Panel width="100%" height="100%" title="风险偏好测试表(三)" fontSize="14" textAlign="center">
+						<mx:VBox width="100%" height="100%">
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      9.你为一家私营的呈上升期的小型电子企业工作.公司在通过向员工出售股票募集资金.管理层计划将公司上市,但要至少4年以后.如果你买股票,你的股票只能在公司股票公开交易后,方可卖出.同时,股票不分红.公司一旦上市,股票会以你购买的10-20倍的价格交易.你会做多少投资?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="nine" itemClick="this.ninthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="nine" id="a9" value="1" label="一股也不买." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="nine" id="b9" value="2" label="一个月的薪水." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="nine" id="c9" value="4" label="三个月的薪水." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="60" groupName="nine" id="d9" value="6" label="六个月的薪水." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="15"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      10.你的老邻居是一位经验丰富的石油地质学家.他正组织包括他自己在内的一群投资者,为开发一个油井而集资.如果油井成功,那么它会带来50-100倍的投资收益;如果失败,所有的投资就一文不值了.你的邻居估计成功概率有20%. 你会投资?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="ten" itemClick="this.tenthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="ten" id="a10" value="1" label="0" left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="ten" id="b10" value="3" label="一个月的薪水." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="ten" id="c10" value="6" label="三个月的薪水." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="60" groupName="ten" id="d10" value="9" label="六个月的薪水." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="15"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      11.你在某个电视竞赛中有下列选择,你会选?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="eleven" itemClick="this.eleventhQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="eleven" id="a11" value="1" label="一千元现钞." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="eleven" id="b11" value="3" label="50%的机会获得4000元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="eleven" id="c11" value="5" label="20%的机会获得1万元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="60" groupName="eleven" id="d11" value="9" label="5%的机会获得10万元." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="30"/>
+							<mx:Canvas width="100%">
+								<mx:LinkButton label="下一页" fontSize="12" horizontalCenter="0" verticalCenter="0" click="this.getFourthPage();"/>
+							</mx:Canvas>
+						</mx:VBox>
+					</mx:Panel>
+				</mx:Canvas>
+				<mx:Canvas id="fourthPage" width="100%" height="100%" backgroundColor="#000000" showEffect="{slide}" hideEffect="{slide}">
+					<mx:Panel width="100%" height="100%" title="风险偏好测试表(四)" fontSize="14" textAlign="center">
+						<mx:VBox width="100%" height="100%">
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      12.假设通货膨胀率目前很高,硬通资产如稀有金属,收藏品和房地产预计会随通货膨胀率同步上涨,你目前的所有投资是长期债券.你会?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="twelve" itemClick="this.twelvethQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="twelve" id="a12" value="1" label="继续持有债券." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="twelve" id="b12" value="2" label="卖掉债券,把一半的钱投资基金,另一半投资硬通资产." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="twelve" id="c12" value="3" label="卖掉债券,把所有的钱投资硬通资产." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="60" groupName="twelve" id="d12" value="4" label="卖掉债券,把所有的钱投资硬通资产,还借钱来买更多的硬通资产." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="20"/>
+							<mx:Text width="100%" textAlign="left" fontSize="12">
+								<mx:htmlText><![CDATA[      13.你在一项博彩游戏中,已经输了500元.为了赢会500元,你准备的翻本钱是?]]>
+								</mx:htmlText>
+							</mx:Text>
+							<mx:Canvas width="100%">
+								<mx:RadioButtonGroup id="thirteen" itemClick="this.thirteenthQuestion();"/>
+								<mx:RadioButton fontSize="12" top="0" groupName="thirteen" id="a13" value="1" label="不来了,放弃." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="20" groupName="thirteen" id="b13" value="2" label="100元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="40" groupName="thirteen" id="c13" value="4" label="250元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="60" groupName="thirteen" id="d13" value="6" label="500元." left="35" height="20"/>
+								<mx:RadioButton fontSize="12" top="80" groupName="thirteen" id="e13" value="8" label="超过500元." left="35" height="20"/>
+							</mx:Canvas>
+							<mx:Spacer width="100%" height="150"/>
+							<mx:Canvas width="100%">
+								<mx:Button id="achieve" label="提交" fontSize="12" horizontalCenter="0" verticalCenter="0" click="this.achieveHandler();"/>
+							</mx:Canvas>
+						</mx:VBox>
+					</mx:Panel>
+				</mx:Canvas>
+			</mx:ViewStack>
+		</mx:Canvas>
+	</mx:ViewStack>
+				
+</mx:Canvas>

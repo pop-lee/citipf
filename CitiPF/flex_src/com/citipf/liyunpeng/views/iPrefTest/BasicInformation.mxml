@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="530" backgroundAlpha="0" color="#000000">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.events.MenuEvent;
+			
+			public var _main:Boolean;
+					 
+        	private function itemClickHandler(event:MenuEvent, can:Canvas):void {
+        		if (event.index == 0) {
+        			can.visible = false;
+        		} else {
+        			can.visible = true;
+        		}
+        	}
+        	
+        	private function childrenHandler(event:MouseEvent):void {
+        		if (this.familyNumber.value==1) {
+        			this.c4.visible = this.c3.visible = this.c2.visible = this.c1.visible = false;
+        		}else if (this.familyNumber.value==2) {
+        			this.c4.visible = true;
+        			this.c3.visible = this.c2.visible = this.c1.visible = false;
+        		} else if (this.familyNumber.value==3) {
+        			this.c3.visible = true;
+        			this.c2.visible = this.c1.visible = false;
+        		} else if (this.familyNumber.value==4) {
+        			this.c2.visible = true;
+        			this.c1.visible = false;
+        		} else if (this.familyNumber.value==5) {
+        			this.c1.visible = true;
+        		}
+        	}
+        	
+		]]>
+	</mx:Script>
+	
+	<mx:XMLList id="whether">
+		<node label="无"/>
+		<node label="有"/>
+	</mx:XMLList>
+	
+	<mx:WipeLeft id="left" duration="500"/>
+	<mx:WipeRight id="right" duration="500"/>
+	
+	<mx:Panel width="100%" height="100%" title="基础情况" fontSize="14" textAlign="center">
+		<mx:VBox width="100%" height="100%">
+			<mx:Spacer width="100%" height="20"/>
+			<mx:Canvas width="100%" height="20">
+				<mx:Label height="100%" text="用户情况" fontSize="12" textAlign="center" horizontalCenter="0" verticalCenter="0"/>
+			</mx:Canvas>
+			<mx:Spacer width="100%" height="10"/>
+			<mx:Canvas width="100%" height="25">
+				<mx:Canvas left="0" width="50%" height="100%">
+					<mx:Label text="您的当前年龄:" fontSize="12" left="30"/>
+					<mx:NumericStepper id="age" width="60" height="100%" right="10" minimum="18" maximum="100" stepSize="1"/>
+				</mx:Canvas>
+				<mx:Canvas right="0" width="50%" height="100%">
+					<mx:Label text="您的当前工龄:" fontSize="12" left="30"/>
+					<mx:NumericStepper id="jobAge" width="60" height="100%" right="10" minimum="1" maximum="50" stepSize="1"/>
+				</mx:Canvas>
+			</mx:Canvas>
+			<mx:Canvas width="100%" height="25">
+				<mx:Canvas left="0" width="50%" height="100%">
+					<mx:Label text="您的配偶情况:" fontSize="12" left="30"/>
+					<mx:PopUpMenuButton width="60" height="100%" fontSize="12" dataProvider="{whether}" labelField="@label" right="10" itemClick="this.itemClickHandler(event, mate);"/>
+				</mx:Canvas>
+				<mx:Canvas right="0" width="50%" height="100%">
+					<mx:Label text="您的子女情况:" fontSize="12" left="30"/>
+					<mx:PopUpMenuButton width="60" height="100%" fontSize="12" dataProvider="{whether}" labelField="@label" right="10" itemClick="this.itemClickHandler(event, family);"/>
+				</mx:Canvas>
+			</mx:Canvas>
+			<mx:Spacer width="100%" height="30"/>
+			<mx:Canvas width="100%" height="20" visible="{mate.visible}" showEffect="{right}" hideEffect="{left}">
+				<mx:Label height="100%" text="配偶情况" fontSize="12" textAlign="center" horizontalCenter="0" verticalCenter="0"/>
+			</mx:Canvas>
+			<mx:Spacer width="100%" height="10"/>
+			<mx:Canvas width="100%" height="25" id="mate" visible="false" showEffect="{right}" hideEffect="{left}">
+				<mx:Canvas left="0" width="50%" height="100%">
+					<mx:Label text="您配偶的当前年龄:" fontSize="12" left="30"/>
+					<mx:NumericStepper id="mateAge" width="60" height="100%" right="10" minimum="18" maximum="100" stepSize="1"/>
+				</mx:Canvas>
+				<mx:Canvas right="0" width="50%" height="100%">
+					<mx:Label text="您配偶的当前工龄:" fontSize="12" left="30"/>
+					<mx:NumericStepper width="60" height="100%" right="10" minimum="1" maximum="50" stepSize="1"/>
+				</mx:Canvas>
+			</mx:Canvas>
+			<mx:Spacer width="100%" height="30"/>
+			<mx:Canvas width="100%" height="20" visible="{family.visible}" showEffect="{right}" hideEffect="{left}">
+				<mx:Label height="100%" text="子女情况" fontSize="12" textAlign="center" horizontalCenter="0" verticalCenter="0"/>
+			</mx:Canvas>
+			<mx:Spacer width="100%" height="10"/>
+			<mx:Canvas width="100%" height="60" id="family" visible="false" showEffect="{right}" hideEffect="{left}">
+				<mx:Canvas left="0" top="0" width="50%" height="25">
+					<mx:Label text="您有几个子女:" fontSize="12" left="30"/>
+					<mx:NumericStepper id="familyNumber" width="60" height="100%" right="10" minimum="1" maximum="5" click="this.childrenHandler(event);"/>
+				</mx:Canvas>
+				<mx:Canvas left="0" bottom="0" width="100%" height="25">
+					<mx:Label text="您子女的平均年龄:" fontSize="12" left="30"/>
+					<mx:NumericStepper id="c1" width="60" height="100%" right="30" minimum="1" stepSize="1" visible="false" maximum="100"/>
+					<mx:NumericStepper id="c2" width="60" height="100%" right="110" minimum="1" stepSize="1" visible="false" maximum="100"/>
+					<mx:NumericStepper id="c3" width="60" height="100%" right="190" minimum="1" stepSize="1" visible="false" maximum="100"/>
+					<mx:NumericStepper id="c4" width="60" height="100%" right="270" minimum="1" stepSize="1" visible="false" maximum="100"/>
+					<mx:NumericStepper id="c5" width="60" height="100%" right="350" minimum="1" stepSize="1" visible="true" maximum="100"/>
+				</mx:Canvas>
+			</mx:Canvas>
+			<mx:Spacer width="100%" height="62"/>
+			<mx:Canvas width="100%">
+                <mx:LinkButton label="下一页" fontSize="12" right="100" id="toRt"/>				
+			</mx:Canvas>
+		</mx:VBox>
+	</mx:Panel>
+		
+</mx:Canvas>
