@@ -21,8 +21,7 @@ public class UInveDaoImpl extends IBatisDaoSupport implements IUInveDao<UInveVO>
 
 	@Override
 	public UInveVO select(UInveVO o) {
-		// TODO Auto-generated method stub
-		return null;
+		return (UInveVO) this.getSqlSessionTemplate().selectOne("UInve.selectUInveVO", o);
 	}
 
 	@Override
@@ -31,10 +30,10 @@ public class UInveDaoImpl extends IBatisDaoSupport implements IUInveDao<UInveVO>
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<UInveVO> selectList(UInveVO o) {
-		return this.getSqlSessionTemplate().selectList("UInve.selectListUInvevo",o.getIp_infId());
+//		return this.getSqlSessionTemplate().selectList("UInve.selectUInveVO",o.getIp_infId());
+		return null;
 	}
 
 	@Override
