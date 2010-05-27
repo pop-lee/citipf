@@ -9,18 +9,21 @@
 	 creationComplete="createComp()" xmlns:login="com.citipf.liyunpeng.views.login.*">
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.valueObject.UInveVO;
+			import mx.events.PropertyChangeEvent;
+			import mx.binding.utils.ChangeWatcher;
 			import mx.events.CloseEvent;
-			import com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert;
 			import mx.events.IndexChangedEvent;
 			import mx.effects.easing.Elastic;
 			import mx.effects.easing.Back;
 			import mx.effects.Move;
+			import mx.managers.PopUpManager;
+			import mx.containers.Panel;
+			import com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert;
 			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.mdi.SuperWindow;
 			import com.citipf.liyunpeng.models.ViewModel;
 			import com.citipf.liyunpeng.views.purcPlan.PurcPlanMain;
-			import mx.containers.Panel;
-			import mx.managers.PopUpManager;
 			import flash.utils.getDefinitionByName;
 			
 			[Bindable]
@@ -32,6 +35,7 @@
 			private function init() : void
 			{
 				viewModel.mainVBox = mainVBox;
+				
 				for each(var obj : Object in mainViews.views) 
 				{
 					try {
@@ -43,6 +47,10 @@
 						trace("引用模块---“" + obj.label + "”---类名未定义或定义错误" + 
 								"---Reference Class name not found");
 					}
+				}
+				
+				if(ChangeWatcher.canWatch(model,"_curUser")) {
+					ChangeWatcher.watch(model,"_curUser",loginedGetInfo);
 				}
 			}
 			
@@ -74,6 +82,8 @@
 				mainViewStackMove.stop();
 				mainViewStackMove.yTo = 0;
 				mainViewStackMove.play();
+				
+				CocoaAlert.paddingTop = applicationBar.height + 5;
 			}
 			
 			/**
@@ -109,13 +119,12 @@
 			 */
 			private function pageIndexChange(event : IndexChangedEvent) : void
 			{
-				if(model._curUser == null && event.newIndex > 1) {
+				if(model._curUser == null && event.newIndex > 0) {
 					mainBox.enabled = false;
-					CocoaAlert.paddingTop = applicationBar.height + 5;
 					CocoaAlert.show("您暂时还没有登录，\n\n所以暂时还不能做理财规划，\n\n请先登录 ^_^", "未登录提示", 0x4, mainBox, false, notLoginAlert);
-				}
-				if(event.newIndex > 2) {
-					
+				} else if(event.newIndex > 1 && model._uInve == null) {
+					mainBox.enabled = false;
+					CocoaAlert.show("请先确定下您的投资偏好，\n\n若不确定我们将对您进行测试 ^_^", "未登录提示", 0x4, mainBox, false, noUInveAlert);
 				}
 			}
 			/**
@@ -126,6 +135,21 @@
 				toLogin();
 				mainViewStack.selectedIndex = 0;
 				mainBox.enabled = true;
+			}
+			private function noUInveAlert(event : CloseEvent) : void
+			{
+				mainViewStack.selectedIndex = 1;
+				mainBox.enabled = true;
+			}
+			
+			private function loginedGetInfo(event : PropertyChangeEvent) : void
+			{
+				if(model._curUser != null) {
+					model._loginStatus = 1;
+					toLogin();
+					var uInve : UInveVO = new UInveVO();
+					model.getUInveVO(uInve);
+				}
 			}
 			
 		]]>
