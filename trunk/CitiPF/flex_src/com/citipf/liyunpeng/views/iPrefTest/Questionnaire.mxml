@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="530" backgroundAlpha="0" 
+	xmlns:iPrefTest="com.citipf.liyunpeng.views.iPrefTest.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.citipf.liyunpeng.models.Model;
+			import com.citipf.liyunpeng.events.AddUserAddVOEvent;
+			import com.citipf.liyunpeng.valueObject.UserAddVO;
+			import mx.core.Container;
+			import mx.events.ItemClickEvent;
+			import mx.effects.easing.*;
+            import mx.charts.series.items.PieSeriesItem;
+            import mx.charts.events.ChartItemEvent;
+            import mx.core.Application;
+            
+            private function initBi():void {
+            	this.bi.toRt.addEventListener(MouseEvent.CLICK, toRtHandler);
+            }
+            
+            private function initRt():void {
+            	this.rt.toBi.addEventListener(MouseEvent.CLICK, toBiHandler);
+                this.rt.toAc.addEventListener(MouseEvent.CLICK, toAcHandler);
+            }
+            
+            private function initAc():void {
+            	this.ac.achieve.addEventListener(MouseEvent.CLICK, achieveHandler);
+                this.ac.toRt.addEventListener(MouseEvent.CLICK, toRtHandler);
+            }
+            
+            private function toBiHandler(event:MouseEvent):void {
+            	this.main.selectedIndex = 0;
+            }
+            
+            private function toRtHandler(event:MouseEvent):void {
+            	this.main.selectedIndex = 1;
+            }
+            
+            private function toAcHandler(event:MouseEvent):void {
+            	this.main.selectedIndex = 2;
+            }
+            
+			[Bindable]
+			private var model : Model = Model.getInstance();
+			
+			
+			[Bindable]
+			private var ageReport:String;
+			[Bindable]
+			private var inAndOutReport1:String;
+			[Bindable]
+			private var inAndOutReport2:String;
+			[Bindable]
+			private var inAndOutReport3:String;
+			[Bindable]
+			private var inAndOutReport4:String;
+			[Bindable]
+			private var assetsReport1:String;
+			[Bindable]
+			private var assetsReport2:String;
+			[Bindable]
+			private var investmentReport1:String;
+			[Bindable]
+			private var investmentReport2:String;
+			[Bindable]
+			private var contingencyReport1:String;
+			[Bindable]
+			private var contingencyReport2:String;
+			[Bindable]
+			private var wage:int;
+			[Bindable]
+			private var gain:int;
+			[Bindable]
+			private var bonus:int;
+			[Bindable]
+			private var otherIn:int;
+			[Bindable]
+			private var daily:int;
+			[Bindable]
+			private var insurance:int;
+			[Bindable]
+			private var tour:int;
+			[Bindable]
+			private var otherOut:int;
+			[Bindable]
+			private var cash:int;
+			[Bindable]
+			private var deposit:int;
+			[Bindable]
+			private var house:int;
+			[Bindable]
+			private var car:int;
+			[Bindable]
+			private var stock:int;
+			[Bindable]
+			private var fund:int;
+			[Bindable]
+			private var bond:int;
+			[Bindable]
+			private var otherAssets:int;
+			[Bindable]
+			private var houseFinance:int;
+			[Bindable]
+			private var carFinance:int;
+			[Bindable]
+			private var creditCard:int;
+			[Bindable]
+			private var otherDebt:int;
+			[Bindable]
+			private var highData:int;
+			[Bindable]
+			private var middleData:int;
+			[Bindable]
+			private var lowData:int;
+			[Bindable]
+			private var dataProvider:XMLListCollection;
+			
+			private var grossIncome:Number;
+			private var wagePercent:Number;
+			private var insurancePercent:Number;
+			private var outgoPercent:Number;
+			private var balancePerM:Number;
+			private var balancePerY:Number;
+			private var incomePerY:Number;
+			private var balancePercent:Number;
+			private var allAssets:Number;
+			private var allDepts:Number;
+			private var reallyAssets:Number;
+			private var deptsPercent:Number;
+			private var raPercent:Number;
+			private var ageScore:Number;
+			private var riskScore:Number;
+			private var outgoPerM:Number;
+			private var contingencyFund:Number;
+			private var contingencyPercent:Number; 
+			private var investAssets:Number;
+			private var investPercent:Number;
+			
+			private function achieveHandler(event:MouseEvent):void {
+				this.referData();
+				this.ageReportHandler();
+				this.incomeAndOutgoHandler();
+				this.assetsHandler();
+				this.investmentHandler();
+				this.contingencyHandler();
+				this.dataHandler();
+				this.dataProvider = this.incomeData;
+				if (this.rt._main) {
+					this.vs.selectedIndex = 1;
+				}
+			}
+			
+			private function referData():void {
+				var allInPerM : Number = this.ac.wage.value + this.ac.gain.value/12 + this.ac.bonus.value/12 + this.ac.otherIn.value/12;
+				var allOutPerM : Number = this.ac.daily.value + this.ac.insurance.value + this.ac.tour.value/12 + this.ac.otherOut.value/12;
+				var userAddVO : UserAddVO = new UserAddVO();
+				userAddVO.ua_avg_micom = allInPerM;
+				userAddVO.ua_avg_miout = allOutPerM;
+				model.addUserAddVO(userAddVO);
+			}
+			
+			private function ageReportHandler():void {
+				if (this.bi.age.value<35) {
+					this.ageReport = "　　您正处于家庭初建期,事业处于起步阶段,经济能力尚可,子女的负担较轻或没有,收入大于支出,可承担较大的风险." + 
+									 "这一阶段的投资目的通常是为购房或旅游积累资金.建议您尝试一些较高风险的投资项目,以获利及积累投资经验.";
+				} else if (this.bi.age.value>=35&&this.bi.age.value<50) {
+					this.ageReport = "　　您正处于家庭成熟期,事业已处于鼎盛阶段,经济稳定,随着子女的成长,生活负担增加,休闲时间减少." + 
+									 "由于这一阶段需要储备子女教育经费,且你风险承受力较高,因此投资方面应以中高风险的产品为主.";
+				} else if (this.bi.age.value>=50&&this.bi.age.value<60) {
+					this.ageReport = "　　您正处于家庭成熟期,事业已处于鼎盛阶段,经济稳定,随着子女的独立,生活负担逐渐减轻,休闲时间增加,开始享受生活." + 
+									 "由于这一阶段需要储备退休后的生活费,风险承受力降低,因此投资方面应以中、低风险的产品为主." + 
+									 "随着退休年龄的逐渐接近,用于风险投资的比例还应逐渐减少.";
+				} else {
+					this.ageReport = "　　您正处于退休期,退休之后,收入减少或停止,主要依靠养老金及前期投资收益生活,生活空间完全自由,风险承受能力极低." + 
+									 "这一阶段的投资以稳健、安全、保值为目的.";
+				}
+			}
+			
+			private function incomeAndOutgoHandler():void {
+				
+				this.grossIncome = this.ac.wage.value + this.ac.gain.value/12 + this.ac.bonus.value/12 + this.ac.otherIn.value/12;
+				
+				if (this.grossIncome==0) {
+					this.wagePercent = 0;
+					this.insurancePercent = 0;
+					this.outgoPercent = 0;
+				} else {
+					this.wagePercent = this.ac.wage.value / this.grossIncome;
+					this.insurancePercent = this.ac.insurance.value / this.grossIncome;
+					this.outgoPercent = (this.ac.daily.value + this.ac.otherOut.value/12) / this.grossIncome;
+				}
+				
+				this.incomePerY = this.ac.wage.value*12 + this.ac.gain.value + this.ac.bonus.value + this.ac.otherIn.value;
+				this.balancePerM = this.ac.wage.value - this.ac.daily.value - this.ac.insurance.value;
+				this.balancePerY = (this.ac.wage.value*12 + this.ac.gain.value + this.ac.bonus.value + this.ac.otherIn.value) - 
+								   (this.ac.daily.value*12 + this.ac.insurance.value*12 + this.ac.tour.value + this.ac.otherOut.value);
+				
+				if (this.incomePerY==0) {
+					this.balancePercent = 0;					
+				} else {
+					this.balancePercent = this.balancePerY / this.incomePerY;
+				}
+				
+				
+				
+				if (this.wagePercent>=0.8) {
+					this.inAndOutReport1 = "　　从家庭收入构成来看,工资收入约占总收入的" + 
+												int(this.wagePercent*100) + 
+												"%,显示家庭的收入来源较为单一.可尝试通过各种途径获得兼职收入、租金收入等其他收入.";
+				} else {
+					this.inAndOutReport1 = "　　从家庭收入构成来看,工资收入约占总收入的" + 
+												int(this.wagePercent*100) + 
+												"%,显示家庭收入来源广泛,构成合理.";
+				}
+				
+				if (this.insurancePercent>=0.4) {
+					this.inAndOutReport2 = "　　家庭支出构成中,按揭还款约占月总收入的" + 
+												int(this.insurancePercent*100) + 
+												"%,在危险的范围之内.未来如果利率上升,月供水平提高,可能出现还款危机,现在需要适当作出控制.";
+				} else {
+					this.inAndOutReport2 = "　　家庭支出构成中,按揭还款约占月总收入的" + 
+												int(this.insurancePercent*100) + 
+												"%,在安全的范围之内.未来即使利率上升,月供水平提高,仍留有余地.合理的负债可提高家庭的生活水平,又不至造成过重的负担.";
+				}
+				
+				if (this.outgoPercent>=0.4) {
+					this.inAndOutReport3 = "　　家庭支出构成中,日常支出和其他支出约占月总收入的" + 
+												int(this.outgoPercent*100) + 
+												"%,显示家庭控制开支的能力较弱,储蓄能力也较弱.";
+				} else {
+					this.inAndOutReport3 = "　　家庭支出构成中,日常支出和其他支出约占月总收入的" + 
+												int(this.outgoPercent*100) + 
+												"%,显示家庭控制开支的能力较强,储蓄能力也较强.";
+				}
+				
+				this.inAndOutReport4 = "　　目前家庭月度节余资金" + this.balancePerM + 
+											"元,年度节余资金" + this.balancePerY + 
+											"元，约占家庭年总收入的" + int(this.balancePercent*100) + 
+											"%.这一比率称为储蓄比例,反映了您的家庭控制开支和能够增加净资产的能力.对于这些节余资金,您可通过合理的投资来实现未来家庭各项财务目标的积累.";
+				
+			}
+			
+			private function assetsHandler():void {
+			
+				this.allAssets = this.ac.cash.value + this.ac.deposit.value + this.ac.house.value + this.ac.car.value + 
+								 this.ac.stock.value + this.ac.fund.value + this.ac.bond.value + this.ac.otherAssets.value;
+				this.allDepts = this.ac.houseFinance.value + this.ac.carFinance.value + this.ac.otherDebt.value;
+				this.reallyAssets = this.allAssets - this.allDepts;
+				
+				if (this.allAssets==0) {
+					this.deptsPercent = 0;
+					this.raPercent = 0;
+				} else {
+					this.deptsPercent = this.allDepts / this.allAssets;
+					this.raPercent = this.reallyAssets / this.allAssets;
+				}
+				
+				if (this.deptsPercent>=0.5) {
+					this.assetsReport1 = "　　根据家庭资产负债的构成来看,家庭总负债占家庭总资产的比率约为" + 
+										 int(this.deptsPercent*100) + 
+										 "%,高于50%的临界水平,在危险的水平内.过高的债务额度会令家庭时常感受到债务带来的沉重压力.";
+				} else {
+					this.assetsReport1 = "　　根据家庭资产负债的构成来看,家庭总负债占家庭总资产的比率约为" + 
+										 int(this.deptsPercent*100) + 
+										 "%,低于50%的临界水平,在安全的水平内.适度的债务额度不至于令家庭时常感受到债务带来的沉重压力.";
+				}
+				
+				if (this.raPercent>=0.5) {
+					this.assetsReport2 = "　　家庭的净资产占总资产的比例约为" + 
+										 int(this.raPercent*100) + 
+										 "%,高于50%的安全水平.即使在经济不景气的时候,家庭也有能力偿还所有债务.";
+				} else {
+					this.assetsReport2 = "　　家庭的净资产占总资产的比例约为" + 
+										 int(this.raPercent*100) + 
+										 "%,低于50%的安全水平.如果在经济不景气的时候,家庭可能会丧失偿还所有债务的能力.";
+				}
+				
+			}
+			
+			private function investmentHandler():void {
+				
+				if (this.bi.age.value<35) {
+					this.ageScore = 1;
+				} else if (this.bi.age.value<55) {
+					this.ageScore = 2;
+				} else {
+					this.ageScore = 3;
+				}
+				
+				if (this.rt.riskStyle.selectedValue=="g") {
+					this.riskScore = 1;
+					this.investmentReport2 = "　　您的获利期待较低.";				
+				} else if (this.rt.riskStyle.selectedValue=="m") {
+					this.riskScore = 2;
+					this.investmentReport2 = "　　您的获利期待中等.";					
+				} else {
+					this.riskScore = 3;
+					this.investmentReport2 = "　　您的获利期待较高.";					
+				}
+				
+				if ((this.ageScore+this.riskScore)<=2) {
+					this.investmentReport1 = "　　您的风险承受能力很强.";
+					this.lowData = 50;
+					this.middleData = 30;
+					this.highData = 20;
+				} else if ((this.ageScore+this.riskScore)<=5) {
+					this.investmentReport1 = "　　您的风险承受能力一般.";
+					this.lowData = 40;
+					this.middleData = 40;
+					this.highData = 20;
+				} else {
+					this.investmentReport1 = "　　您的风险承受能力很弱.";
+					this.lowData = 40;
+					this.middleData = 30;
+					this.highData = 30;
+				}
+					
+				
+			}
+			
+			private function contingencyHandler():void {
+				
+				this.outgoPerM = this.ac.daily.value + this.ac.insurance.value + this.ac.tour.value/12 + this.ac.otherOut.value/12;
+				this.contingencyFund = this.ac.cash.value + this.ac.fund.value;
+				this.investAssets = this.ac.deposit.value + this.ac.stock.value + this.ac.fund.value + this.ac.bond.value + this.ac.otherAssets.value;
+				this.allAssets = this.ac.cash.value + this.ac.deposit.value + this.ac.house.value + this.ac.car.value + 
+								 this.ac.stock.value + this.ac.fund.value + this.ac.bond.value + this.ac.otherAssets.value;
+				this.allDepts = this.ac.houseFinance.value + this.ac.carFinance.value + this.ac.otherDebt.value;
+				this.reallyAssets = this.allAssets - this.allDepts;
+				
+				if (this.outgoPerM==0) {
+					this.contingencyPercent = 0
+				} else {
+					this.contingencyPercent = this.contingencyFund / this.outgoPerM;
+				}
+				
+				if (this.reallyAssets==0) {
+					this.investPercent = 0;
+				} else {
+					this.investPercent = this.investAssets / this.reallyAssets;
+				}
+				
+				if (this.contingencyPercent>=5) {
+					this.contingencyReport1 = "　　家庭的现金、活期储蓄及货币市场基金类资产与月支出的比例约是" + 
+											  int(this.contingencyPercent*100) + 
+											  "%.家庭目前的应急基金虽然足够充分,但由于该类资产的流动性强而收益率较低,持有过多的该类资产将导致整体资产的回报率降低." + 
+											  "所以,应通过调整资产结构来减少现金、活期储蓄或货币市场基金所占的比重.";
+				} else {
+					this.contingencyReport1 = "　　家庭的现金、活期储蓄及货币市场基金类资产与月支出的比例约是" + 
+											  int(this.contingencyPercent*100) + 
+											  "%.家庭目前的应急基金不够充分,再发生基金情况时,可能出现现金不够用的情况,需要调整自己的流动资产比例.";
+				}
+				
+				if (this.investPercent<=0.5) {
+					this.contingencyReport2 = "　　家庭的投资资产(包括定期存款/债券/基金/股票/房地产(投资)/黄金及收藏品等)与净资产的比例约是" + 
+											  int(this.investPercent*100) + 
+											  "%,低于50%的合理水平.投资资产与净资产的比值反映了家庭财富增值的能力." + 
+											  "由于投资资产能带来较高的回报,所以应增加这部分资产的价值,提升家庭财富增值的能力." + 
+											  "具体可以通过确定您的风险偏好和风险承受能力,构建合适的投资组合.";
+				} else {
+					this.contingencyReport2 = "　　家庭的投资资产(包括定期存款/债券/基金/股票/房地产(投资)/黄金及收藏品等)与净资产的比例约是" + 
+											  int(this.investPercent*100) + 
+											  "%,高于50%的合理水平.投资资产与净资产的比值反映了家庭财富增值的能力." + 
+											  "由于投资资产能带来较高的回报,所以您的投资组合较为合理.";
+				}
+				
+			}
+			
+			private function dataHandler():void {
+				this.wage = int(this.ac.wage.value*12);
+				this.gain = int(this.ac.gain.value);
+				this.bonus = int(this.ac.gain.value);
+				this.otherIn = int(this.ac.otherIn.value);
+				this.daily = int(this.ac.daily.value*12);
+				this.insurance = int(this.ac.insurance.value*12);
+				this.tour = int(this.ac.tour.value);
+				this.otherOut = int(this.ac.otherOut.value);
+				this.cash = int(this.ac.cash.value);
+				this.deposit = int(this.ac.deposit.value);
+				this.car = int(this.ac.car.value);
+				this.house = int(this.ac.house.value);
+				this.stock = int(this.ac.stock.value);
+				this.fund = int(this.ac.fund.value);
+				this.bond = int(this.ac.bond.value);
+				this.otherAssets = int(this.ac.otherAssets.value);
+				this.houseFinance = int(this.ac.houseFinance.value);
+				this.carFinance = int(this.ac.carFinance.value);
+				this.creditCard = int(this.ac.creditCard.value);
+				this.otherDebt = int(this.ac.otherDebt.value);
+			}
+						
+			private function pieChart_itemClick(evt:ChartItemEvent, dp:XMLListCollection):void {
+                var item:PieSeriesItem = evt.hitData.chartItem as PieSeriesItem;
+                var degrees:Number = radiansToDegrees(item.startAngle);
+                var arr:Array = [];
+                arr[item.index] = 0.2;
+                pieSeries.perWedgeExplodeRadius = arr;
+                pieSeries.startAngle -= degrees;
+ 				dp.refresh();
+            }
+ 
+            private function radiansToDegrees(radians:Number):Number {
+                return radians * (180 / Math.PI);
+            }
+            
+            private function itemClickHandler(event:ItemClickEvent):void {
+            	if (event.index==0) {
+            		this.dataProvider = this.incomeData;
+            	} else if (event.index==1) {
+            		this.dataProvider = this.outgoData;
+            	} else if (event.index==2) {
+            		this.dataProvider = this.assetsData;
+            	} else if (event.index==3) {
+            		this.dataProvider = this.deptsData;
+            	} else {
+            		this.pieChart.dataProvider = this.investData;
+            	}
+            }
+			
+						
+		]]>
+	</mx:Script>
+	
+	<mx:XMLListCollection id="incomeData">
+	    <mx:source>      
+	    	<mx:XMLList>
+				<product label="工资收入" data="{this.wage}" />
+                <product label="投资利润" data="{this.gain}" />
+                <product label="年终奖金" data="{this.bonus}" />
+                <product label="其他收入" data="{this.otherIn}" />
+            </mx:XMLList>
+        </mx:source>
+    </mx:XMLListCollection>
+    
+    <mx:XMLListCollection id="outgoData">
+	    <mx:source>      
+	    	<mx:XMLList>
+				<product label="日常支出" data="{this.daily}" />
+                <product label="床还贷款" data="{this.insurance}" />
+                <product label="旅游支出" data="{this.tour}" />
+                <product label="其他支出" data="{this.otherOut}" />
+            </mx:XMLList>
+        </mx:source>
+    </mx:XMLListCollection>
+    
+    <mx:XMLListCollection id="assetsData">
+	    <mx:source>      
+	    	<mx:XMLList>
+				<product label="现金及活期存款" data="{this.cash}" />
+                <product label="定期存款" data="{this.deposit}" />
+                <product label="房产价值" data="{this.house}" />
+                <product label="汽车价值" data="{this.car}" />
+                <product label="股票" data="{this.stock}" />
+                <product label="基金" data="{this.fund}" />
+                <product label="债券" data="{this.bond}" />
+                <product label="其他" data="{this.otherAssets}" />                
+            </mx:XMLList>
+        </mx:source>
+    </mx:XMLListCollection>
+    
+    <mx:XMLListCollection id="deptsData">
+	    <mx:source>      
+	    	<mx:XMLList>
+				<product label="购房贷款" data="{this.houseFinance}" />
+                <product label="购车贷款" data="{this.carFinance}" />
+                <product label="信用卡透支" data="{this.creditCard}" />
+                <product label="其他贷款及负债" data="{this.otherDebt}" />
+            </mx:XMLList>
+        </mx:source>
+    </mx:XMLListCollection>
+    
+    <mx:XMLListCollection id="investData">
+	    <mx:source>      
+	    	<mx:XMLList>
+				<product label="低风险金融投资产品所占比重" data="{this.lowData}" />
+                <product label="中风险金融投资产品所占比重" data="{this.middleData}" />
+                <product label="高风险金融投资产品所占比重" data="{this.highData}" />
+            </mx:XMLList>
+        </mx:source>
+    </mx:XMLListCollection>
+	
+	<mx:WipeDown id="down" duration="1000"/>
+	<mx:WipeUp id="up" duration="1000"/>
+	
+	<mx:Metadata>
+		[Event("cvs",type="mx.events.Event")]
+	</mx:Metadata>
+		
+	<mx:Iris id="irisOut" duration="1000" showTarget="true"/>
+    <mx:Iris id="irisIn" duration="1000" showTarget="false"/>
+	<mx:ViewStack width="100%" height="100%" id="vs">
+		<mx:Canvas width="100%" height="100%" showEffect="{irisIn}" hideEffect="{irisOut}">
+			<mx:VBox width="100%" height="100%">
+				<mx:ViewStack width="100%" height="100%" id="main">
+					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" backgroundColor="#000000">
+						<iPrefTest:BasicInformation id="bi" horizontalCenter="0" creationComplete="this.initBi();"/>
+					</mx:Canvas>
+					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" backgroundColor="#000000">
+						<iPrefTest:RiskTrend id="rt" creationComplete="this.initRt();"/>
+					</mx:Canvas>
+					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" backgroundColor="#000000">
+						<iPrefTest:AssetsCircs id="ac" creationComplete="this.initAc();"/>
+					</mx:Canvas>
+				</mx:ViewStack>
+			</mx:VBox>
+		</mx:Canvas>
+		<mx:Canvas width="100%" height="100%" color="#000000" showEffect="{irisIn}" hideEffect="{irisOut}">
+			<mx:Panel width="100%" height="100%" title="诊断结果" textAlign="center" fontSize="14">
+				<mx:Text fontSize="12" width="100%" textAlign="left" color="#0B333C"
+					text="{this.ageReport}" />
+					<!--
+					<mx:text>{this.ageReport}</mx:text>
+				</mx:Text>
+				-->
+				<mx:Text fontSize="12" textAlign="left" color="#0B333C" width="100%">
+					<mx:htmlText>
+						<![CDATA[　　下面,我们将从收入、支出、资产、负债和保险保障等方面,对您家庭的财务状况做出分析和诊断,您可以点击 <font color="#ff0000"><b>图表</b></font>来详细的查看您的各项数据构成情况.]]>
+					</mx:htmlText>
+				</mx:Text>
+				<mx:Canvas width="100%" height="370">
+					<mx:Accordion width="100%" height="100%">
+						<mx:VBox label="收支情况" width="100%" height="100%">
+							<mx:Text text="　　任何家庭理财计划都要从储蓄开始,没有资金,任何投资都将无从谈起.而收支节余资金正是投资资金的重要来源.运用“开源节流”的思想,增加收入,理性消费,减少不合理的开支,都将增加家庭可用于投资的资金.尤其是在家庭消费方面,做好预算,通过记帐等方式进行家庭财务管理都是有效的手段.
+										{ '\n\n' + this.inAndOutReport1}
+										{ '\n\n' + this.inAndOutReport2}
+										{ '\n\n' + this.inAndOutReport3}
+										{ '\n\n' + this.inAndOutReport4}"
+										 textAlign="left" width="100%" fontSize="12" color="#0B333C"/>
+							<!--
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text></mx:text>
+							</mx:Text>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.inAndOutReport2}</mx:text>
+							</mx:Text>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.inAndOutReport3}</mx:text>
+							</mx:Text>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.inAndOutReport4}</mx:text>
+							</mx:Text>
+							-->
+						</mx:VBox>	
+						<mx:VBox label="资产负债情况" width="100%" height="100%">
+							<mx:Text text="　　资产是您拥有所有权的财富,包括金融资产、实物资产等.债务是指由过去的经济活动而产生的,将会引起您现在的经济资源流出的责任.一般而言,按照期限长短,债务可分为短期负债（1年以下）、中期负债（1-5年）和长期负债（5年以上）等.而净资产是您的资产减去您的债务后剩下的那一部分财富.它表示了在某个时点上您偿还了所有债务后能够支配的财富价值.
+										{ '\n\n' +  this.assetsReport1}
+										{ '\n\n' +  this.assetsReport2}
+										" 
+								fontSize="12" textAlign="left" color="#0B333C" width="100%"/>
+							<!--
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.assetsReport1}</mx:text>
+							</mx:Text>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.assetsReport2}</mx:text>
+							</mx:Text>
+							-->
+						</mx:VBox>
+		
+						<mx:VBox label="投资组合" width="100%" height="100%">
+							<mx:Text text="　　投资组合是指您的总财富中,包括股票、基金、债券、定期储蓄、投资性房地产等在内的投资资产的构成情况.
+										{ '\n\n' }　　对于家庭理财来说,通常投资的主要目的是为了使家庭资产保值增值,并实现包括购房,支付子女大学教育费用或退休后生活需要等各种家庭财务目标.为了实现这些目标,任何投资者都希望自己的投资能获得最大的回报,但较高的收益往往伴随着较高的风险.而通过构建恰当的投资组合,您可以分散或减少风险,从而实现一定风险水平下的收益最大化.
+										{ '\n\n' }　　要构建恰当的投资组合,首先要了解您的风险偏好.
+										{ '\n\n' + this.investmentReport1}
+										{ '\n\n' + this.investmentReport2}
+										" 
+								fontSize="12" textAlign="left" color="#0B333C" width="100%"/>
+							<!--
+							<mx:Text text="　　对于家庭理财来说,通常投资的主要目的是为了使家庭资产保值增值,并实现包括购房,支付子女大学教育费用或退休后生活需要等各种家庭财务目标.为了实现这些目标,任何投资者都希望自己的投资能获得最大的回报,但较高的收益往往伴随着较高的风险.而通过构建恰当的投资组合,您可以分散或减少风险,从而实现一定风险水平下的收益最大化." 
+								fontSize="12" textAlign="left" color="#0B333C" width="100%"/>
+							<mx:Text text="　　要构建恰当的投资组合,首先要了解您的风险偏好." 
+								fontSize="12" textAlign="left" color="#0B333C" width="100%"/>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.investmentReport1}</mx:text>
+							</mx:Text>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.investmentReport2}</mx:text>
+							</mx:Text>
+							-->
+							<mx:Text fontSize="12" textAlign="left" color="#0B333C" width="100%">
+								<mx:htmlText>
+									<![CDATA[　　我们构建了一个适合并且并与您所处的生命周期相匹配的典型投资组合,请您进入<font color="#ff0000"><b>图表</b></font>中的<font color="#ff0000"><b>投资组合表</b></font>进行查看.其中,<b>低风险金融投资产品包括:储蓄、国债、人民币理财产品等,中等风险金融投资产品包括:信托、开放式基金、外汇理财产品等,高风险、高收益金融投资产品包括:股票、个人外汇买卖、期货、房地产、黄金及收藏品等</b>.]]>
+								</mx:htmlText>
+							</mx:Text>
+						</mx:VBox>
+		
+						<mx:VBox label="家庭应急基金的准备情况" width="100%" height="100%">
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left"
+								text="{ this.contingencyReport1
+							 + '\n\n' + this.contingencyReport2}" />
+							 <!--
+								<mx:text>{this.contingencyReport1}</mx:text>
+							</mx:Text>
+							<mx:Text fontSize="12" color="#0B333C" width="100%" textAlign="left">
+								<mx:text>{this.contingencyReport2}</mx:text>
+							</mx:Text>
+							-->
+						</mx:VBox>
+		
+						<mx:VBox label="图表" height="100%" width="100%">
+							<mx:ApplicationControlBar dock="true" horizontalAlign="center">
+								<mx:ToggleButtonBar fontSize="12" itemClick="this.itemClickHandler(event);">
+									<mx:dataProvider>
+										<mx:String>收入构成</mx:String>
+										<mx:String>支出构成</mx:String>
+										<mx:String>资产构成</mx:String>
+										<mx:String>负债构成</mx:String>
+										<mx:String>投资组合</mx:String>
+									</mx:dataProvider>
+								</mx:ToggleButtonBar>
+							</mx:ApplicationControlBar>
+							 <mx:PieChart id="pieChart" dataProvider="{this.dataProvider}" showDataTips="true" itemClick="pieChart_itemClick(event,this.dataProvider);" height="100%" width="100%">
+								<mx:series>
+									<mx:PieSeries id="pieSeries" field="@data" nameField="@label">
+										<mx:showDataEffect>
+											<mx:SeriesInterpolate duration="1500" easingFunction="{Elastic.easeOut}" />
+										</mx:showDataEffect>
+										<mx:filters>
+											<mx:DropShadowFilter />
+									    </mx:filters>
+									</mx:PieSeries>
+								</mx:series>
+							</mx:PieChart>
+						</mx:VBox>
+					</mx:Accordion>
+				</mx:Canvas>
+				<mx:Canvas width="100%">
+					<mx:Button verticalCenter="0" horizontalCenter="0" label="关闭" fontSize="12" click="{this.dispatchEvent(new Event('cvs'))}"/>
+				</mx:Canvas>
+			</mx:Panel>
+		</mx:Canvas>
+	</mx:ViewStack>
+	
+</mx:Canvas>

@@ -30,9 +30,13 @@ package com.citipf.liyunpeng.valueObject
 		{
 		}
 		
-		public function get ui_infoId() 
+		public function set ui_infoId(ui_infoId : int) : void
 		{
-			return this._ui_bankId;
+			this._ui_infoId = ui_infoId; 
+		}
+		public function get ui_infoId() : int
+		{
+			return this._ui_infoId;
 		}
 		
 		public function set ui_bankId(ui_bankId : String) : void

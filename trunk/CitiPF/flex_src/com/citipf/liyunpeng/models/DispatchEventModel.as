@@ -3,6 +3,7 @@ package com.citipf.liyunpeng.models
 	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	import com.citipf.liyunpeng.events.*;
 	import com.citipf.liyunpeng.valueObject.UInveVO;
+	import com.citipf.liyunpeng.valueObject.UserAddVO;
 	import com.citipf.liyunpeng.valueObject.UserVO;
 	
 	public class DispatchEventModel
@@ -28,6 +29,11 @@ package com.citipf.liyunpeng.models
 		 public function getUserVO(user : UserVO) : void
 		 {
 		 	cairngormEventDispatcher.dispatchEvent(new GetUserVOEvent(user));
+		 }
+		 
+		 public function addUserAddVO(userAddVO : UserAddVO) : void
+		 {
+		 	cairngormEventDispatcher.dispatchEvent(new AddUserAddVOEvent(userAddVO));
 		 }
 		 
 		 /****UInve************************************************************************/
