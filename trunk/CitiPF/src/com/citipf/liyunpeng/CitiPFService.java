@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.citipf.liyunpeng.valueObject.StockVO;
 import com.citipf.liyunpeng.valueObject.UInveVO;
+import com.citipf.liyunpeng.valueObject.UserAddVO;
 import com.citipf.liyunpeng.valueObject.UserVO;
 
 public class CitiPFService extends BaseService {
@@ -22,5 +23,15 @@ public class CitiPFService extends BaseService {
 	
 	public UInveVO selectUInveVO(UInveVO o) {
 		return getUInveDao().select(o);
+	}
+	
+	public UInveVO insertUInveVO(UInveVO o) {
+		getUInveDao().insert(o);
+		return null;
+	}
+	
+	public UserAddVO insertUserAddVO(UserAddVO o) {
+		getUserAddDao().insert(o);
+		return getUserAddDao().select(o); 
 	}
 }

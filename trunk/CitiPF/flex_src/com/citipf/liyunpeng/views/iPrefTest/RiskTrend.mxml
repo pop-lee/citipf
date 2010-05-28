@@ -136,13 +136,13 @@
 					sum = this._one + this._two + this._three + this._four + this._five + this._six + this._seven
 						+ this._eight + this._nine + this._ten + this._eleven + this._twelve + this._thirteen;
 					if (sum<21) {
-						this.riskStyle.selectedValue = "g";
+						this.riskStyle.selectedValue = "1";
 						this.itemClickHandler();
 					} else if (sum>=21&&sum<=35) {
-						this.riskStyle.selectedValue = "m";
+						this.riskStyle.selectedValue = "2";
 						this.itemClickHandler();
 					} else if (sum>35) {
-						this.riskStyle.selectedValue = "r";
+						this.riskStyle.selectedValue = "3";
 						this.itemClickHandler();
 					}
 					this.main.selectedIndex = 0;
@@ -152,11 +152,11 @@
 			}
 			
 			private function itemClickHandler():void {
-				if (this.riskStyle.selectedValue=="g") {
+				if (this.riskStyle.selectedValue=="1") {
 					this.advice.text = "您的风险偏好为偏向保守类型";
-				} else if (this.riskStyle.selectedValue=="m") {
+				} else if (this.riskStyle.selectedValue=="2") {
 					this.advice.text = "您的风险偏好为风格中庸类型";
-				} else if (this.riskStyle.selectedValue=="r") {
+				} else if (this.riskStyle.selectedValue=="3") {
 					this.advice.text = "您的风险偏好为投资激进类型";
 				}
 				this._main = true;	
@@ -171,8 +171,8 @@
 		<node label="投资激进"/>
 	</mx:XMLList>
 	
-	<viewStackEffects:Slide id="slide" duration="1000" direction="up"/>
-	<viewStackEffects:FlipPapervision3D id="fp" duration="1000"/>
+	<viewStackEffects:Slide id="slide" duration="600" direction="up"/>
+	<viewStackEffects:FlipPapervision3D id="fp" duration="600"/>
 	
 	<mx:ViewStack width="100%" height="100%" id="main">
 		<mx:Canvas width="100%" height="100%" showEffect="{fp}" hideEffect="{fp}" backgroundColor="#000000">
@@ -181,9 +181,9 @@
 					<mx:Label width="100%" height="20" fontSize="12" textAlign="center" text="如果您对您自己的风险偏好比较了解,可以直接选择您的风险偏好类型:"/>
 					<mx:Canvas width="100%">
 						<mx:RadioButtonGroup id="riskStyle" itemClick="itemClickHandler();"/>
-       						<mx:RadioButton groupName="riskStyle" id="guard" value="g" label="偏向保守" width="75" horizontalCenter="0" fontSize="12" top="0"/>
-        					<mx:RadioButton groupName="riskStyle" id="mean" value="m" label="风格中庸" width="75" horizontalCenter="0" fontSize="12" top="20"/>
-        					<mx:RadioButton groupName="riskStyle" id="radicalness" value="r" label="投资激进" width="75" horizontalCenter="0" fontSize="12" top="40"/>
+       						<mx:RadioButton groupName="riskStyle" id="guard" value="1" label="偏向保守" width="75" horizontalCenter="0" fontSize="12" top="0"/>
+        					<mx:RadioButton groupName="riskStyle" id="mean" value="2" label="风格中庸" width="75" horizontalCenter="0" fontSize="12" top="20"/>
+        					<mx:RadioButton groupName="riskStyle" id="radicalness" value="3" label="投资激进" width="75" horizontalCenter="0" fontSize="12" top="40"/>
 					</mx:Canvas>
 					<mx:Label id="advice" fontSize="12" textAlign="center" width="100%" height="20"/>
 					<mx:Spacer width="100%" height="30"/>
@@ -194,7 +194,7 @@
 					<mx:Spacer width="100%" height="231"/>
 				    <mx:Canvas width="100%">
                         <mx:LinkButton label="上一页" left="100" fontSize="12" id="toBi"/>
-                        <mx:LinkButton label="下一页" right="100" fontSize="12" id="toAc"/>
+                        <mx:LinkButton label="下一页" right="100" fontSize="12" id="toAc" enabled="{riskStyle.selectedValue==null?false:true}"/>
                     </mx:Canvas>
 				</mx:VBox>
 			</mx:Panel>

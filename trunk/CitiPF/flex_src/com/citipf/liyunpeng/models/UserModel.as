@@ -1,6 +1,7 @@
 package com.citipf.liyunpeng.models
 {
 	import com.citipf.liyunpeng.valueObject.UInveVO;
+	import com.citipf.liyunpeng.valueObject.UserAddVO;
 	import com.citipf.liyunpeng.valueObject.UserVO;
 	
 	[Bindable]
@@ -25,6 +26,11 @@ package com.citipf.liyunpeng.models
 		 */
 		public var _uInve : UInveVO = null;
 		
+		/**
+		 * 用户的附加信息
+		 * 月平均收入与支出
+		 */
+		public var _userAdd : UserAddVO = null;
 		
 		
 		public function UserModel()

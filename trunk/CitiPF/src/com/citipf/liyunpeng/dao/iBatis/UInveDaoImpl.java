@@ -15,7 +15,7 @@ public class UInveDaoImpl extends IBatisDaoSupport implements IUInveDao<UInveVO>
 
 	@Override
 	public void insert(UInveVO t) {
-		// TODO Auto-generated method stub
+		this.getSqlSessionTemplate().insert("UInve.insertUInveVO", t);
 		
 	}
 

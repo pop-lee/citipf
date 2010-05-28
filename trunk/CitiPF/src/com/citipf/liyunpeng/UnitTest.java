@@ -53,7 +53,7 @@ public class UnitTest extends TestCase {
 	
 	private void test02() {
 		UInveVO uivo = new UInveVO();
-		uivo.setIp_infId(2);
+		uivo.setIp_infoId(2);
 		List<UInveVO> list = uinvedao.selectList(uivo);
 		System.out.println(list);
 	}

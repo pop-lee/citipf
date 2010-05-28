@@ -3,7 +3,7 @@
 PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="UInve">
-	<resultMap type="com.citipf.liyunpeng.valueObject.UInveVO" id="resultMap_UInvelVO">
+	<resultMap type="UInveVO" id="resultMap_UInvelVO">
 		<result column="IP_INFOID" javaType="int" property="ip_infoId"/>
 		<result column="IP_PREF" javaType="int" property="ip_pref"/>
 	</resultMap>
@@ -11,23 +11,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<sql id="uInveColumns">IP_INFOID,IP_PREF</sql>
 	
 	<insert id="insertUInveVO" parameterType="UInveVO">
-		if exsts (
-			select * from citi_inve_pref
-			where IP_INFOID = #{ip_infoId}
-		)	begin
-				update citi_inve_pref set IP_PREF = #{ip_pref}
-				where IP_INFOID = #{ip_infoId}
-			end
-		else
-			begin
-				insert into 
-					citi_inve_pref(
-						<include refid="uInveColumns"/>
-					)
-				values
-					(#{ip_infoId},#{ip_pref});
-				)
-			end
+		insert into 
+			citi_inve_pref(
+				<include refid="uInveColumns"/>
+			)
+		values(#{ip_infoId},#{ip_pref})
+			on duplicate key update 
+			IP_INFOID = #{ip_infoId},IP_PREF = #{ip_pref};
 	</insert>
 	
 	<select id="selectUInveVO" resultMap="resultMap_UInvelVO" parameterType="int">

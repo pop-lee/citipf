@@ -27,6 +27,9 @@ public class UserVO {
 	public int getUi_infoId() {
 		return ui_infoId;
 	}
+	public void setUi_infoId(int ui_infoId) {
+		this.ui_infoId = ui_infoId;
+	}
 	public String getUi_bankId() {
 		return ui_bankId;
 	}

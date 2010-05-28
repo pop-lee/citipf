@@ -1,13 +1,16 @@
 package com.citipf.liyunpeng.valueObject;
 
 public class UInveVO {
-	private int ip_infId;
+	
+	private int ip_infoId;
 	private int ip_pref;
-	public int getIp_infId() {
-		return ip_infId;
+	
+	
+	public int getIp_infoId() {
+		return ip_infoId;
 	}
-	public void setIp_infId(int ip_infId) {
-		this.ip_infId = ip_infId;
+	public void setIp_infoId(int ip_infoId) {
+		this.ip_infoId = ip_infoId;
 	}
 	public int getIp_pref() {
 		return ip_pref;
@@ -17,6 +20,6 @@ public class UInveVO {
 	}
 	
 	public String toString() {
-		return this.ip_infId + "," + this.ip_pref + ".";
+		return this.ip_infoId + "," + this.ip_pref + ".";
 	}
 }

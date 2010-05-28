@@ -82,10 +82,13 @@
 		<property name="sqlSessionFactory" ref="sqlMapClient" />
 	</bean>
 	<bean id="userDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.UserDaoImpl">
-		<property name="sqlSessionFactory" ref="sqlMapClient"></property>
+		<property name="sqlSessionFactory" ref="sqlMapClient" />
 	</bean>
 	<bean id="uInveDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.UInveDaoImpl">
-		<property name="sqlSessionFactory" ref="sqlMapClient"></property>
+		<property name="sqlSessionFactory" ref="sqlMapClient" />
+	</bean>
+	<bean id="userAddDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.UserAddDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlMapClient" />
 	</bean>
 	<!-- Service -->
 	<!-- 

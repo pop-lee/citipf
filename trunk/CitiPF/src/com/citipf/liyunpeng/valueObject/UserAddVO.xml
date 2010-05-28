@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UserAdd">
+
+	<resultMap type="UserAddVO" id="resultMap_UserAddVO">
+		<result column="UA_INFOID" javaType="int" property="ua_infoId"/>
+		<result column="UA_AVG_MICOM" javaType="double" property="ua_avg_micom" />
+		<result column="UA_AVG_MPOUT" javaType="double" property="ua_avg_mpout" />
+	</resultMap>
+	
+	<sql id="userAddColumns">UA_INFOID,UA_AVG_MICOM,UA_AVG_MPOUT</sql>
+	
+	<insert id="insertUserAddVO" parameterType="UserAddVO">
+		insert into 
+			CITI_USERINFO_ADD(
+				UA_INFOID,UA_AVG_MICOM,UA_AVG_MPOUT
+			) values (#{ua_infoId},#{ua_avg_micom},#{ua_avg_mpout})
+			on duplicate key update 
+			UA_INFOID = #{ua_infoId},UA_AVG_MICOM = #{ua_avg_micom} ,UA_AVG_MPOUT = #{ua_avg_mpout};
+	</insert>
+	
+</mapper>
