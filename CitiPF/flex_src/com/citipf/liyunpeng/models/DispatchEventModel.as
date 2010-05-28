@@ -44,6 +44,11 @@ package com.citipf.liyunpeng.models
 		 {
 		 	cairngormEventDispatcher.dispatchEvent(new GetUInveVOEvent(uinve));
 		 }
+		 
+		 public function addUInveVO(uinve : UInveVO) : void
+		 {
+		 	cairngormEventDispatcher.dispatchEvent(new AddUInveVOEvent(uinve));
+		 }
 
 	}
 }

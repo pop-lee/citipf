@@ -4,6 +4,8 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.valueObject.UInveVO;
+			import com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert;
 			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.events.AddUserAddVOEvent;
 			import com.citipf.liyunpeng.valueObject.UserAddVO;
@@ -154,8 +156,15 @@
 				var allInPerM : Number = this.ac.wage.value + this.ac.gain.value/12 + this.ac.bonus.value/12 + this.ac.otherIn.value/12;
 				var allOutPerM : Number = this.ac.daily.value + this.ac.insurance.value + this.ac.tour.value/12 + this.ac.otherOut.value/12;
 				var userAddVO : UserAddVO = new UserAddVO();
+				userAddVO.ua_infoId = model._curUser.ui_infoId;
 				userAddVO.ua_avg_micom = allInPerM;
-				userAddVO.ua_avg_miout = allOutPerM;
+				userAddVO.ua_avg_mpout = allOutPerM;
+				
+				var uInveVO : UInveVO = new UInveVO();
+				uInveVO.ip_infoId = model._curUser.ui_infoId;
+				uInveVO.ip_pref = int(rt.riskStyle.selectedValue);
+				
+				model.addUInveVO(uInveVO);
 				model.addUserAddVO(userAddVO);
 			}
 			
@@ -486,8 +495,8 @@
 		[Event("cvs",type="mx.events.Event")]
 	</mx:Metadata>
 		
-	<mx:Iris id="irisOut" duration="1000" showTarget="true"/>
-    <mx:Iris id="irisIn" duration="1000" showTarget="false"/>
+	<mx:Iris id="irisOut" duration="600" showTarget="true"/>
+    <mx:Iris id="irisIn" duration="600" showTarget="false"/>
 	<mx:ViewStack width="100%" height="100%" id="vs">
 		<mx:Canvas width="100%" height="100%" showEffect="{irisIn}" hideEffect="{irisOut}">
 			<mx:VBox width="100%" height="100%">
