@@ -148,6 +148,7 @@
 					model._loginStatus = 1;
 					toLogin();
 					var uInve : UInveVO = new UInveVO();
+					uInve.ip_infoId = model._curUser.ui_infoId;
 					model.getUInveVO(uInve);
 				}
 			}
