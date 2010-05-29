@@ -27,11 +27,15 @@ public class CitiPFService extends BaseService {
 	
 	public UInveVO insertUInveVO(UInveVO o) {
 		getUInveDao().insert(o);
-		return null;
+		return getUInveDao().select(o);
 	}
 	
 	public UserAddVO insertUserAddVO(UserAddVO o) {
 		getUserAddDao().insert(o);
 		return getUserAddDao().select(o); 
+	}
+	
+	public UserAddVO selectUserAddVO(UserAddVO o) {
+		return getUserAddDao().select(o);
 	}
 }

@@ -9,6 +9,7 @@
 	 creationComplete="createComp()" xmlns:login="com.citipf.liyunpeng.views.login.*">
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.valueObject.UserAddVO;
 			import com.citipf.liyunpeng.valueObject.UInveVO;
 			import mx.events.PropertyChangeEvent;
 			import mx.binding.utils.ChangeWatcher;
@@ -147,9 +148,13 @@
 				if(model._curUser != null) {
 					model._loginStatus = 1;
 					toLogin();
-					var uInve : UInveVO = new UInveVO();
-					uInve.ip_infoId = model._curUser.ui_infoId;
-					model.getUInveVO(uInve);
+					var uInveVO : UInveVO = new UInveVO();
+					var userAddVO : UserAddVO = new UserAddVO();
+					uInveVO.ip_infoId = 
+					userAddVO.ua_infoId = 
+					model._curUser.ui_infoId;
+					model.getUInveVO(uInveVO);
+					model.getUserAddVO(userAddVO);
 				}
 			}
 			

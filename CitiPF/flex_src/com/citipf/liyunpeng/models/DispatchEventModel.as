@@ -36,6 +36,11 @@ package com.citipf.liyunpeng.models
 		 	cairngormEventDispatcher.dispatchEvent(new AddUserAddVOEvent(userAddVO));
 		 }
 		 
+		 public function getUserAddVO(userAddVO : UserAddVO) : void
+		 {
+		 	cairngormEventDispatcher.dispatchEvent(new GetUserAddVOEvent(userAddVO));
+		 }
+		 
 		 /****UInve************************************************************************/
 		 /**
 		 * 个人风险偏好测试

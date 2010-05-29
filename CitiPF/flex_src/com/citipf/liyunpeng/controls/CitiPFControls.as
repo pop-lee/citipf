@@ -14,6 +14,7 @@ package com.citipf.liyunpeng.controls
 			addCommand(ADD_UINVEVO_EVENT,AddUInveVOCommand);
 			
 			addCommand(ADD_USERADDVO_EVENT,AddUserAddVOCommand);
+			addCommand(GET_USERADDVO_EVENT,GetUserAddVOCommand);
 		}
 		
 		public static const GET_STOCKVOLIST_EVENT : String = "getStockVOListEvent" ;
@@ -23,6 +24,7 @@ package com.citipf.liyunpeng.controls
 		public static const ADD_UINVEVO_EVENT : String = "addUInveVOEvent";
 		
 		public static const ADD_USERADDVO_EVENT : String = "addUserAddVOEvent";
+		public static const GET_USERADDVO_EVENT : String = "getUserAddVOEvent";
 		
 	}
 }

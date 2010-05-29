@@ -20,8 +20,7 @@ public class UserAddDaoImpl extends IBatisDaoSupport implements IUserAddDao<User
 
 	@Override
 	public UserAddVO select(UserAddVO o) {
-		// TODO Auto-generated method stub
-		return null;
+		return (UserAddVO) this.getSqlSessionTemplate().selectOne("UserAdd.selectUserAddVO", o);
 	}
 
 	@Override
