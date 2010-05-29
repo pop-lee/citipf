@@ -21,4 +21,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			UA_INFOID = #{ua_infoId},UA_AVG_MICOM = #{ua_avg_micom} ,UA_AVG_MPOUT = #{ua_avg_mpout};
 	</insert>
 	
+	<select id="selectUserAddVO" parameterType="UserAddVO" resultMap="resultMap_UserAddVO">
+		select * from
+			CITI_USERINFO_ADD
+		where UA_INFOID = #{ua_infoId};
+	</select>
+	
 </mapper>
