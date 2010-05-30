@@ -2,6 +2,7 @@ package com.citipf.liyunpeng.models
 {
 	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	import com.citipf.liyunpeng.events.*;
+	import com.citipf.liyunpeng.valueObject.PurcProgVO;
 	import com.citipf.liyunpeng.valueObject.UInveVO;
 	import com.citipf.liyunpeng.valueObject.UserAddVO;
 	import com.citipf.liyunpeng.valueObject.UserVO;
@@ -53,6 +54,11 @@ package com.citipf.liyunpeng.models
 		 public function addUInveVO(uinve : UInveVO) : void
 		 {
 		 	cairngormEventDispatcher.dispatchEvent(new AddUInveVOEvent(uinve));
+		 }
+		 
+		 public function addPurcProgVO(purcProg : PurcProgVO) : void
+		 {
+		 	cairngormEventDispatcher.dispatchEvent(new AddPurcProgVOEvent(purcProg));
 		 }
 
 	}
