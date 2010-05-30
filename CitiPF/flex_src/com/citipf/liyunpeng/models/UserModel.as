@@ -32,6 +32,10 @@ package com.citipf.liyunpeng.models
 		 */
 		public var _userAdd : UserAddVO = null;
 		
+		/**
+		 * 当日时间
+		 */
+		public var _today : Date = new Date();
 		
 		public function UserModel()
 		{
