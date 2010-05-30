@@ -3,7 +3,7 @@ package com.citipf.liyunpeng.models
 	import flash.errors.IllegalOperationError;
 	
 	[Bindable]
-	public class Model extends UserModel
+	public class Model extends PurcModel
 	{
 		private static var instance : Model = new Model();
 		
