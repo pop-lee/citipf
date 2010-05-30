@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns="com.citi.view.xsive.controls.*" width="350" height="100" backgroundColor="#000000">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Panel;
+			import mx.controls.Button;
+			import effect.CocoaPopUp.xsive.managers.CocoaPopUpManager;
+            import mx.core.Application;
+            
+            public static function show(s:Canvas):Cue {
+            	var c:Cue = new Cue();
+            	//var s:Sprite = Sprite(Application.application);
+            	CocoaPopUpManager.addPopUp(c, s, false);
+            	return c;
+            }
+            
+            public function closeHandler(b:Button):void {
+            	if (b.id=="yes") {
+            		
+            	} else if (b.id=="no") {
+            		
+            	}
+            	
+            	CocoaPopUpManager.removePopUp(this);
+            	
+            }
+            
+            
+		]]>
+	</mx:Script>
+	
+	<mx:Label textAlign="center" text="您每月放贷额占收入比例超出警戒线水平,说明您负债结构不合理." fontSize="12" width="100%" color="#ffffff" top="5"/>
+	
+	<mx:Label textAlign="center" text="是否进行调整?" fontSize="12" width="100%" color="#ffffff" top="30"/>
+	
+
+	
+	<mx:Canvas bottom="5" width="150" horizontalCenter="0">
+		<mx:Button left="0" label="是" id="yes" click="this.closeHandler(yes);"/>
+		<mx:Button right="0" label="否" id="no" click="this.closeHandler(no)"/>
+	</mx:Canvas>
+	
+</mx:Canvas>

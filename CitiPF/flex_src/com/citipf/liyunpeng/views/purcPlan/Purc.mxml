@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:flexlib="http://code.google.com/p/flexlib/"
+    creationComplete="init()"
+    paddingTop="5">
+    <mx:Script>
+        <![CDATA[
+        	import com.citipf.liyunpeng.models.Model;
+            import mx.events.IndexChangedEvent;
+            import mx.events.ListEvent;
+            import mx.events.ItemClickEvent;
+            import mx.controls.Alert;
+            import mx.effects.easing.Elastic;
+            import mx.collections.ArrayCollection;
+            
+            [Bindable]
+            private var model : Model = Model.getInstance();
+            
+            /**
+             * @预计买房年份
+             */
+            [Bindable]
+            private var a1 : int = 0;
+            /**
+             * @预计买房月份
+             */
+            [Bindable]
+            private var a2 : int = 0;
+            /**
+             * 预计购买房平米数
+             */
+            [Bindable]
+            private var a3 : Number = 0;
+            /**
+             * 预计房价每平米价
+             */
+            [Bindable]
+            private var a4 : Number = 0;
+            
+            /**
+             * @预算装修经济型
+             */
+            [Bindable]
+            private var a5a : Number = 0;
+            /**
+             * @预算装修中档型
+             */
+            [Bindable]
+            private var a5b : Number = 0;
+            /**
+             * @预算装修豪华型
+             */
+            [Bindable]
+            private var a5c : Number = 0;
+            /**
+             * @预算家电经济型
+             */
+            [Bindable]
+            private var a6a : Number = 0;
+            /**
+             * @预算家电中档型
+             */
+            [Bindable]
+            private var a6b : Number = 0;
+            /**
+             * @预算家电豪华型
+             */
+             [Bindable]
+            private var a6c : Number = 0;
+            /**
+             * @预算契税
+             */
+            [Bindable]
+            private var a71a : Number = 0;
+            /**
+             * @预算印花税
+             */
+            [Bindable]
+            private var a72a : Number = 0;
+            /**
+             * @预算公共维修基金费
+             */
+            [Bindable]
+            private var a73a : Number = 0;
+            /**
+             * @预算律师费
+             */
+            [Bindable]
+            private var a74a : Number = 0;
+            /**
+             * @预算税费总和
+             */
+            [Bindable]
+            private var a7sum : Number = 0;
+            
+            /**
+             * @预计购房总费用
+             */
+            [Bindable]
+            private var a8 : Number = 0;
+            
+            [Bindable]
+            private var a1arr : ArrayCollection = new ArrayCollection();
+            [Bindable]
+            private var a2arr : ArrayCollection = new ArrayCollection();
+            
+            [Bindable]
+            private var today : Date = Model.getInstance()._today;
+//            
+//            private var personModel : PersonModel = PersonModel.getInstance();
+            
+            private function init() : void
+            {
+                addMonth();
+            }
+            
+            public function addYear() : void
+            {
+                a1arr.removeAll();
+                for(var i:int = 0;i < 10;i++)
+                {
+                    a1arr.addItemAt(today.getFullYear() + i,a1arr.length);
+                }
+            }
+            public function addMonth() : void
+            {
+                a2arr.removeAll();
+                if(a1n.value == today.getFullYear())
+                {
+                    for(var i:int = today.getMonth()+1;i <= 12;i++)
+                    {
+                        a2arr.addItemAt(i,a2arr.length);
+                    }
+                } else {
+                    for(var j:int = 1;j <= 12;j++)
+                    {
+                        a2arr.addItemAt(j,a2arr.length);
+                    }
+                }
+                a2n.value=a2arr[0];
+            }
+            
+            private function decoration() : void
+            {
+                /**
+                * 装修费用预算
+                */
+                a5a = Number((Number(a3t.text)*Number(a4t.text)*0.075/10000).toFixed(2));
+                a5b =Number((Number(a3t.text)*Number(a4t.text)*0.2/10000).toFixed(2));
+                a5c =Number((Number(a3t.text)*Number(a4t.text)*0.3/10000).toFixed(2));
+                /**
+                * 预算家电费用
+                */
+                a6a =Number((Number(a3t.text)*Number(a4t.text)*0.075/10000).toFixed(2));
+                a6b =Number((Number(a3t.text)*Number(a4t.text)*0.15/10000).toFixed(2));
+                a6c =Number((Number(a3t.text)*Number(a4t.text)*0.25/10000).toFixed(2));
+                /**
+                * 运算税务统计
+                */
+                a71a = Number(a3t.text)*Number(a4t.text)*Number(a71.text)/100/10000;
+                a72a = Number(a3t.text)*Number(a4t.text)*Number(a72.text)/100/10000;
+                a73a = Number(a3t.text)*Number(a4t.text)*Number(a73.text)/100/10000;
+                a74a = Number(a3t.text)*Number(a4t.text)*Number(a74.text)/100/10000;
+                
+                a7sum = a71a + a72a + a73a + a74a
+                
+                this.sum();
+            }
+            private function sum() : void
+            {
+                model.a8 = a8 = Number(a3t.text)*Number(a4t.text)/10000 + a5r.selectedValue + a6r.selectedValue + a7sum;
+            }
+            private function changeA1() : void
+            {
+            	model.a1 = a1 = a1n.value;
+            }
+            private function changeA2() : void
+            {
+            	model.a2 = a2 = a2n.value;
+            }
+            private function changeA3() : void
+            {
+            	model.a3 = a3 = Number(a3t.text);
+            }
+            private function changeA4() : void
+            {
+            	model.a4 = a4 = Number(a4t.text);
+            }
+            
+            private function changeA5(event:ItemClickEvent) : void
+            {
+                this.sum();
+            }
+            private function changeA6(event:ItemClickEvent) : void
+            {
+                this.sum();
+            }
+            
+        ]]>
+    </mx:Script>
+    
+    <mx:Metadata>
+        [Event("toNext",type="mx.events.Event")]
+    </mx:Metadata>
+    
+    <mx:Parallel >
+        <mx:Resize id="hideL" heightTo="0" />
+        <mx:Resize id="showL" heightTo="60" />
+    </mx:Parallel>
+    
+    <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+        <mx:LinkBar direction="vertical" dataProvider="vs" />
+        <mx:ViewStack id="vs" width="100%" height="100%" >
+        <mx:VBox width="100%" height="100%" horizontalAlign="center" >
+            <mx:HBox horizontalAlign="center" width="100%">
+                <mx:Text text="您希望在" />
+                <mx:NumericStepper id="a1n" minimum="{today.getFullYear()}" maximum="{today.getFullYear()+9}"
+                    focusIn="{addYear();showL.target=yearList;showL.play()}"
+                    focusOut="{hideL.target=yearList;hideL.play()}"
+                    change="changeA1()" />
+                <mx:Text text="年" />
+                <mx:NumericStepper id="a2n" minimum="{12-a2arr.length+1}" maximum="12" 
+                    focusIn="{addMonth();showL.target=monthList;showL.play()}"
+                    focusOut="{hideL.target=monthList;hideL.play()}"
+                    change="changeA2()" />
+                <mx:Text text="月 购房" />
+            </mx:HBox>
+            <mx:VBox id="yearList" horizontalAlign="center" height="0" width="100%" verticalScrollPolicy="off">
+                <mx:TileList columnCount="5" rowCount="2" width="200" height="100%"
+                    dataProvider="{a1arr}"
+                    change="{a1n.value = event.itemRenderer.data.toString();changeA1();}" />
+                    <!--
+                    change="{personModel.a1n = a1n.value = event.itemRenderer.data.toString();
+                    }" />
+                    -->
+            </mx:VBox>
+            <mx:VBox id="monthList" horizontalAlign="center" height="0" width="100%" verticalScrollPolicy="off">
+                <mx:TileList columnCount="6" rowCount="{a2arr.length/6}" width="200" height="100%"
+                    dataProvider="{a2arr}" 
+                    change="{a2n.value = event.itemRenderer.data.toString();changeA2();}" />
+                    <!--
+                    change="{personModel.a2n = a2n.value = event.itemRenderer.data.toString();
+                    }" />
+                    -->
+            </mx:VBox>
+            <mx:HBox>
+                <mx:Text text="购买面积为（平米）" />
+                <flexlib:PromptingTextInput id="a3t" prompt="88"
+                    change="{changeA3();decoration();}" focusIn="showL.target=_const;showL.play()"/>
+                <mx:Text text="每平米价格(元)" />
+                <flexlib:PromptingTextInput id="a4t" prompt="8888"
+                    change="{changeA4();decoration();}" focusIn="showL.target=_const;showL.play()" />
+                
+            </mx:HBox>
+            <mx:VBox id="_const" height="0" verticalScrollPolicy="off">
+                <mx:HBox >
+                    <mx:Text text="装修费用预计" />
+                    <mx:RadioButtonGroup id="a5r" itemClick="changeA5(event)" change="sum()" />
+                    <mx:RadioButton groupName="a5r" label="经济型：{a5a}" value="{a5a}" />
+                    <mx:RadioButton groupName="a5r" label="舒适型：{a5b}" value="{a5b}" />
+                    <mx:RadioButton groupName="a5r" label="豪华型：{a5c}" value="{a5c}" />
+                </mx:HBox>
+                <mx:HBox>
+                   <mx:Text text="电器费用预计" />
+                   <mx:RadioButtonGroup id="a6r" itemClick="changeA6(event)" />
+                   <mx:RadioButton groupName="a6r" label="经济型（万元）：{a6a}" value="{a6a}" />
+                   <mx:RadioButton groupName="a6r" label="舒适型（万元）：{a6b}" value="{a6b}" />
+                   <mx:RadioButton groupName="a6r" label="豪华型（万元）：{a6c}" value="{a6c}" />
+                </mx:HBox>
+            </mx:VBox>
+            <mx:VBox height="100%" width="100%" verticalAlign="middle" horizontalAlign="center">
+                <mx:Label text="以下为推荐税值" color="#FF0000" />
+                <mx:HBox >
+	                <mx:Form  right="0" >
+	                    <mx:FormItem label="契税（百分之）" >
+	                        <mx:TextInput id="a71" width="40" text="1.5" change="decoration()"/>
+	                    </mx:FormItem>
+	                    <mx:FormItem label="印花税（百分之）" >
+	                        <mx:TextInput id="a72" width="40" text="0.05" change="decoration()" />
+	                    </mx:FormItem>
+	                </mx:Form>
+	                <mx:Form width="100%">
+	                    <mx:FormItem label="公共维修基金率（百分之）" >
+	                        <mx:TextInput id="a73" width="40" text="2" change="decoration()" />
+	                    </mx:FormItem>
+	                    <mx:FormItem label="律师费税（百分之）">
+	                        <mx:TextInput id="a74" width="40" text="0.4" change="decoration()"/>
+	                    </mx:FormItem>
+	                </mx:Form>
+                </mx:HBox>
+                <mx:Spacer height="10%" />
+                <mx:VBox>
+                    <mx:Text text="契税（万元）：{a71a.toFixed(2)}" />
+                    <mx:Text text="印花税（万元）：{a72a.toFixed(2)}"  />
+                    <mx:Text text="公共维护基金率（万元）：{a73a.toFixed(2)}"  />
+                    <mx:Text text="律师费税（万元）{a74a.toFixed(2)}" />
+                    <mx:Text text="相关税费总计（万元）：{a7sum.toFixed(2)}" />
+                    <mx:Text text="届时总支出为（万元）：{a8.toFixed(2)}" />
+                </mx:VBox>
+                <mx:Spacer height="100%" />
+                    <mx:Button label="下一步" click="{this.dispatchEvent(new Event('toNext'));}" />
+            </mx:VBox>
+        </mx:VBox>
+        </mx:ViewStack>
+    </mx:HBox>
+</mx:Panel>

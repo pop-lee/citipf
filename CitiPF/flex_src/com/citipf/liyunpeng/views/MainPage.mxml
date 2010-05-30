@@ -120,13 +120,13 @@
 			 */
 			private function pageIndexChange(event : IndexChangedEvent) : void
 			{
-				if(model._curUser == null && event.newIndex > 0) {
-					mainBox.enabled = false;
-					CocoaAlert.show("您暂时还没有登录，\n\n所以暂时还不能做理财规划，\n\n请先登录 ^_^", "未登录提示", 0x4, mainBox, false, notLoginAlert);
-				} else if(event.newIndex > 1 && model._uInve == null) {
-					mainBox.enabled = false;
-					CocoaAlert.show("请先确定下您的投资偏好，\n\n若不确定我们将对您进行测试 ^_^", "未登录提示", 0x4, mainBox, false, noUInveAlert);
-				}
+//				if(model._curUser == null && event.newIndex > 0) {
+//					mainBox.enabled = false;
+//					CocoaAlert.show("您暂时还没有登录，\n\n所以暂时还不能做理财规划，\n\n请先登录 ^_^", "未登录提示", 0x4, mainBox, false, notLoginAlert);
+//				} else if(event.newIndex > 1 && model._uInve == null) {
+//					mainBox.enabled = false;
+//					CocoaAlert.show("请先确定下您的投资偏好，\n\n若不确定我们将对您进行测试 ^_^", "未登录提示", 0x4, mainBox, false, noUInveAlert);
+//				}
 			}
 			/**
 			 * 没有登录提示错误

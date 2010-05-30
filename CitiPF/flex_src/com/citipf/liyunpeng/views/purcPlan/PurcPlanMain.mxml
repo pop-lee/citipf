@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="100%" height="100%">
-	
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="100%" height="100%"
+	xmlns:viewStackEffects="org.efflex.mx.*" 
+	xmlns:purcPlan="com.citipf.liyunpeng.views.purcPlan.*">
+	<mx:Script>
+		<![CDATA[
+			private function toEndPage() : void
+			{
+				accFunds.initData();
+			}
+		]]>
+	</mx:Script>
+	<!--
+	<viewStackEffects:TileEffect id="effect" transparent="true"/>
+	-->
+	<viewStackEffects:TileFade id="tileFade" duration="600" />
+
+	<mx:ViewStack id="purc" width="100%" height="100%" >
+			<mx:Canvas width="100%" height="100%" backgroundColor="#ffffff" showEffect="listEffect" hideEffect="listEffect">
+				<mx:Image source="@Embed(source='assets/2.jpg')" horizontalCenter="0" verticalCenter="0"/>
+				<mx:Button label="开始进行购房规划" horizontalCenter="0" bottom="50" width="150" click="this.purc.selectedIndex=1"/>
+			</mx:Canvas>
+			<purcPlan:Purc width="100%" height="100%" title="购房目标" horizontalAlign="center"
+				toNext="{purc.selectedIndex = purc.selectedIndex + 1;}"
+			/>
+			<!--
+			   toNext="{purc.selectedIndex = purc.selectedIndex + 1;accFunds.doAccount()}"
+			   showEffect="effect" hideEffect="effect" />
+			-->
+			<purcPlan:PurcReady width="100%" height="100%" title="购房准备" horizontalAlign="center" 
+				toBack="{purc.selectedIndex = purc.selectedIndex - 1;}"
+				toNext="{purc.selectedIndex = purc.selectedIndex + 1;toEndPage()}"
+				/>
+			<purcPlan:AccFunds id="accFunds" width="100%" height="100%" title="资金积累情况" horizontalAlign="center"
+				toBack="{purc.selectedIndex = purc.selectedIndex - 1}"
+				toFirst="{purc.selectedIndex = 0}"
+				/>
+			<!--
+				toNext="{purc.selectedIndex = purc.selectedIndex + 1;accFunds.doAccount()}"
+			   showEffect="effect" hideEffect="effect" />
+			   showEffect="effect" hideEffect="effect" />
+			   -->
+		</mx:ViewStack>
 </mx:Panel>
