@@ -4,6 +4,7 @@
     paddingTop="5" >
     <mx:Script>
         <![CDATA[
+        	import com.citipf.liyunpeng.valueObject.PurcProgVO;
         	import com.citipf.liyunpeng.models.Model;
             import mx.collections.ArrayCollection;
             
@@ -59,6 +60,9 @@
              */
             [Bindable]
             private var c42 : Number = 0;
+            
+            [Bindable]
+            private var c5 : Number = 0;
             /**
              * 等额本息还款金额
              */
@@ -140,7 +144,7 @@
                     k = (l + c42/100)*k;
                 }
                 
-                c51 = c3p*j/c31 + c4p*k/c41;
+                c5 = c51 = c3p*j/c31 + c4p*k/c41;
             }
             private function doC52() : void
             {
@@ -149,7 +153,18 @@
             
             private function submit() : void
             {
-            	
+            	var purcProgVO : PurcProgVO = new PurcProgVO();
+            	purcProgVO.pp_infoId = model._curUser.ui_infoId;
+            	purcProgVO.pp_dpay = c2;
+            	purcProgVO.pp_mfund = c5;
+            	purcProgVO.pp_mcount = monthCount;
+            	var date : Date = new Date();
+            	date.setFullYear(a1,a2);
+            	purcProgVO.pp_purc_date = date;
+            	purcProgVO.pp_squarym = a3;
+            	purcProgVO.pp_mprice = a4;
+            	purcProgVO.pp_funds = a8; 
+            	model.addPurcProgVO(purcProgVO);
             }
             
 //            private function perform() : void{
