@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:viewStackEffects="org.efflex.mx.*"
+    paddingTop="5" >
+    <mx:Script>
+        <![CDATA[
+        	import com.citipf.liyunpeng.models.Model;
+            import mx.collections.ArrayCollection;
+            
+            [Bindable]
+            private var model : Model = Model.getInstance();
+            
+            [Bindable]
+            private var a1 : int = 0;
+            [Bindable]
+            private var a2 : int = 0;
+            [Bindable]
+            private var a3 : Number = 0;
+            
+            [Bindable]
+            private var a4 : Number = 0;
+            
+            [Bindable]
+            private var a8 : Number = 8;
+            
+            [Bindable]
+            private var b2 : Number = 0;
+            [Bindable]
+            private var b3 : Number = 0;
+            [Bindable]
+            private var b7 : Number = 0;
+            [Bindable]
+            private var b8 : Number = 0;
+            
+            [Bindable]
+            private var c1 : Number = 0;
+            [Bindable]
+            private var c2 : Number = 0;
+            
+            
+            
+            [Bindable]
+            private var today : Date = model._today;
+            [Bindable]
+            private var monthCount : Number = 0;
+            
+            [Bindable]
+            private var c3p : Number = 0;
+            [Bindable]
+            private var c4p : Number = 0;
+            
+            /**
+             * @公积金利率
+             */ 
+            [Bindable]
+            private var c32 : Number = 0;
+            /**
+             * @银行按揭利率
+             */
+            [Bindable]
+            private var c42 : Number = 0;
+            /**
+             * 等额本息还款金额
+             */
+            [Bindable]
+            private var c51 : Number = 0;
+            /**
+             * 等额本金还款金额
+             */
+            [Bindable]
+            private var c52 : Number = 0;
+            
+            
+            public function initData() : void
+            {
+	            a1 = model.a1;
+	            a2 = model.a2;
+	            a3 = model.a3;
+	            a4 = model.a4;
+	            a8 = model.a8;
+	            b2 = model.b2;
+	            b3 = model.b3;
+	            b7 = model.b7;
+	            b8 = model.b8;
+	            today = model._today;
+	            
+	            doAccount();
+            }
+            public function doAccount() : void
+            {
+                monthCount = (a1-today.getFullYear())*12 + (a2-(today.getMonth() + 1));
+                var j : Number = 1;
+                var k : Number = 1;
+                for(var i : int = 0; i < monthCount; i++) {
+                    j = Number(((1 + b3/12)*j).toFixed(2));
+                    k = Number(((1 + b8/12)*k).toFixed(2));
+                }
+                if(b8 == 0) {
+                    c1 = 0;
+                } else {
+                    c1 = Number((b2*j + b7*(k - 1)/(b8/12)).toFixed(2))/10000;
+                }
+                
+            }
+
+            //计算购房推荐
+            private function recPurc() : void
+            {
+                if(c1 >= a8) {
+                    vs.selectedChild = aPage;
+                } else if (c1 >= a8 - a3*a4*0.9) {
+                    vs.selectedChild = bPage;
+                } else {
+                    vs.selectedChild = cPage;
+                }
+                
+            }
+            
+            private function changeFund() : void
+            {
+                c32 = c3arr[c3c.selectedIndex].rate;
+            }
+            
+            private function changeMortgage() : void
+            {
+                c42 = c4arr[c4c.selectedIndex].rate;
+            }
+            private var c31 : Number = 0;
+            private var c41 : Number = 0;
+            private function doC51() : void
+            {
+                c31 = c3arr[c3c.selectedIndex].duration;
+                var j : Number = 1;
+                for(var i : int = 0;i < c31; i++) {
+                    j = (1 + c32/100)*j;
+                }
+                c41 = c4arr[c4c.selectedIndex].duration;
+                var k : Number = 1;
+                for(var l : int = 0;l < c41; l++) {
+                    k = (l + c42/100)*k;
+                }
+                
+                c51 = c3p*j/c31 + c4p*k/c41;
+            }
+            private function doC52() : void
+            {
+                
+            }
+            
+            private function submit() : void
+            {
+            	
+            }
+            
+//            private function perform() : void{
+//                var planVO : PlanVO = new PlanVO();
+//                planVO.userName = personModel.currentAccount.userName;
+//                planVO.firstPay = a3*a4*(mortgageIs.value/10);
+//                planVO.payHouseMonth = c41;
+//                personModel.firstPay = planVO.firstPay;
+//                personModel.c3p = c3p;
+//                personModel.duration = c3arr[c4c.selectedIndex].duration;
+//                personModel.c4p = c4p;
+//                personModel.duration1 = c4arr[c4c.selectedIndex].duration;
+//                personModel.c51 = this.c51;
+////                CairngormEventDispatcher.getInstance().dispatchEvent(new AddPlanEvent(planVO));
+//                
+//            }
+        ]]>
+    </mx:Script>
+    
+    <mx:Metadata>
+        [Event("toBack",type="mx.events.Event")]
+        [Event("toFirst",type="mx.events.Event")]
+    </mx:Metadata>
+    
+    
+    <mx:Model id="_model" source="/configs/bankInfo.xml" />
+    <mx:ArrayCollection id="c3arr" source="{_model.fund}" />
+    <mx:ArrayCollection id="c4arr" source="{_model.mortgage}" />
+    
+    <viewStackEffects:TileFade id="tileFade" duration="600" />
+    
+    <mx:VBox id="vv" verticalAlign="middle" horizontalAlign="center" width="100%" height="100%">
+        <mx:Text text="到　　{a1.toString()}　　年　　{a2.toString()}　　月，距离现在规划时的时间为{
+            monthCount} 个月" />
+        <mx:Text text="您的购房投资预算金额是：{c1}　万元" />
+        <mx:Button label="查看购房规划推荐" click="recPurc()" />
+        <mx:Box width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+        <mx:ViewStack id="vs" width="100%" height="100%" verticalCenter="0" horizontalCenter="0" >
+            <mx:Canvas id="writePage" width="100%" height="100%"
+                hideEffect="tileFade" showEffect="tileFade" />
+            <mx:Canvas id="aPage" hideEffect="tileFade" showEffect="tileFade">
+                <mx:Text text="购房规划情况 A ：您可直接进行一次付清购房" horizontalCenter="0" />
+            </mx:Canvas>
+            <mx:Canvas id="bPage" showEffect="tileFade" hideEffect="tileFade"  >
+                <mx:Form horizontalCenter="0" >
+                    <mx:FormItem label="请选择首付成数（0到10之间）：">
+                        <mx:HSlider id="mortgageIs" 
+                            change="{c2 = Number((a3*a4*(mortgageIs.value/10)).toFixed(2));
+                            c3c4.maximum = a3*a4 - c2}" />
+                    </mx:FormItem>
+                    <mx:FormItem label="首付金额：" >
+                        <mx:Text id="c2t" text="{model.numberFormatter.format(c2)}" />
+                    </mx:FormItem>
+                    <mx:FormItem label="剩余由公积金以及银行按揭贷款筹集" >
+                        <mx:VBox>
+                            <mx:HSlider id="c3c4"
+                                maximum="{a3*a4}"
+                                change="{c3p = event.target.value;c4p = c3c4.maximum-event.target.value}"
+                                 showDataTip="false" />
+                             <mx:HBox>
+                                <mx:Text id="c3t" text="公积金：{c3p.toFixed(2)}" />
+	                            <mx:Text id="c4t" text="银行按揭：{c4p.toFixed(2)}" />
+                             </mx:HBox>
+                        </mx:VBox>
+                    </mx:FormItem>
+                    <mx:FormItem label="公积金期限">
+                        <mx:HBox>
+                            <mx:ComboBox id="c3c" dataProvider="{c3arr}" labelField="duration" change="changeFund()" />
+		                    <mx:FormItem label="年，            公积金利率（百分之）">
+		                        <mx:Text text="{c32}" />
+		                    </mx:FormItem>
+                        </mx:HBox>
+                    </mx:FormItem>
+                    <mx:FormItem label="银行按揭贷款期限">
+                        <mx:HBox>
+	                        <mx:ComboBox id="c4c" dataProvider="{c4arr}" labelField="duration" change="changeMortgage()" />
+	                        <mx:FormItem label="年，             银行按揭利率（百分之）" >
+	                            <mx:Text text="{c42}" />
+	                        </mx:FormItem>
+                        </mx:HBox>
+                    </mx:FormItem>
+                    <mx:FormItem label="请您选择还贷方式" >
+                        <mx:HBox >
+                            <mx:LinkButton width="50%" label="等额本息偿还法" click="doC51()" />
+                            <mx:LinkButton width="50%" label="等额本金偿还法" click="doC52()"/>
+                        </mx:HBox>
+                    </mx:FormItem>
+                    <mx:FormItem>
+                        <mx:Text text="规划您每月需还贷　　　　{c51.toFixed(2)}" />
+                    </mx:FormItem>
+                    <mx:FormItem>
+                        <mx:Text text="规划您每月需还贷　　　　{c52.toFixed(2)}" />
+                    </mx:FormItem>
+                    <mx:FormItem>
+		                <mx:Button label="确认执行并保存" horizontalCenter="0" click="submit()" />
+                    </mx:FormItem>
+                </mx:Form>
+            </mx:Canvas>
+            <mx:VBox id="cPage" showEffect="tileFade" hideEffect="tileFade" verticalAlign="middle" horizontalAlign="center">
+                <mx:Text text="您的资金额度对于购房不符合" />
+                <mx:Text text="您可以返回第一步对某些条件进行调整" />
+                <mx:LinkButton label="返回第一步" click="{this.dispatchEvent(new Event('toFirst'))}" />
+            </mx:VBox>
+        </mx:ViewStack>
+        </mx:Box>
+        <mx:Button label="上一步" click="{this.dispatchEvent(new Event('toBack'))}" />
+    </mx:VBox>
+</mx:Panel>

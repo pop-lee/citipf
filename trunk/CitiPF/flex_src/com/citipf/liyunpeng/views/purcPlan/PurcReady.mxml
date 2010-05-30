@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" paddingTop="5">
+	<mx:Script>
+		<![CDATA[
+			import com.citipf.liyunpeng.models.Model;
+			
+			[Bindable]
+			private var model : Model = Model.getInstance();
+			
+			/**
+			 * 准备用总资产的数目购房
+			 */
+			[Bindable]
+			private var b2 : Number = 0;
+			/**
+			 * 此产预期年收益
+			 */
+			[Bindable]
+			private var b3 : Number = 0;
+			/**
+			 * 家庭平均月收入
+			 */
+			[Bindable]
+			private var b4 : Number = 0;
+			/**
+			 * 家庭平均月支出
+			 */
+			[Bindable]
+			private var b5 : Number = 0;
+			
+			/**
+			 * 每月结余中用作购房资金
+			 */
+			[Bindable]
+			private var b7 : Number = 0;
+			/**
+			 * 这份资金的年收益率
+			 */
+			[Bindable]
+			private var b8 : Number = 0;
+			
+			private function changeB2(event : Event) : void
+			{
+				if (event.target is NumericStepper) {
+					b2h.value = b2n.value;
+				}
+				else if (event.target is HSlider) {
+					b2n.value = b2h.value;
+				}
+				model.b2 = b2 = b2n.value;
+				changeB6();
+			}
+			
+			private function changeB3(event : Event) : void
+			{
+				model.b3 = b3 = event.target.value/100;
+			}
+			private function changeB4(event : Event) : void
+			{
+				b5n.maximum = b5h.maximum = b4n.value;
+			}
+			private function changeB5(event : Event) : void
+			{
+				if (event.target is NumericStepper) {
+					b5h.value = b5n.value;
+				}
+				else if (event.target is HSlider) {
+					b5n.value = b5h.value;
+				}
+				b5 = b5n.value;
+				changeB6();
+				b7h.maximum = b7n.maximum = Number((b4n.value - b5h.value).toFixed(2));
+			}
+			private function changeB6() : void
+			{
+				b6.text = (b4n.value - b5h.value).toFixed(2).toString();
+			}
+			private function changeB7(event:Event) : void
+			{
+				if (event.target is NumericStepper) {
+					b7h.value = b7n.value;
+				}
+				else if (event.target is HSlider) {
+					b7n.value = b7h.value;
+				}
+				
+				model.b7 = b7 = b7n.value;
+			}
+			private function changeB8(event: Event) : void
+			{
+				model.b8 = b8 = event.target.value/100;
+			}
+			
+		]]>
+	</mx:Script>
+
+	<mx:Metadata>
+		[Event("toBack",type="mx.events.Event")]
+		[Event("toNext",type="mx.events.Event")]
+	</mx:Metadata>
+<mx:Box width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+	
+	<mx:Form >
+		<mx:FormItem label="您目前所拥有的资产">
+			<mx:NumericStepper id="b1" change="{b2h.maximum = b2n.maximum = b1.value;}"
+				maxChars="10" maximum="9999999999" />
+		</mx:FormItem>
+		<mx:FormItem label="计划动用总资产中作为购房准备的资金">
+			<mx:VBox>
+				<mx:HSlider id="b2h" change="changeB2(event)" minimum="0" />
+				<mx:NumericStepper id="b2n" change="changeB2(event)" minimum="0"/>
+			</mx:VBox>
+		</mx:FormItem>
+		<mx:FormItem label="这份资产的预期年收益率（百分之）">
+			<mx:NumericStepper id="b3n" change="changeB3(event)" minimum="0" maximum="1000000" />
+		</mx:FormItem>
+		<mx:FormItem label="家庭目前月平均收入（含有年终奖金等）" >
+			<mx:NumericStepper id="b4n" maximum="100000000" change="changeB4(event)" />
+		</mx:FormItem>
+		<mx:FormItem label="月平均支出（含有各种偿还贷款的总支出）" >
+			<mx:VBox>
+				<mx:HSlider id="b5h" change="changeB5(event)" minimum="0" />
+				<mx:NumericStepper id="b5n" change="changeB5(event)" minimum="0" />
+			</mx:VBox>
+		</mx:FormItem>
+		<mx:FormItem label="月度节余资金" >
+				<mx:Text id="b6" />
+		</mx:FormItem>
+		<mx:FormItem label="每月节余中用做购房准备的资金">
+			<mx:HSlider id="b7h" change="changeB7(event)" minimum="0" />
+			<mx:NumericStepper id="b7n" change="changeB7(event)" minimum="0" />
+		</mx:FormItem>
+		<mx:FormItem label="这部分资金的年收益率（百分之）">
+			<mx:NumericStepper id="b8n" change="changeB8(event)" minimum="0" />
+		</mx:FormItem>
+	</mx:Form>
+	<mx:Spacer height="100%" />
+	<mx:HBox >
+		<mx:Button label="上一步" click="this.dispatchEvent(new Event('toBack'));" />
+		<mx:Spacer width="100%" />
+		<mx:Button label="下一步" click="this.dispatchEvent(new Event('toNext'));" />
+	</mx:HBox>
+</mx:Box>
+</mx:Panel>
