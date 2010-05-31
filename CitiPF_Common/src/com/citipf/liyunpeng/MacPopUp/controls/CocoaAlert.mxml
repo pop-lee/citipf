@@ -2,7 +2,7 @@
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="{paddingTop + 200}"
 	 verticalAlign="middle" horizontalAlign="center"
 	 paddingLeft="10" paddingRight="10" 
-	 paddingTop="{paddingTop}"
+	 paddingTop="{paddingTop}" fontSize="14"
 	 backgroundColor="#FFFFFF" cornerRadius="4" borderStyle="solid" borderThickness="0" dropShadowEnabled="true">
 	
 	<mx:Image width="57" height="57" scaleContent="false" id="img_icon"/>
