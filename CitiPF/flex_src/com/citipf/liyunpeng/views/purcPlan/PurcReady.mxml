@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" paddingTop="5">
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" >
 	<mx:Script>
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
@@ -135,7 +135,7 @@
 		</mx:FormItem>
 	</mx:Form>
 	<mx:Spacer height="100%" />
-	<mx:HBox >
+	<mx:HBox paddingLeft="30" paddingRight="100" >
 		<mx:Button label="上一步" click="this.dispatchEvent(new Event('toBack'));" />
 		<mx:Spacer width="100%" />
 		<mx:Button label="下一步" click="this.dispatchEvent(new Event('toNext'));" />

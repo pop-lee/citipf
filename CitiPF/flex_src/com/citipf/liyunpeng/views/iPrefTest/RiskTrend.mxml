@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="530" backgroundAlpha="0" 
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundAlpha="0" 
 	xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*">
 	
 	<mx:Script>
@@ -181,9 +181,9 @@
 					<mx:Label width="100%" height="20" fontSize="12" textAlign="center" text="如果您对您自己的风险偏好比较了解,可以直接选择您的风险偏好类型:"/>
 					<mx:Canvas width="100%">
 						<mx:RadioButtonGroup id="riskStyle" itemClick="itemClickHandler();"/>
-       						<mx:RadioButton groupName="riskStyle" id="guard" value="1" label="偏向保守" width="75" horizontalCenter="0" fontSize="12" top="0"/>
-        					<mx:RadioButton groupName="riskStyle" id="mean" value="2" label="风格中庸" width="75" horizontalCenter="0" fontSize="12" top="20"/>
-        					<mx:RadioButton groupName="riskStyle" id="radicalness" value="3" label="投资激进" width="75" horizontalCenter="0" fontSize="12" top="40"/>
+       						<mx:RadioButton groupName="riskStyle" id="guard" value="1" label="偏向保守"  horizontalCenter="0" fontSize="12" top="0"/>
+        					<mx:RadioButton groupName="riskStyle" id="mean" value="2" label="风格中庸"  horizontalCenter="0" fontSize="12" top="20"/>
+        					<mx:RadioButton groupName="riskStyle" id="radicalness" value="3" label="投资激进"  horizontalCenter="0" fontSize="12" top="40"/>
 					</mx:Canvas>
 					<mx:Label id="advice" fontSize="12" textAlign="center" width="100%" height="20"/>
 					<mx:Spacer width="100%" height="30"/>

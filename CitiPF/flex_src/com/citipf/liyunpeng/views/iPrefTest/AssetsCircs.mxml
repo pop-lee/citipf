@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="530" backgroundAlpha="0">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundAlpha="0">
 	
 	<mx:Script>
 		<![CDATA[
@@ -116,7 +116,7 @@
 					<mx:NumericStepper width="120" height="100%" right="10" id="otherDebt" minimum="0" stepSize="1" maximum="99999999"/>
 				</mx:Canvas>
 			</mx:Canvas>
-			<mx:Spacer width="100%" height="25"/>
+			<mx:Spacer width="100%" height="100%"/>
 			<mx:Canvas width="100%">
 				<mx:LinkButton label="上一页" left="100" fontSize="12" id="toRt"/>
 				<mx:LinkButton label="确认,提交" right="100" fontSize="12" id="achieve"/>

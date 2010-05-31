@@ -3,12 +3,15 @@
 	 xmlns:ChartViews="com.citipf.liyunpeng.views.chartViews.*"
 	 xmlns:flexlib="com.citipf.liyunpeng.mdi.containers.*"
 	 width="100%" height="100%"
-	 minWidth="800" minHeight="600"
+	 minWidth="1000" minHeight="600"
 	 horizontalScrollPolicy="auto" verticalScrollPolicy="auto"
 	 initialize="init()"
-	 creationComplete="createComp()" xmlns:login="com.citipf.liyunpeng.views.login.*">
+	 creationComplete="createComp()"
+	 xmlns:login="com.citipf.liyunpeng.views.login.*">
 	<mx:Script>
 		<![CDATA[
+			import mx.events.CollectionEvent;
+			import mx.containers.Canvas;
 			import com.citipf.liyunpeng.valueObject.UserAddVO;
 			import com.citipf.liyunpeng.valueObject.UInveVO;
 			import mx.events.PropertyChangeEvent;
@@ -36,11 +39,11 @@
 			private function init() : void
 			{
 				viewModel.mainVBox = mainVBox;
-				
+				viewModel.mainBox = mainBox;
 				for each(var obj : Object in mainViews.views) 
 				{
 					try {
-						var disObj : Panel = new (getDefinitionByName(obj.className)) as Panel; 
+						var disObj : Canvas = new (getDefinitionByName(obj.className)) as Canvas; 
 						disObj.label = obj.lable;
 						trace("加载---" + obj.label + "---模块");
 						mainViewStack.addChild(disObj);
@@ -53,6 +56,7 @@
 				if(ChangeWatcher.canWatch(model,"_curUser")) {
 					ChangeWatcher.watch(model,"_curUser",loginedGetInfo);
 				}
+				viewModel.windowList.addEventListener(CollectionEvent.COLLECTION_CHANGE,showWinGrid)
 			}
 			
 			/**
@@ -120,20 +124,22 @@
 			 */
 			private function pageIndexChange(event : IndexChangedEvent) : void
 			{
-//				if(model._curUser == null && event.newIndex > 0) {
-//					mainBox.enabled = false;
-//					CocoaAlert.show("您暂时还没有登录，\n\n所以暂时还不能做理财规划，\n\n请先登录 ^_^", "未登录提示", 0x4, mainBox, false, notLoginAlert);
-//				} else if(event.newIndex > 1 && model._uInve == null) {
-//					mainBox.enabled = false;
-//					CocoaAlert.show("请先确定下您的投资偏好，\n\n若不确定我们将对您进行测试 ^_^", "未登录提示", 0x4, mainBox, false, noUInveAlert);
-//				}
+				if(model._curUser == null && event.newIndex > 0) {
+					mainBox.enabled = false;
+					CocoaAlert.show("您暂时还没有登录，\n\n所以暂时还不能做理财规划，\n\n请先登录 ^_^", "未登录提示", 0x4, mainBox, false, notLoginAlert);
+				} else if(event.newIndex > 1 && model._uInve == null) {
+					mainBox.enabled = false;
+					CocoaAlert.show("请先确定下您的投资偏好，\n\n若不确定我们将对您进行测试 ^_^", "未登录提示", 0x4, mainBox, false, noUInveAlert);
+				}
 			}
 			/**
 			 * 没有登录提示错误
 			 */
 			private function notLoginAlert(event : CloseEvent) : void 
-			{ 
-				toLogin();
+			{
+				if(loginBox.loginViewEnable == false) {
+					toLogin();
+				}
 				mainViewStack.selectedIndex = 0;
 				mainBox.enabled = true;
 			}
@@ -157,17 +163,28 @@
 					model.getUserAddVO(userAddVO);
 				}
 			}
+			private function showWinGrid(event : CollectionEvent) : void
+			{
+				if(viewModel.windowList.length > 0) {
+					winDG.visible = true;
+				} else {
+					winDG.visible = false;
+				}
+			}
 			
 		]]>
 	</mx:Script>
 	<mx:Model id="mainViews" source="../configs/viewsConfig.xml" />
 	
+	<mx:WipeDown id="wipeDown" duration="500"/>
+	<mx:WipeUp id="wipeUp" duration="500"/>
+	
 	<mx:ApplicationControlBar id="applicationBar" height="70" width="100%" >
-		<mx:HBox width="100%" height="100%" >
-			<mx:Label width="200" />
+		<mx:HBox width="100%" height="100%" paddingLeft="10" >
+			<mx:Image source="@Embed(source='assets/logo.png')" width="200" />
 			<ChartViews:TitleChartView />
 			<mx:VBox width="200" height="100%">
-				<mx:Button id="toLoginBtn" label="登录" click="toLogin()" />
+				<mx:LinkButton id="toLoginBtn" label="登录" click="toLogin()" />
 			</mx:VBox>
 		</mx:HBox>
 	</mx:ApplicationControlBar>
@@ -176,7 +193,7 @@
 		horizontalScrollPolicy="off" verticalScrollPolicy="off" >
 		<mx:HBox id="mainBox" width="100%" height="100%" styleName="navButtonBox"
 			x="0" y="0" >
-			<mx:VBox width="{viewModel.NAV_BUTTON_WIDTH}" height="100%" >
+			<mx:VBox width="{viewModel.NAV_BUTTON_WIDTH}" height="100%" backgroundAlpha="0.5" >
 				<mx:ToggleButtonBar id="navButton" width="85%" selectedIndex="{mainViewStack.selectedIndex}"
 					 dataProvider="{mainViews.views}" labelField="label" direction="vertical" />
 				<!--
@@ -184,7 +201,12 @@
 				-->
 				<mx:DataGrid id="winDG" width="{navButton.width}" height="100%" dataProvider="{viewModel.windowList}"
 					doubleClickEnabled="true" 
-					doubleClick="winDGDoubleClick_Handle()" />
+					doubleClick="winDGDoubleClick_Handle()"
+					visible="false" hideEffect="wipeUp" showEffect="wipeDown">
+					<mx:columns>
+						<mx:DataGridColumn dataField="title" headerText="窗口" />
+					</mx:columns>
+				</mx:DataGrid>
 			</mx:VBox>
 			<mx:ViewStack id="mainViewStack" width="100%" height="100%" change="pageIndexChange(event)"
 				selectedIndex="{navButton.selectedIndex}" />

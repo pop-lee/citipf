@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bankInfos>
+    <fund>
+        <duration>1</duration>
+        <rate>2.775</rate>
+    </fund>
+    <fund>
+        <duration>2</duration>
+        <rate>2.775</rate>
+    </fund>
+    <fund>
+        <duration>3</duration>
+        <rate>2.775</rate>
+    </fund>
+    <fund>
+        <duration>4</duration>
+        <rate>2.775</rate>
+    </fund>
+    <fund>
+        <duration>5</duration>
+        <rate>2.775</rate>
+    </fund>
+    <fund>
+        <duration>6</duration>
+        <rate>3.775</rate>
+    </fund>
+    
+    
+    
+    <mortgage>
+        <duration>1</duration>
+        <rate>5.47</rate>
+    </mortgage>
+    <mortgage>
+        <duration>2</duration>
+        <rate>5.56</rate>
+    </mortgage>
+    <mortgage>
+        <duration>3</duration>
+        <rate>5.56</rate>
+    </mortgage>
+    <mortgage>
+        <duration>4</duration>
+        <rate>5.74</rate>
+    </mortgage>
+    <mortgage>
+        <duration>5</duration>
+        <rate>5.74</rate>
+    </mortgage>
+    <mortgage>
+        <duration>6</duration>
+        <rate>6.39</rate>
+    </mortgage>
+    
+    
+    
+    
+</bankInfos>

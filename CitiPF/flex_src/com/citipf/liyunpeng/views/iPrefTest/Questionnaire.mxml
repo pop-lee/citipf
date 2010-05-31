@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="530" backgroundAlpha="0" 
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundAlpha="0" 
 	xmlns:iPrefTest="com.citipf.liyunpeng.views.iPrefTest.*">
 	
 	<mx:Script>
@@ -488,8 +488,8 @@
         </mx:source>
     </mx:XMLListCollection>
 	
-	<mx:WipeDown id="down" duration="1000"/>
-	<mx:WipeUp id="up" duration="1000"/>
+	<mx:WipeDown id="down" duration="500"/>
+	<mx:WipeUp id="up" duration="500"/>
 	
 	<mx:Metadata>
 		[Event("cvs",type="mx.events.Event")]
@@ -501,20 +501,20 @@
 		<mx:Canvas width="100%" height="100%" showEffect="{irisIn}" hideEffect="{irisOut}">
 			<mx:VBox width="100%" height="100%">
 				<mx:ViewStack width="100%" height="100%" id="main">
-					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" backgroundColor="#000000">
+					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" >
 						<iPrefTest:BasicInformation id="bi" horizontalCenter="0" creationComplete="this.initBi();"/>
 					</mx:Canvas>
-					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" backgroundColor="#000000">
+					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" >
 						<iPrefTest:RiskTrend id="rt" creationComplete="this.initRt();"/>
 					</mx:Canvas>
-					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" backgroundColor="#000000">
+					<mx:Canvas width="100%" height="100%" showEffect="{down}" hideEffect="{up}" >
 						<iPrefTest:AssetsCircs id="ac" creationComplete="this.initAc();"/>
 					</mx:Canvas>
 				</mx:ViewStack>
 			</mx:VBox>
 		</mx:Canvas>
 		<mx:Canvas width="100%" height="100%" color="#000000" showEffect="{irisIn}" hideEffect="{irisOut}">
-			<mx:Panel width="100%" height="100%" title="诊断结果" textAlign="center" fontSize="14">
+			<mx:Panel width="100%" height="100%" title="诊断结果" textAlign="center" >
 				<mx:Text fontSize="12" width="100%" textAlign="left" color="#0B333C"
 					text="{this.ageReport}" />
 					<!--
@@ -608,7 +608,7 @@
 		
 						<mx:VBox label="图表" height="100%" width="100%">
 							<mx:ApplicationControlBar dock="true" horizontalAlign="center">
-								<mx:ToggleButtonBar fontSize="12" itemClick="this.itemClickHandler(event);">
+								<mx:ToggleButtonBar itemClick="this.itemClickHandler(event);">
 									<mx:dataProvider>
 										<mx:String>收入构成</mx:String>
 										<mx:String>支出构成</mx:String>

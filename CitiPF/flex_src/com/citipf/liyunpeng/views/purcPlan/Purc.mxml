@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:flexlib="http://code.google.com/p/flexlib/"
-    creationComplete="init()"
-    paddingTop="5">
+    creationComplete="init()" >
     <mx:Script>
         <![CDATA[
         	import com.citipf.liyunpeng.models.Model;
@@ -205,11 +204,10 @@
     
     <mx:Parallel >
         <mx:Resize id="hideL" heightTo="0" />
-        <mx:Resize id="showL" heightTo="60" />
+        <mx:Resize id="showL" heightTo="65" />
     </mx:Parallel>
     
     <mx:HBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
-        <mx:LinkBar direction="vertical" dataProvider="vs" />
         <mx:ViewStack id="vs" width="100%" height="100%" >
         <mx:VBox width="100%" height="100%" horizontalAlign="center" >
             <mx:HBox horizontalAlign="center" width="100%">
@@ -235,7 +233,7 @@
                     -->
             </mx:VBox>
             <mx:VBox id="monthList" horizontalAlign="center" height="0" width="100%" verticalScrollPolicy="off">
-                <mx:TileList columnCount="6" rowCount="{a2arr.length/6}" width="200" height="100%"
+                <mx:TileList columnCount="6" rowCount="{a2arr.length>6?2:1}" width="200" height="100%"
                     dataProvider="{a2arr}" 
                     change="{a2n.value = event.itemRenderer.data.toString();changeA2();}" />
                     <!--
@@ -245,60 +243,62 @@
             </mx:VBox>
             <mx:HBox>
                 <mx:Text text="购买面积为（平米）" />
-                <flexlib:PromptingTextInput id="a3t" prompt="88"
+                <mx:TextInput id="a3t" restrict="0-9"
                     change="{changeA3();decoration();}" focusIn="showL.target=_const;showL.play()"/>
                 <mx:Text text="每平米价格(元)" />
-                <flexlib:PromptingTextInput id="a4t" prompt="8888"
+                <mx:TextInput id="a4t" restrict="0-9"
                     change="{changeA4();decoration();}" focusIn="showL.target=_const;showL.play()" />
                 
             </mx:HBox>
-            <mx:VBox id="_const" height="0" verticalScrollPolicy="off">
+            <mx:VBox id="_const" height="0" verticalScrollPolicy="off" verticalGap="0">
                 <mx:HBox >
                     <mx:Text text="装修费用预计" />
                     <mx:RadioButtonGroup id="a5r" itemClick="changeA5(event)" change="sum()" />
-                    <mx:RadioButton groupName="a5r" label="经济型：{a5a}" value="{a5a}" />
-                    <mx:RadioButton groupName="a5r" label="舒适型：{a5b}" value="{a5b}" />
-                    <mx:RadioButton groupName="a5r" label="豪华型：{a5c}" value="{a5c}" />
+                    <mx:RadioButton groupName="a5r" label="经济型(万元)：{a5a}" value="{a5a}" />
+                    <mx:RadioButton groupName="a5r" label="舒适型(万元)：{a5b}" value="{a5b}" />
+                    <mx:RadioButton groupName="a5r" label="豪华型(万元)：{a5c}" value="{a5c}" />
                 </mx:HBox>
                 <mx:HBox>
                    <mx:Text text="电器费用预计" />
                    <mx:RadioButtonGroup id="a6r" itemClick="changeA6(event)" />
-                   <mx:RadioButton groupName="a6r" label="经济型（万元）：{a6a}" value="{a6a}" />
-                   <mx:RadioButton groupName="a6r" label="舒适型（万元）：{a6b}" value="{a6b}" />
-                   <mx:RadioButton groupName="a6r" label="豪华型（万元）：{a6c}" value="{a6c}" />
+                   <mx:RadioButton groupName="a6r" label="经济型(万元)：{a6a}" value="{a6a}" />
+                   <mx:RadioButton groupName="a6r" label="舒适型(万元)：{a6b}" value="{a6b}" />
+                   <mx:RadioButton groupName="a6r" label="豪华型(万元)：{a6c}" value="{a6c}" />
                 </mx:HBox>
             </mx:VBox>
             <mx:VBox height="100%" width="100%" verticalAlign="middle" horizontalAlign="center">
                 <mx:Label text="以下为推荐税值" color="#FF0000" />
                 <mx:HBox >
 	                <mx:Form  right="0" >
-	                    <mx:FormItem label="契税（百分之）" >
+	                    <mx:FormItem label="契税(百分之)" >
 	                        <mx:TextInput id="a71" width="40" text="1.5" change="decoration()"/>
 	                    </mx:FormItem>
-	                    <mx:FormItem label="印花税（百分之）" >
+	                    <mx:FormItem label="印花税(百分之)" >
 	                        <mx:TextInput id="a72" width="40" text="0.05" change="decoration()" />
 	                    </mx:FormItem>
 	                </mx:Form>
 	                <mx:Form width="100%">
-	                    <mx:FormItem label="公共维修基金率（百分之）" >
+	                    <mx:FormItem label="公共维修基金率(百分之)" >
 	                        <mx:TextInput id="a73" width="40" text="2" change="decoration()" />
 	                    </mx:FormItem>
-	                    <mx:FormItem label="律师费税（百分之）">
+	                    <mx:FormItem label="律师费税(百分之)">
 	                        <mx:TextInput id="a74" width="40" text="0.4" change="decoration()"/>
 	                    </mx:FormItem>
 	                </mx:Form>
                 </mx:HBox>
                 <mx:Spacer height="10%" />
                 <mx:VBox>
-                    <mx:Text text="契税（万元）：{a71a.toFixed(2)}" />
-                    <mx:Text text="印花税（万元）：{a72a.toFixed(2)}"  />
-                    <mx:Text text="公共维护基金率（万元）：{a73a.toFixed(2)}"  />
-                    <mx:Text text="律师费税（万元）{a74a.toFixed(2)}" />
-                    <mx:Text text="相关税费总计（万元）：{a7sum.toFixed(2)}" />
-                    <mx:Text text="届时总支出为（万元）：{a8.toFixed(2)}" />
+                    <mx:Text text="契税(万元)：{a71a.toFixed(2)}" />
+                    <mx:Text text="印花税(万元)：{a72a.toFixed(2)}"  />
+                    <mx:Text text="公共维护基金率(万元)：{a73a.toFixed(2)}"  />
+                    <mx:Text text="律师费税(万元){a74a.toFixed(2)}" />
+                    <mx:Text text="相关税费总计(万元)：{a7sum.toFixed(2)}" />
+                    <mx:Text text="届时总支出为(万元)：{a8.toFixed(2)}" />
                 </mx:VBox>
                 <mx:Spacer height="100%" />
-                    <mx:Button label="下一步" click="{this.dispatchEvent(new Event('toNext'));}" />
+                <mx:Canvas width="100%" >
+	                <mx:Button label="下一步" click="{this.dispatchEvent(new Event('toNext'));}" right="100" />
+                </mx:Canvas>
             </mx:VBox>
         </mx:VBox>
         </mx:ViewStack>

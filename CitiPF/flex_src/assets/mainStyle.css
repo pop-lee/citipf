@@ -1,16 +1,21 @@
 /* CSS file */
 
 .global {
-	/*fontSize : 15;*/
+	/*fontSize : 15;
 	backgroundColor : #cecece
+	*/
 }
 
 Application{
-	backgroundColor:#EFEFEF;
+	
+	/*
+	backgroundColor:#ffffff;
 	color:#444;
 	backgroundGradientAlphas: 1.0, 1.0;
 	backgroundGradientColors: #F0F0F0, #E3E3E3;
 	themeColor:#2AE;
+	*/
+	backgroundImage : Embed(source='assets/backgroundImage.jpg');
 }
 
 Button
@@ -113,6 +118,19 @@ LinkButton
 	downSkin: Embed(source="assets/summerSkins/LinkButton_downSkin.png",scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
 	overSkin: Embed(source="assets/summerSkins/LinkButton_overSkin.png",scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
 	upSkin: Embed(source="assets/summerSkins/LinkButton_upSkin.png",scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
+}
+
+PopUpButton
+{
+	color:#10CAFC;
+	text-roll-over-color:#EA0;
+	text-selected-color:#F70;
+	disabledSkin: Embed(source="assets/summerSkins/PopUpButton_disabledSkin.png",scaleGridRight="58",scaleGridLeft="5",scaleGridTop="3",scaleGridBottom="4");
+	downSkin: Embed(source="assets/summerSkins/PopUpButton_downSkin.png",scaleGridRight="58",scaleGridLeft="5",scaleGridTop="3",scaleGridBottom="4");
+	overSkin: Embed(source="assets/summerSkins/PopUpButton_overSkin.png",scaleGridRight="58",scaleGridLeft="5",scaleGridTop="3",scaleGridBottom="4");
+	popUpDownSkin: Embed(source="assets/summerSkins/PopUpButton_popUpDownSkin.png",scaleGridRight="58",scaleGridLeft="5",scaleGridTop="3",scaleGridBottom="4");
+	popUpOverSkin: Embed(source="assets/summerSkins/PopUpButton_popUpOverSkin.png",scaleGridRight="58",scaleGridLeft="5",scaleGridTop="3",scaleGridBottom="4");
+	upSkin: Embed(source="assets/summerSkins/PopUpButton_upSkin.png",scaleGridRight="58",scaleGridLeft="5",scaleGridTop="3",scaleGridBottom="4");
 }
 
 RadioButton
