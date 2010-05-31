@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:viewStackEffects="org.efflex.mx.*"
-    paddingTop="5" >
+    >
     <mx:Script>
         <![CDATA[
         	import com.citipf.liyunpeng.valueObject.PurcProgVO;
@@ -270,6 +270,8 @@
             </mx:VBox>
         </mx:ViewStack>
         </mx:Box>
-        <mx:Button label="上一步" click="{this.dispatchEvent(new Event('toBack'))}" />
+        <mx:Canvas width="100%">
+	        <mx:Button label="上一步" click="{this.dispatchEvent(new Event('toBack'))}" left="100" />
+        </mx:Canvas>
     </mx:VBox>
 </mx:Panel>

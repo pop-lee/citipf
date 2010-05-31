@@ -7,6 +7,7 @@ package com.citipf.liyunpeng.models
 	import com.citipf.liyunpeng.views.chartViews.ChartMain;
 	
 	import mx.collections.ArrayCollection;
+	import mx.core.Container;
 	import mx.core.UIComponent;
 	
 	public class WindowManagerModel
@@ -27,6 +28,14 @@ package com.citipf.liyunpeng.models
 		 * 主面板中MDI的窗口主容器
 		 */		
 		public var mainVBox : MDICanvas ;
+		
+		[Bindable]
+		public var mainBox : Container;
+		/**
+		 * 登录窗口
+		 */
+		[Bindable]
+		public var loginBox : Container;
 		
 		/**
 		 * 打开窗口的内部子容器

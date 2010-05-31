@@ -5,15 +5,16 @@
 				xmlns:business="com.citipf.liyunpeng.business.*"
 				height="100%" width="100%"
 				initialize="init()" 
+				preloader="assets.progress.CustomPreloader"
 				viewSourceURL="srcview/index.html"
 				pageTitle="网上个人理财" 
+
 				>
 	<mx:Script>
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.models.ViewModel;
 			
-			ViewModel.getInstance();
 			Model.getInstance();
 			private function init() : void
 			{
