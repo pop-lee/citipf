@@ -1,0 +1,60 @@
+/* CSS file */
+
+.global {
+	/*fontSize : 15;*/
+	backgroundColor : #cecece
+}
+
+Application{
+	backgroundColor:#EFEFEF;
+	color:#444;
+	backgroundGradientAlphas: 1.0, 1.0;
+	backgroundGradientColors: #F0F0F0, #E3E3E3;
+	themeColor:#2AE;
+}
+
+Button
+{
+	theme-color: #474747;
+	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
+}
+/****导航按钮容器属性******************************************************/
+ToggleButtonBar {
+	buttonStyleName : "myToggleButtonStyle";
+	selectedButtonTextStyleName : "myToggleButtonStyle";
+	firstButtonStyleName : "myToggleButtonStyle";
+	lastButtonStyleName : "myToggleButtonStyle";
+}
+
+.myToggleButtonStyle {
+	cornerRadius : 0;
+	theme-color: #474747;
+	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
+}
+
+.navButtonBox {
+	paddingLeft : 5 ;
+	paddingRight : 5 ;
+}
+/**************************************************************************/
+
+/****Title Chart***********************************************************/
+.titleChartColor {
+	paddingLeft : -1;
+	
+}
+
+/**************************************************************************/
+
+/****loginStyle *****************************************************/
+.loginStyle {
+	fontSize : 13;
+	paddingTop : 10;
+}
+/**************************************************************************/
