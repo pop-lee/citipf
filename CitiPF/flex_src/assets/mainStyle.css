@@ -1,40 +1,146 @@
 /* CSS file */
 
 .global {
-	fontSize : 15;
+	/*fontSize : 15;*/
 	backgroundColor : #cecece
+}
+
+Application{
+	backgroundColor:#EFEFEF;
+	color:#444;
+	backgroundGradientAlphas: 1.0, 1.0;
+	backgroundGradientColors: #F0F0F0, #E3E3E3;
+	themeColor:#2AE;
 }
 
 Button
 {
-	theme-color: #474747;
-	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
-	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
-	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
-	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
+	color:#FFF;
+	textRollOverColor:#FFF;
+	text-selected-color:#A42E00;
+	/* textSelectedColor: #FFBD2F; */
+	font-size:12;
+	font-weight:normal;
+	padding-top:6; padding-bottom:6; padding-right:10; padding-left:10;
+
+	upSkin: Embed(source="assets/summerSkins/Button_upSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	overSkin: Embed(source="assets/summerSkins/Button_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	downSkin: Embed(source="assets/summerSkins/Button_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	disabledSkin: Embed(source="assets/summerSkins/Button_disabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	selectedUpSkin: Embed(source="assets/summerSkins/Button_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	selectedOverSkin: Embed(source="assets/summerSkins/Button_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	selectedDownSkin: Embed(source="assets/summerSkins/Button_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	selectedDisabledSkin: Embed(source="assets/summerSkins/Button_disabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="72",scaleGridBottom="26");
+	disabledColor: #777777;
 }
 /****导航按钮容器属性******************************************************/
-ToggleButtonBar {
-	buttonStyleName : "myToggleButtonStyle";
-	selectedButtonTextStyleName : "myToggleButtonStyle";
-	firstButtonStyleName : "myToggleButtonStyle";
-	lastButtonStyleName : "myToggleButtonStyle";
+ButtonBar
+{
+	buttonStyleName: "buttonBarButton";
+	firstButtonStyleName: "buttonBarButton";
+	lastButtonStyleName: "buttonBarButton";
+	horizontalGap: -1;
+}
+.buttonBarButton
+{
+	upSkin: Embed(source="assets/summerSkins/ButtonBar-button_upSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	downSkin: Embed(source="assets/summerSkins/ButtonBar-button_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	overSkin: Embed(source="assets/summerSkins/ButtonBar-button_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	disabledSkin: Embed(source="assets/summerSkins/ButtonBar-button_disabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selectedDisabledSkin: Embed(source="assets/summerSkins/ButtonBar-button_selectedDisabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selected-down-skin: Embed(source="assets/summerSkins/ButtonBar-button_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selected-over-skin: Embed(source="assets/summerSkins/ButtonBar-button_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selectedUpSkin: Embed(source="assets/summerSkins/ButtonBar-button_selectedUpSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	color:#00AFE1;
+	text-roll-over-color:#EA0;
+	textSelectedColor: #222;
+}
+buttonBarFirstButton
+{
+	upSkin: Embed(source="assets/summerSkins/ButtonBar-firstButton_upSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	downSkin: Embed(source="assets/summerSkins/ButtonBar-firstButton_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	overSkin: Embed(source="assets/summerSkins/ButtonBar-firstButton_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	disabledSkin: Embed(source="assets/summerSkins/ButtonBar-firstButton_disabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selectedDisabledSkin: Embed(source="assets/summerSkins/ButtonBar-firstButton_selectedDisabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selected-down-skin: Embed(source="assets/summerSkins/ButtonBar-firstButton_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selected-over-skin: Embed(source="assets/summerSkins/ButtonBar-firstButton_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selectedUpSkin: Embed(source="assets/summerSkins/ButtonBar-firstButton_selectedUpSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	color:#00AFE1;
+	text-roll-over-color:#EA0;
+	textSelectedColor: #222;
+}
+.buttonBarLastButton
+{
+	upSkin: Embed(source="assets/summerSkins/ButtonBar-lastButton_upSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	downSkin: Embed(source="assets/summerSkins/ButtonBar-lastButton_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	overSkin: Embed(source="assets/summerSkins/ButtonBar-lastButton_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	disabledSkin: Embed(source="assets/summerSkins/ButtonBar-lastButton_disabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selectedDisabledSkin: Embed(source="assets/summerSkins/ButtonBar-lastButton_selectedDisabledSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selected-down-skin: Embed(source="assets/summerSkins/ButtonBar-lastButton_downSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selected-over-skin: Embed(source="assets/summerSkins/ButtonBar-lastButton_overSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	selectedUpSkin: Embed(source="assets/summerSkins/ButtonBar-lastButton_selectedUpSkin.png",scaleGridLeft="2",scaleGridTop="2",scaleGridRight="42",scaleGridBottom="17");
+	color:#00AFE1;
+	text-roll-over-color:#EA0;
+	textSelectedColor: #222;
 }
 
-.myToggleButtonStyle {
-	cornerRadius : 0;
-	theme-color: #474747;
-	up-skin: ClassReference('assets.skins.flexraysButtonSkin');
-	over-skin: ClassReference('assets.skins.flexraysButtonSkin');
-	down-skin: ClassReference('assets.skins.flexraysButtonSkin');
-	disabled-skin: ClassReference('assets.skins.flexraysButtonSkin');
+HSlider
+{
+	thumbDisabledSkin: Embed(source="assets/summerSkins/Slider_thumbDisabledSkin.png");
+	thumbDownSkin: Embed(source="assets/summerSkins/Slider_thumbDownSkin.png");
+	thumbOverSkin: Embed(source="assets/summerSkins/Slider_thumbOverSkin.png");
+	thumbUpSkin: Embed(source="assets/summerSkins/Slider_thumbUpSkin.png");
+	trackHighlightSkin: Embed(source="assets/summerSkins/Slider_trackHighlightSkin.png");
+	trackSkin: Embed(source="assets/summerSkins/Slider_trackSkin.png");
 }
+
+HBox {
+	horizontalAlign : center;
+	verticalAlign : middle;
+}
+
+VBox {
+	horizontalAlign : center;
+	verticalAlign : middle;
+}
+
+LinkButton
+{
+	color:#00AFE1;
+	text-roll-over-color:#EA0;
+	text-selected-color:#FFF;
+	disabledSkin: Embed(source="assets/summerSkins/LinkButton_disabledSkin.png", scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
+	downSkin: Embed(source="assets/summerSkins/LinkButton_downSkin.png",scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
+	overSkin: Embed(source="assets/summerSkins/LinkButton_overSkin.png",scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
+	upSkin: Embed(source="assets/summerSkins/LinkButton_upSkin.png",scaleGridLeft="4",scaleGridTop="4",scaleGridRight="60",scaleGridBottom="18");
+}
+
+RadioButton
+{
+	disabledIcon: Embed(source="assets/summerSkins/RadioButton_disabledIcon.png");
+	downIcon: Embed(source="assets/summerSkins/RadioButton_downIcon.png");
+	overIcon: Embed(source="assets/summerSkins/RadioButton_overIcon.png");
+	selectedDisabledIcon: Embed(source="assets/summerSkins/RadioButton_selectedDisabledIcon.png");
+	selectedDownIcon: Embed(source="assets/summerSkins/RadioButton_selectedDownIcon.png");
+	selectedOverIcon: Embed(source="assets/summerSkins/RadioButton_selectedOverIcon.png");
+	selectedUpIcon: Embed(source="assets/summerSkins/RadioButton_selectedUpIcon.png");
+	upIcon: Embed(source="assets/summerSkins/RadioButton_upIcon.png");
+
+	color: #00AFE1;
+	textRollOverColor: #777777;
+	textSelectedColor: #FF7200;
+	disabledColor: #A3A3A3;
+}
+
 
 .navButtonBox {
 	paddingLeft : 5 ;
 	paddingRight : 5 ;
 }
 /**************************************************************************/
+
+
+
 
 /****Title Chart***********************************************************/
 .titleChartColor {
@@ -50,3 +156,8 @@ ToggleButtonBar {
 	paddingTop : 10;
 }
 /**************************************************************************/
+
+/****prefTest ****/
+.prefTest {
+	fontSize : 14;
+}
