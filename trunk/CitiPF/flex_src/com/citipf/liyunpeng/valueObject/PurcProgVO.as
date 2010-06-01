@@ -1,7 +1,7 @@
 package com.citipf.liyunpeng.valueObject
 {
 	[Bindable]
-	[RemoteClass(alias="com.citipf.liyunpeng.valueObject")]
+	[RemoteClass(alias="com.citipf.liyunpeng.valueObject.PurcProgVO")]
 	public class PurcProgVO
 	{
 		private var _pp_infoId : int;

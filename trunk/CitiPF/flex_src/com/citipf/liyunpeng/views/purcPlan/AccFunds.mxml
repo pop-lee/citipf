@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
-	xmlns:viewStackEffects="org.efflex.mx.*"
-	>
+	implements="com.citipf.liyunpeng.interfaceFiles.IWindow"
+	xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*">
 	<mx:Script>
 		<![CDATA[
 			import mx.events.MenuEvent;
@@ -167,21 +167,7 @@
 				purcProgVO.pp_funds = a8; 
 				model.addPurcProgVO(purcProgVO);
 			}
-			
-//			private function perform() : void{
-//				var planVO : PlanVO = new PlanVO();
-//				planVO.userName = personModel.currentAccount.userName;
-//				planVO.firstPay = a3*a4*(mortgageIs.value/10);
-//				planVO.payHouseMonth = c41;
-//				personModel.firstPay = planVO.firstPay;
-//				personModel.c3p = c3p;
-//				personModel.duration = c3arr[c4c.selectedIndex].duration;
-//				personModel.c4p = c4p;
-//				personModel.duration1 = c4arr[c4c.selectedIndex].duration;
-//				personModel.c51 = this.c51;
-////				CairngormEventDispatcher.getInstance().dispatchEvent(new AddPlanEvent(planVO));
-//				
-//			}
+
 		]]>
 	</mx:Script>
 	
@@ -195,7 +181,7 @@
 	<mx:ArrayCollection id="c3arr" source="{_model.fund}" />
 	<mx:ArrayCollection id="c4arr" source="{_model.mortgage}" />
 	
-	<viewStackEffects:TileFade id="tileFade" duration="600" />
+	<viewStackEffects:FadeZoom id="cubeEffect" duration="700" />
 	
 	<mx:VBox id="vv" verticalAlign="middle" horizontalAlign="center" width="100%" height="100%">
 		<mx:Text text="到　　{a1.toString()}　　年　　{a2.toString()}　　月，距离现在规划时的时间为{
@@ -205,11 +191,15 @@
 		<mx:Box width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 		<mx:ViewStack id="vs" width="100%" height="100%" verticalCenter="0" horizontalCenter="0"  >
 			<mx:Canvas id="writePage" width="100%" height="100%"
-				hideEffect="tileFade" showEffect="tileFade" />
-			<mx:Canvas id="aPage" hideEffect="tileFade" showEffect="tileFade">
+				hideEffect="cubeEffect" showEffect="cubeEffect" />
+			<mx:Canvas id="aPage" 
+				backgroundColor="#cccccc" backgroundAlpha="1"
+				hideEffect="cubeEffect" showEffect="cubeEffect">
 				<mx:Text text="购房规划情况 A ：您可直接进行一次付清购房" horizontalCenter="0" />
 			</mx:Canvas>
-			<mx:Canvas id="bPage" showEffect="tileFade" hideEffect="tileFade"
+			<mx:Canvas id="bPage" 
+					backgroundColor="#cccccc"
+					hideEffect="cubeEffect" showEffect="cubeEffect"
 					verticalScrollPolicy="off" horizontalScrollPolicy="off"  >
 				<mx:Form horizontalCenter="0" minWidth="600" minHeight="400"
 					verticalScrollPolicy="off" horizontalScrollPolicy="off" >
@@ -243,7 +233,7 @@
 						<mx:HBox width="100%">
 							<mx:PopUpMenuButton id="c3c" dataProvider="{c3arr}" labelField="duration" itemClick="changeFund(event)" height="25" />
 							<mx:FormItem label="年，　　公积金利率（百分之）" width="100%">
-								<mx:Text text="{c32}" width="100%" textAlign="right"/>
+								<mx:Text text="{c32}" width="100%" textAlign="center" />
 							</mx:FormItem>
 						</mx:HBox>
 					</mx:FormItem>
@@ -269,7 +259,9 @@
 					</mx:FormItem>
 				</mx:Form>
 			</mx:Canvas>
-			<mx:VBox id="cPage" showEffect="tileFade" hideEffect="tileFade" verticalAlign="middle" horizontalAlign="center">
+			<mx:VBox id="cPage" verticalAlign="middle" horizontalAlign="center"
+				backgroundColor="#cccccc"
+				hideEffect="cubeEffect" showEffect="cubeEffect">
 				<mx:Text text="您的资金额度对于购房不符合" />
 				<mx:Text text="您可以返回第一步对某些条件进行调整" />
 				<mx:LinkButton label="返回第一步" click="{this.dispatchEvent(new Event('toFirst'))}" />

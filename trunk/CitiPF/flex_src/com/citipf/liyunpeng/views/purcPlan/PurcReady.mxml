@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+	implements="com.citipf.liyunpeng.interfaceFiles.IWindow"
 	 >
 	<mx:Script>
 		<![CDATA[
@@ -40,33 +41,48 @@
 			[Bindable]
 			private var b8 : Number = 0;
 			
-			private function changeB2(event : Event) : void
+			public function initData() : void
 			{
-				if (event.target is NumericStepper) {
-					b2h.value = b2n.value;
-				}
-				else if (event.target is HSlider) {
-					b2n.value = b2h.value;
+				changeB2();
+				changeB3();
+				changeB4();
+				changeB5();
+				changeB6();
+				changeB7();
+				changeB8();
+			}
+			
+			private function changeB2(event : Event = null) : void
+			{
+				if(event != null) {
+					if (event.target is NumericStepper) {
+						b2h.value = b2n.value;
+					}
+					else if (event.target is HSlider) {
+						b2n.value = b2h.value;
+					}
 				}
 				model.b2 = b2 = b2n.value;
 				changeB6();
 			}
 			
-			private function changeB3(event : Event) : void
+			private function changeB3() : void
 			{
-				model.b3 = b3 = event.target.value/100;
+				model.b3 = b3 = b3n.value/100;
 			}
-			private function changeB4(event : Event) : void
+			private function changeB4() : void
 			{
 				b5n.maximum = b5h.maximum = b4n.value;
 			}
-			private function changeB5(event : Event) : void
+			private function changeB5(event : Event = null) : void
 			{
-				if (event.target is NumericStepper) {
-					b5h.value = b5n.value;
-				}
-				else if (event.target is HSlider) {
-					b5n.value = b5h.value;
+				if(event != null) {
+					if (event.target is NumericStepper) {
+						b5h.value = b5n.value;
+					}
+					else if (event.target is HSlider) {
+						b5n.value = b5h.value;
+					}
 				}
 				b5 = b5n.value;
 				changeB6();
@@ -76,20 +92,22 @@
 			{
 				b6.text = (b4n.value - b5h.value).toFixed(2).toString();
 			}
-			private function changeB7(event:Event) : void
+			private function changeB7(event : Event = null) : void
 			{
-				if (event.target is NumericStepper) {
-					b7h.value = b7n.value;
-				}
-				else if (event.target is HSlider) {
-					b7n.value = b7h.value;
+				if(event != null) {
+					if (event.target is NumericStepper) {
+						b7h.value = b7n.value;
+					}
+					else if (event.target is HSlider) {
+						b7n.value = b7h.value;
+					}
 				}
 				
 				model.b7 = b7 = b7n.value;
 			}
-			private function changeB8(event: Event) : void
+			private function changeB8() : void
 			{
-				model.b8 = b8 = event.target.value/100;
+				model.b8 = b8 = b8n.value/100;
 			}
 			
 		]]>
@@ -104,25 +122,25 @@
 	<mx:Form >
 		<mx:FormItem label="您目前所拥有的资产" width="100%">
 			<mx:NumericStepper id="b1" change="{b2h.maximum = b2n.maximum = b1.value;}"
-				width="70" value="300000" stepSize="5000"
+				width="85" value="300000" stepSize="5000"
 				maxChars="10" maximum="9999999999" />
 		</mx:FormItem>
 		<mx:FormItem label="计划动用总资产中作为购房准备的资金" width="100%">
 			<mx:VBox horizontalAlign="left" width="100%">
 				<mx:HSlider id="b2h" change="changeB2(event)" minimum="0" maximum="300000" value="200000" width="100%" />
-				<mx:NumericStepper id="b2n" change="changeB2(event)" minimum="0" maximum="300000" width="70" value="200000"/>
+				<mx:NumericStepper id="b2n" change="changeB2(event)" minimum="0" maximum="300000" width="85" value="200000"/>
 			</mx:VBox>
 		</mx:FormItem>
 		<mx:FormItem width="100%" label="这份资产的预期年收益率（百分之）">
-			<mx:NumericStepper id="b3n" change="changeB3(event)" minimum="0" maximum="100" width="70" value="5" />
+			<mx:NumericStepper id="b3n" change="changeB3()" minimum="0" maximum="100" width="85" value="5" />
 		</mx:FormItem>
 		<mx:FormItem width="100%" label="家庭目前月平均收入（含有年终奖金等）" >
-			<mx:NumericStepper id="b4n" maximum="100000000" change="changeB4(event)" width="70" stepSize="200" value="4000" />
+			<mx:NumericStepper id="b4n" maximum="100000000" change="changeB4()" width="85" stepSize="200" value="4000" />
 		</mx:FormItem>
 		<mx:FormItem width="100%" label="月平均支出（含有各种偿还贷款的总支出）" >
 			<mx:VBox horizontalAlign="left">
 				<mx:HSlider id="b5h" change="changeB5(event)" minimum="0" width="100%" maximum="4000" value="2000" />
-				<mx:NumericStepper id="b5n" change="changeB5(event)" minimum="0" width="70" maximum="4000" value="2000" />
+				<mx:NumericStepper id="b5n" change="changeB5(event)" minimum="0" width="85" maximum="4000" value="2000" />
 			</mx:VBox>
 		</mx:FormItem>
 		<mx:FormItem width="100%" label="月度节余资金" >
@@ -130,10 +148,10 @@
 		</mx:FormItem>
 		<mx:FormItem width="100%" label="每月节余中用做购房准备的资金">
 			<mx:HSlider id="b7h" change="changeB7(event)" minimum="0" maximum="4000" width="100%" value="2000" />
-			<mx:NumericStepper id="b7n" change="changeB7(event)" minimum="0" maximum="4000" width="70" value="2000" />
+			<mx:NumericStepper id="b7n" change="changeB7(event)" minimum="0" maximum="4000" width="85" value="2000" />
 		</mx:FormItem>
 		<mx:FormItem width="100%" label="这部分资金的年收益率（百分之）">
-			<mx:NumericStepper id="b8n" change="changeB8(event)" minimum="0" maximum="100" width="70" value="5" />
+			<mx:NumericStepper id="b8n" change="changeB8()" minimum="0" maximum="100" width="85" value="5" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:Spacer height="100%" />

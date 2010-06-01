@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:flexlib="http://code.google.com/p/flexlib/"
+    implements="com.citipf.liyunpeng.interfaceFiles.IWindow"
+    paddingTop="5"
     creationComplete="init()" >
     <mx:Script>
         <![CDATA[
@@ -111,6 +113,15 @@
             private function init() : void
             {
                 addMonth();
+            }
+            
+            public function initData() : void
+            {
+            	changeA1();
+            	changeA2();
+            	changeA3();
+            	changeA4();
+            	sum();
             }
             
             public function addYear() : void
