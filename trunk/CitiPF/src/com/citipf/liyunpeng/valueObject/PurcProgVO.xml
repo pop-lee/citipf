@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="PurcProg">
+	<resultMap type="PurcProgVO" id="resultMap_purcProg">
+		<result property="pp_infoId" javaType="int" column="PP_INFOID"/>
+		<result property="pp_dpay" javaType="int" column="pp_DPAY"/>
+		<result property="pp_mfund" javaType="double" column="PP_MFUND"/>
+		<result property="pp_mcount" javaType="int" column="PP_MCOUNT"/>
+		<result property="pp_purc_date" javaType="Date" column="PP_PURC_DATE"/>
+		<result property="pp_squarym" javaType="int" column="PP_SQUARYM"/>
+		<result property="pp_mprice" javaType="double" column="PP_MPRICE"/>
+		<result property="pp_funds" javaType="double" column="PP_FUNDS"/>
+	</resultMap>
+	
+	<sql id="purcProgColumns">
+		PP_INFOID,
+		pp_DPAY,
+		PP_MFUND,
+		PP_MCOUNT,
+		PP_PURC_DATE,
+		PP_SQUARYM,
+		PP_MPRICE,
+		PP_FUNDS
+	</sql>
+	
+	<insert id="insertPurcProg">
+		insert into 
+			CITI_PURC_PROG(<include refid="purcProgColumns"/>)
+		values (#{pp_infoId},
+				#{pp_dpay},
+				#{pp_mfund},
+				#{pp_mcount},
+				#{pp_purc_date},
+				#{pp_squarym},
+				#{pp_mprice},
+				#{pp_funds});
+	</insert>
+</mapper>
