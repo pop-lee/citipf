@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
-	xmlns:viewStackEffects="org.efflex.mx.*" 
+	xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*" 
 	xmlns:purcPlan="com.citipf.liyunpeng.views.purcPlan.*"
 	styleName="purcPlan"
 	>
 	<mx:Script>
 		<![CDATA[
-			private function toEndPage() : void
+			import com.citipf.liyunpeng.interfaceFiles.IWindow;
+			private function lodingData(obj : IWindow) : void
 			{
-				accFunds.initData();
+				obj.initData();
 			}
 		]]>
 	</mx:Script>
 	<!--
 	<viewStackEffects:TileEffect id="effect" transparent="true"/>
 	-->
-	<viewStackEffects:TileFade id="tileFade" duration="600" />
+	<viewStackEffects:CoverFlowPapervision3D id="cf3d" duration="600" direction="horizontal"/>
 
 	<mx:ViewStack id="purc" width="100%" height="100%" >
-			<mx:Canvas width="100%" height="100%" backgroundColor="#ffffff" showEffect="listEffect" hideEffect="listEffect">
+			<mx:Canvas width="100%" height="100%" backgroundColor="#ffffff" showEffect="cf3d" hideEffect="cf3d">
 				<mx:Image source="@Embed(source='assets/2.jpg')" horizontalCenter="0" verticalCenter="0"/>
-				<mx:Button label="开始进行购房规划" horizontalCenter="0" bottom="50" width="150" click="this.purc.selectedIndex=1"/>
+				<mx:Button label="开始进行购房规划" horizontalCenter="0" bottom="50" width="150" click="{this.purc.selectedIndex=1;}"/>
 			</mx:Canvas>
-			<purcPlan:Purc width="100%" height="100%" title="购房目标" horizontalAlign="center"
-				toNext="{purc.selectedIndex = purc.selectedIndex + 1;}"
+			<purcPlan:Purc id="p" width="100%" height="100%" title="购房目标" horizontalAlign="center"
+				toNext="{purc.selectedIndex = purc.selectedIndex + 1}"
+				showEffect="cf3d" hideEffect="cf3d"
 			/>
 			<!--
 			   toNext="{purc.selectedIndex = purc.selectedIndex + 1;accFunds.doAccount()}"
 			   showEffect="effect" hideEffect="effect" />
 			-->
-			<purcPlan:PurcReady width="100%" height="100%" title="购房准备" horizontalAlign="center" 
+			<purcPlan:PurcReady id="pr" width="100%" height="100%" title="购房准备" horizontalAlign="center" 
 				toBack="{purc.selectedIndex = purc.selectedIndex - 1;}"
-				toNext="{purc.selectedIndex = purc.selectedIndex + 1;toEndPage()}"
+				toNext="{purc.selectedIndex = purc.selectedIndex + 1;lodingData(p);lodingData(pr);lodingData(af)}"
+				showEffect="cf3d" hideEffect="cf3d"
 				/>
-			<purcPlan:AccFunds id="accFunds" width="100%" height="100%" title="资金积累情况" horizontalAlign="center"
+			<purcPlan:AccFunds id="af" width="100%" height="100%" title="资金积累情况" horizontalAlign="center"
 				toBack="{purc.selectedIndex = purc.selectedIndex - 1}"
 				toFirst="{purc.selectedIndex = 0}"
+				showEffect="cf3d" hideEffect="cf3d"
 				/>
 			<!--
 				toNext="{purc.selectedIndex = purc.selectedIndex + 1;accFunds.doAccount()}"
