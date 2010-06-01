@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="{paddingTop + 200}"
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="{paddingTop + 180}"
 	 verticalAlign="middle" horizontalAlign="center"
 	 paddingLeft="10" paddingRight="10" 
 	 paddingTop="{paddingTop}" fontSize="14"
 	 backgroundColor="#FFFFFF" cornerRadius="4" borderStyle="solid" borderThickness="0" dropShadowEnabled="true">
 	
-	<mx:Image width="57" height="57" scaleContent="false" id="img_icon"/>
-	<mx:TextArea width="100%" height="80%" borderStyle="none" id="txt_label" text="{text}" editable="false"/>
-	<mx:Button label="Ok" id="butn_ok" click="{CocoaPopUpManager.removePopUp(this);this.dispatchEvent(new CloseEvent(CloseEvent.CLOSE))}"/>
+	<mx:Image width="80" height="80" scaleContent="false" id="img_icon" source="@Embed(source='assets/importent.png')"/>
+	<mx:VBox width="100%" horizontalAlign="center" height="100%" paddingTop="20">
+		<mx:TextArea textAlign="center" width="100%" height="80%" backgroundAlpha="0" backgroundColor="#ffffff" borderStyle="none" id="txt_label" text="{text}" editable="false"/>
+		<mx:Button label="Ok" id="butn_ok" click="{CocoaPopUpManager.removePopUp(this);this.dispatchEvent(new CloseEvent(CloseEvent.CLOSE))}"/>
+	</mx:VBox>
 	
 	<mx:Script>
 		<![CDATA[
