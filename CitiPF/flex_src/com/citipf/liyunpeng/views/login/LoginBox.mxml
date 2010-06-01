@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="300" height="200" 
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="310" height="200" 
 	styleName="loginStyle" xmlns:viewStackEffects="org.efflex.mx.viewStackEffects.*"
-	backgroundAlpha="0.5"
-	backgroundColor="#ffffff"
 	initialize="isLogined()">
 
 	<mx:Script>
 		<![CDATA[
-			import com.citipf.liyunpeng.models.ViewModel;
+			import mx.core.IFlexDisplayObject;
 			import mx.core.Application;
-			import com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert;
 			import mx.events.PropertyChangeEvent;
 			import mx.binding.utils.ChangeWatcher;
+			import com.citipf.liyunpeng.models.ViewModel;
+			import com.citipf.liyunpeng.MacPopUp.controls.CocoaAlert;
 			import com.citipf.liyunpeng.app.RandomOrder;
 			import com.citipf.liyunpeng.models.Model;
 			import com.citipf.liyunpeng.valueObject.UserVO;
@@ -26,6 +25,9 @@
 			
 			[Bindable]
 			private var numArr : Array = [1,2,3,4,5,6,7,8,9,0];
+			
+			[Bindable]
+			private var curFocus : TextInput ;
 			
 			private function login() : void
 			{
@@ -80,16 +82,18 @@
 		<mx:VBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" >
 			<mx:HBox id="kb" horizontalGap="0" verticalGap="0" visible="false" showEffect="effect" >
                 <mx:Repeater id="rp" dataProvider="{numArr}" >
-                    <mx:Button label="{String(rp.currentItem)}"
-                    	paddingLeft="1"
+                    <mx:LinkButton label="{String(rp.currentItem)}"
+                    	paddingLeft="1" click="{curFocus.text = curFocus.text + event.target.label}"
                     	 width="30" height="30" focusEnabled="false" />
                 </mx:Repeater>
             </mx:HBox>
 			<mx:FormItem id="form1" label="银行卡号" >
-				<mx:TextInput id="bankId" maxChars="16" width="150" restrict="0-9" />
+				<mx:TextInput id="bankId" maxChars="16" width="150" restrict="0-9"
+					focusIn="{curFocus = bankId}" />
 			</mx:FormItem>
 			<mx:FormItem id="form2" label="卡号密码" >
-				<mx:TextInput id="passw" maxChars="16" displayAsPassword="true" width="150" />
+				<mx:TextInput id="passw" maxChars="16" displayAsPassword="true" width="150"
+					focusIn="{curFocus = passw}" />
 			</mx:FormItem>
 			<mx:HBox horizontalGap="10">
 				<mx:LinkButton click="keyBoard()" icon="@Embed(source='assets/keyBoard.png')"

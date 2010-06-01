@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" >
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+	 >
 	<mx:Script>
 		<![CDATA[
 			import com.citipf.liyunpeng.models.Model;
@@ -101,41 +102,42 @@
 <mx:Box width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 	
 	<mx:Form >
-		<mx:FormItem label="您目前所拥有的资产">
+		<mx:FormItem label="您目前所拥有的资产" width="100%">
 			<mx:NumericStepper id="b1" change="{b2h.maximum = b2n.maximum = b1.value;}"
+				width="70" value="300000" stepSize="5000"
 				maxChars="10" maximum="9999999999" />
 		</mx:FormItem>
-		<mx:FormItem label="计划动用总资产中作为购房准备的资金">
-			<mx:VBox>
-				<mx:HSlider id="b2h" change="changeB2(event)" minimum="0" />
-				<mx:NumericStepper id="b2n" change="changeB2(event)" minimum="0"/>
+		<mx:FormItem label="计划动用总资产中作为购房准备的资金" width="100%">
+			<mx:VBox horizontalAlign="left" width="100%">
+				<mx:HSlider id="b2h" change="changeB2(event)" minimum="0" maximum="300000" value="200000" width="100%" />
+				<mx:NumericStepper id="b2n" change="changeB2(event)" minimum="0" maximum="300000" width="70" value="200000"/>
 			</mx:VBox>
 		</mx:FormItem>
-		<mx:FormItem label="这份资产的预期年收益率（百分之）">
-			<mx:NumericStepper id="b3n" change="changeB3(event)" minimum="0" maximum="1000000" />
+		<mx:FormItem width="100%" label="这份资产的预期年收益率（百分之）">
+			<mx:NumericStepper id="b3n" change="changeB3(event)" minimum="0" maximum="100" width="70" value="5" />
 		</mx:FormItem>
-		<mx:FormItem label="家庭目前月平均收入（含有年终奖金等）" >
-			<mx:NumericStepper id="b4n" maximum="100000000" change="changeB4(event)" />
+		<mx:FormItem width="100%" label="家庭目前月平均收入（含有年终奖金等）" >
+			<mx:NumericStepper id="b4n" maximum="100000000" change="changeB4(event)" width="70" stepSize="200" value="4000" />
 		</mx:FormItem>
-		<mx:FormItem label="月平均支出（含有各种偿还贷款的总支出）" >
-			<mx:VBox>
-				<mx:HSlider id="b5h" change="changeB5(event)" minimum="0" />
-				<mx:NumericStepper id="b5n" change="changeB5(event)" minimum="0" />
+		<mx:FormItem width="100%" label="月平均支出（含有各种偿还贷款的总支出）" >
+			<mx:VBox horizontalAlign="left">
+				<mx:HSlider id="b5h" change="changeB5(event)" minimum="0" width="100%" maximum="4000" value="2000" />
+				<mx:NumericStepper id="b5n" change="changeB5(event)" minimum="0" width="70" maximum="4000" value="2000" />
 			</mx:VBox>
 		</mx:FormItem>
-		<mx:FormItem label="月度节余资金" >
+		<mx:FormItem width="100%" label="月度节余资金" >
 				<mx:Text id="b6" />
 		</mx:FormItem>
-		<mx:FormItem label="每月节余中用做购房准备的资金">
-			<mx:HSlider id="b7h" change="changeB7(event)" minimum="0" />
-			<mx:NumericStepper id="b7n" change="changeB7(event)" minimum="0" />
+		<mx:FormItem width="100%" label="每月节余中用做购房准备的资金">
+			<mx:HSlider id="b7h" change="changeB7(event)" minimum="0" maximum="4000" width="100%" value="2000" />
+			<mx:NumericStepper id="b7n" change="changeB7(event)" minimum="0" maximum="4000" width="70" value="2000" />
 		</mx:FormItem>
-		<mx:FormItem label="这部分资金的年收益率（百分之）">
-			<mx:NumericStepper id="b8n" change="changeB8(event)" minimum="0" />
+		<mx:FormItem width="100%" label="这部分资金的年收益率（百分之）">
+			<mx:NumericStepper id="b8n" change="changeB8(event)" minimum="0" maximum="100" width="70" value="5" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:Spacer height="100%" />
-	<mx:HBox paddingLeft="30" paddingRight="100" >
+	<mx:HBox paddingLeft="100" paddingRight="100" width="100%" >
 		<mx:Button label="上一步" click="this.dispatchEvent(new Event('toBack'));" />
 		<mx:Spacer width="100%" />
 		<mx:Button label="下一步" click="this.dispatchEvent(new Event('toNext'));" />
