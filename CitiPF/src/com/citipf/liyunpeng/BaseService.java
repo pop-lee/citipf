@@ -35,6 +35,7 @@ public class BaseService {
 	private IUserDao<UserVO> userDao ;
 	private IUInveDao<UInveVO> uInveDao;
 	private IUserAddDao<UserAddVO> userAddDao;
+	private IPurcProgDao<PurcProgVO> purcProgDao;
 
 	public IStockDao<StockVO> getStockDao() {
 		return stockDao;
@@ -67,7 +68,14 @@ public class BaseService {
 	public void setUserAddDao(IUserAddDao<UserAddVO> userAddDao) {
 		this.userAddDao = userAddDao;
 	}
-	
+
+	public IPurcProgDao<PurcProgVO> getPurcProgDao() {
+		return purcProgDao;
+	}
+
+	public void setPurcProgDao(IPurcProgDao<PurcProgVO> purcProgDao) {
+		this.purcProgDao = purcProgDao;
+	}
 	
 	
 }

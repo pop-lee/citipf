@@ -2,6 +2,7 @@ package com.citipf.liyunpeng;
 
 import java.util.List;
 
+import com.citipf.liyunpeng.valueObject.PurcProgVO;
 import com.citipf.liyunpeng.valueObject.StockVO;
 import com.citipf.liyunpeng.valueObject.UInveVO;
 import com.citipf.liyunpeng.valueObject.UserAddVO;
@@ -37,5 +38,10 @@ public class CitiPFService extends BaseService {
 	
 	public UserAddVO selectUserAddVO(UserAddVO o) {
 		return getUserAddDao().select(o);
+	}
+	
+	public PurcProgVO insertPurcProgVO(PurcProgVO o) {
+		getPurcProgDao().insert(o);
+		return null;
 	}
 }
