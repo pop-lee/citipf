@@ -103,6 +103,29 @@ HBox {
 	horizontalAlign : center;
 	verticalAlign : middle;
 }
+HScrollBar
+{
+	up-arrow-skin: ClassReference(null);
+ 	down-arrow-skin: ClassReference(null);
+	thumbDownSkin: Embed(source="assets/summerSkins/HScrollBar_thumbDownSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="10",scaleGridBottom="43");
+	thumbIcon: Embed(source="assets/summerSkins/HScrollBar_thumbIcon.png");
+	thumbOverSkin: Embed(source="assets/summerSkins/HScrollBar_thumbOverSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="10",scaleGridBottom="43");
+	thumbUpSkin: Embed(source="assets/summerSkins/HScrollBar_thumbUpSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="10",scaleGridBottom="43");
+	trackDisabledSkin: Embed(source="assets/summerSkins/HScrollBar_trackDisabledSkin.png");
+	trackSkin: Embed(source="assets/summerSkins/HScrollBar_trackSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="11",scaleGridBottom="143");
+}
+VScrollBar
+{
+	up-arrow-skin: ClassReference(null);
+ 	down-arrow-skin: ClassReference(null);
+	thumbDownSkin: Embed(source="assets/summerSkins/HScrollBar_thumbDownSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="10",scaleGridBottom="43");
+	thumbIcon: Embed(source="assets/summerSkins/HScrollBar_thumbIcon.png");
+	thumbOverSkin: Embed(source="assets/summerSkins/HScrollBar_thumbOverSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="10",scaleGridBottom="43");
+	thumbUpSkin: Embed(source="assets/summerSkins/HScrollBar_thumbUpSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="10",scaleGridBottom="43");
+	trackDisabledSkin: Embed(source="assets/summerSkins/HScrollBar_trackDisabledSkin.png");
+	trackSkin: Embed(source="assets/summerSkins/HScrollBar_trackSkin.png",scaleGridTop="5",scaleGridLeft="4",scaleGridRight="11",scaleGridBottom="143");
+}
+
 
 VBox {
 	horizontalAlign : center;
@@ -150,6 +173,22 @@ RadioButton
 	disabledColor: #A3A3A3;
 }
 
+TextArea
+{
+	borderSkin: Embed(source="assets/summerSkins/TextArea_borderSkin.png");
+	focusSkin: Embed(source="assets/summerSkins/TextArea_focusSkin.png");
+	color: #444;
+	paddingLeft: 2;
+	fontFamily: Verdana;
+}
+TextInput
+{
+	borderSkin: Embed(source="assets/summerSkins/TextInput_borderSkin.png");
+	focusSkin: Embed(source="assets/summerSkins/TextInput_focusSkin.png");
+	color: #444;
+	fontFamily: Verdana;
+}
+
 
 .navButtonBox {
 	paddingLeft : 5 ;
@@ -172,10 +211,16 @@ RadioButton
 .loginStyle {
 	fontSize : 13;
 	paddingTop : 10;
+	backgroundAlpha : "0.4";
+	backgroundColor : "#cccccc";
 }
 /**************************************************************************/
 
 /****prefTest ****/
 .prefTest {
 	fontSize : 14;
+}
+
+.purcPlan {
+	fontSize : 13;
 }
