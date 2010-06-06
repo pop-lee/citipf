@@ -2,23 +2,23 @@ package com.citipf.liyunpeng.commands
 {
 	import com.adobe.cairngorm.commands.ICommand;
 	import com.adobe.cairngorm.control.CairngormEvent;
-	import com.citipf.liyunpeng.events.AddPurcProgVOEvent;
+	import com.citipf.liyunpeng.events.GetPurcProgVOEvent;
 	
 	import mx.collections.ArrayCollection;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.IResponder;
 
-	public class AddPurcProgVOCommand extends BaseCommands implements ICommand, IResponder
+	public class GetPurcProgVOCommand extends BaseCommands implements ICommand, IResponder
 	{
-		public function AddPurcProgVOCommand()
+		public function GetPurcProgVOCommand()
 		{
 			super();
 		}
 		
 		public function execute(event:CairngormEvent):void
 		{
-			var addPurcProgVOEvent : AddPurcProgVOEvent = event as AddPurcProgVOEvent;
-			var call : AsyncToken = service.insertPurcProgVO(addPurcProgVOEvent.purcProgVO);
+			var getPurcProgVOEvent : GetPurcProgVOEvent = event as GetPurcProgVOEvent;
+			var call : AsyncToken = service.selectPurcProgVOList(getPurcProgVOEvent.purcProgVO);
 			call.addResponder(this);
 		}
 		

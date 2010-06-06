@@ -8,6 +8,7 @@
 		<property name="userDao" ref="userDaoImpl" />
 		<property name="uInveDao" ref="uInveDaoImpl" />
 		<property name="userAddDao" ref="userAddDaoImpl" />
+		<property name="purcProgDao" ref="purcProgDaoImpl" />
 	</bean>
 	
 	<bean id="citiPFService" class="com.citipf.liyunpeng.CitiPFService" parent="baseService" />

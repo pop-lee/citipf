@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	styleName="planDetailStyle">
+	<mx:Script>
+		<![CDATA[
+			import com.citipf.liyunpeng.models.Model;
+			import com.citipf.liyunpeng.valueObject.PurcProgVO;
+			
+			[Bindable]
+			public var purcProg : PurcProgVO = null;
+		]]>
+	</mx:Script>
+	<mx:Form>
+		<mx:FormItem label="本规划预计首付">
+			<mx:Text text="{purcProg.pp_dpay}" />
+		</mx:FormItem>
+		<mx:FormItem label="计划每月需存的资金数">
+			<mx:Text text="{purcProg.pp_mfund}" />
+		</mx:FormItem>
+		<mx:FormItem label="计划还款需要月数">
+			<mx:Text text="{purcProg.pp_mcount}" />
+		</mx:FormItem>
+		<mx:FormItem label="预计购房时间">
+			<mx:Text text="{Model.getInstance().dateFormatter.format(purcProg.pp_purc_date)}" />
+		</mx:FormItem>
+		<mx:FormItem label="计划购买平米数">
+			<mx:Text text="{purcProg.pp_squarym}" />
+		</mx:FormItem>
+		<mx:FormItem label="计划每平米的价格">
+			<mx:Text text="{purcProg.pp_mprice}" />
+		</mx:FormItem>
+	</mx:Form>
+</mx:VBox>

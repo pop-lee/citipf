@@ -107,6 +107,7 @@
 			<mx:FormItem label="用户">
 				<mx:Text text="{model._curUser.ui_name}" />
 			</mx:FormItem>
+			<mx:LinkButton label="我的规划列表" click="{viewModel.getPlanList();this.dispatchEvent(new Event('closeLoginView'))}" />
 			<mx:Button label="注销" click="{CocoaAlert.show('您确定要注销吗？','是否注销',0x4,viewModel.mainBox,false,logout);}" />
 		</mx:VBox>
 	</mx:ViewStack>

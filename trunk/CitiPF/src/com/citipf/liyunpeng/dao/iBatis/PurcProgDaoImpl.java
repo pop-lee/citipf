@@ -9,8 +9,7 @@ public class PurcProgDaoImpl extends IBatisDaoSupport implements IPurcProgDao<Pu
 
 	@Override
 	public void delete(PurcProgVO t) {
-		// TODO Auto-generated method stub
-		
+		this.getSqlSessionTemplate().delete("PurcProg.deletePurcProg", t);
 	}
 
 	@Override
@@ -31,10 +30,10 @@ public class PurcProgDaoImpl extends IBatisDaoSupport implements IPurcProgDao<Pu
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<PurcProgVO> selectList(PurcProgVO o) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getSqlSessionTemplate().selectList("PurcProg.selectPurcProgList", o);
 	}
 
 	@Override

@@ -4,6 +4,8 @@ package com.citipf.liyunpeng.models
 	import com.citipf.liyunpeng.valueObject.UserAddVO;
 	import com.citipf.liyunpeng.valueObject.UserVO;
 	
+	import mx.collections.ArrayCollection;
+	
 	[Bindable]
 	public class UserModel extends StockModel
 	{
@@ -31,6 +33,11 @@ package com.citipf.liyunpeng.models
 		 * 月平均收入与支出
 		 */
 		public var _userAdd : UserAddVO = null;
+		
+		/**
+		 * 用户规划列表
+		 */
+		public var _purcProgList : ArrayCollection = new ArrayCollection();
 		
 		/**
 		 * 当日时间

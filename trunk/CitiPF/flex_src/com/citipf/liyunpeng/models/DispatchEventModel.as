@@ -60,6 +60,16 @@ package com.citipf.liyunpeng.models
 		 {
 		 	cairngormEventDispatcher.dispatchEvent(new AddPurcProgVOEvent(purcProg));
 		 }
+		 
+		 public function getPurcProg(purcProg : PurcProgVO) : void
+		 {
+		 	cairngormEventDispatcher.dispatchEvent(new GetPurcProgVOEvent(purcProg));
+		 }
+		 
+		 public function delPurcProg(purcProg : PurcProgVO) : void
+		 {
+		 	cairngormEventDispatcher.dispatchEvent(new DelPurcProgVOEvent(purcProg));
+		 }
 
 	}
 }

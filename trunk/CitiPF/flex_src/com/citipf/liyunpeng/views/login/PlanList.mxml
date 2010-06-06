@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+    <mx:Script>
+    	<![CDATA[
+    		import com.citipf.liyunpeng.valueObject.PurcProgVO;
+    		import com.citipf.liyunpeng.models.ViewModel;
+    		import com.citipf.liyunpeng.models.Model;
+    		
+    		[Bindable]
+    		private var model : Model = Model.getInstance();
+    		
+    		[Bindable]
+    		private var viewModel : ViewModel = ViewModel.getInstance();
+    		
+    		[Bindable]
+    		private var curMouseOver : Object = null;
+    		
+    		private function dateFormate(item:Object,column:DataGridColumn) : String
+			{
+				return model.dateFormatter.format(item[column.dataField]);
+			}
+			
+			private function showDetail(event : MouseEvent) : void
+			{
+				if(event.target.data != null) {
+					viewModel.getPlanDetail("购房规划信息" + (model._purcProgList.getItemIndex(event.target.data)+1),event.target.data);
+				}
+			}
+			
+			private function initDG() : void
+			{
+				var deleteMenu : ContextMenuItem = new ContextMenuItem("删除当前规划");
+				deleteMenu.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,deletePlan);
+				var dgMenu:ContextMenu = new ContextMenu();
+				dgMenu.hideBuiltInItems();
+				dgMenu.customItems.push(deleteMenu);
+				pp_dg.contextMenu = dgMenu;
+			}
+			
+			private function deletePlan(event : ContextMenuEvent) : void
+			{
+				model.delPurcProg(pp_dg.selectedItem as PurcProgVO);
+			}
+    	]]>
+    </mx:Script>
+    
+    <mx:TabNavigator width="100%" height="100%">
+    	<mx:VBox label="购房规划信息">
+		    <mx:DataGrid id="pp_dg" width="100%" height="100%"
+		    	 initialize="initDG()" 
+		    	 dataProvider="{model._purcProgList}" doubleClick="showDetail(event)" doubleClickEnabled="true">
+		    	<mx:columns>
+		    		<mx:DataGridColumn headerText="购房预计总金额" dataField="pp_funds" />
+		    		<mx:DataGridColumn headerText="预计购房日期" dataField="pp_purc_date" labelFunction="dateFormate" />
+		    		<mx:DataGridColumn headerText="预计购房平米数" dataField="pp_squarym" />
+		    	</mx:columns>
+		    </mx:DataGrid>
+    	</mx:VBox>
+	    <mx:VBox label="购车规划信息" />
+	    <mx:VBox label="子女教育规划信息" />
+	    <mx:VBox label="养老规划信息" />
+	    <mx:VBox label="寿险规划信息" />
+    </mx:TabNavigator>
+	
+</mx:VBox>

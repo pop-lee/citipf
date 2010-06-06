@@ -17,6 +17,8 @@ package com.citipf.liyunpeng.controls
 			addCommand(GET_USERADDVO_EVENT,GetUserAddVOCommand);
 			
 			addCommand(ADD_PURCPROGVO_EVENT,AddPurcProgVOCommand);
+			addCommand(GET_PURCPROGVO_EVENT,GetPurcProgVOCommand);
+			addCommand(DEL_PURCPROGVO_EVENT,DelPurcProgVOCommand);
 		}
 		
 		public static const GET_STOCKVOLIST_EVENT : String = "getStockVOListEvent" ;
@@ -29,5 +31,7 @@ package com.citipf.liyunpeng.controls
 		public static const GET_USERADDVO_EVENT : String = "getUserAddVOEvent";
 		
 		public static const ADD_PURCPROGVO_EVENT : String = "addPurcProgVOEvent";
+		public static const GET_PURCPROGVO_EVENT : String = "getPurcProgVOEvent";
+		public static const DEL_PURCPROGVO_EVENT : String = "delPurcProgVOEvent";
 	}
 }

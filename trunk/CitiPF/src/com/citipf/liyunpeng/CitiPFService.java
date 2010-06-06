@@ -1,5 +1,6 @@
 package com.citipf.liyunpeng;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.citipf.liyunpeng.valueObject.PurcProgVO;
@@ -40,8 +41,17 @@ public class CitiPFService extends BaseService {
 		return getUserAddDao().select(o);
 	}
 	
-	public PurcProgVO insertPurcProgVO(PurcProgVO o) {
+	public ArrayList<PurcProgVO> insertPurcProgVO(PurcProgVO o) {
 		getPurcProgDao().insert(o);
-		return null;
+		return (ArrayList<PurcProgVO>) getPurcProgDao().selectList(o);
+	}
+	
+	public ArrayList<PurcProgVO> selectPurcProgVOList(PurcProgVO o) {
+		return (ArrayList<PurcProgVO>) getPurcProgDao().selectList(o);
+	}
+	
+	public ArrayList<PurcProgVO> deletePurcProgVO(PurcProgVO o) {
+		getPurcProgDao().delete(o);
+		return (ArrayList<PurcProgVO>) getPurcProgDao().selectList(o);
 	}
 }

@@ -10,6 +10,7 @@
 	 xmlns:login="com.citipf.liyunpeng.views.login.*">
 	<mx:Script>
 		<![CDATA[
+			import com.citipf.liyunpeng.valueObject.PurcProgVO;
 			import mx.events.CollectionEvent;
 			import mx.containers.Canvas;
 			import com.citipf.liyunpeng.valueObject.UserAddVO;
@@ -114,7 +115,7 @@
 					if(model._curUser == null) {
 						toLoginBtn.label = "登录﹀" ; 
 					} else {
-						toLoginBtn.label = "注销﹀" ;
+						toLoginBtn.label = "我的﹀" ;
 					}
 				} 
 			}
@@ -156,11 +157,14 @@
 					toLogin();
 					var uInveVO : UInveVO = new UInveVO();
 					var userAddVO : UserAddVO = new UserAddVO();
+					var purcProgVO : PurcProgVO = new PurcProgVO();
 					uInveVO.ip_infoId = 
 					userAddVO.ua_infoId = 
+					purcProgVO.pp_infoId = 
 					model._curUser.ui_infoId;
 					model.getUInveVO(uInveVO);
 					model.getUserAddVO(userAddVO);
+					model.getPurcProg(purcProgVO);
 				}
 			}
 			private function showWinGrid(event : CollectionEvent) : void
