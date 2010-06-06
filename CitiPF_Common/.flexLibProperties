@@ -7,6 +7,7 @@
     <classEntry path="com.citipf.liyunpeng.MacPopUp.effects.BackgroundFadeInstance"/>
     <classEntry path="com.citipf.liyunpeng.MacPopUp.effects.BackgroundFadePopupBlocker"/>
     <classEntry path="com.citipf.liyunpeng.MacPopUp.managers.CocoaPopUpManager"/>
+    <classEntry path="com.citipf.liyunpeng.app.RandomOrder"/>
     <classEntry path="com.citipf.liyunpeng.interfaceFiles.IWindow"/>
     <classEntry path="com.citipf.liyunpeng.map.HashMap"/>
     <classEntry path="com.citipf.liyunpeng.map.HashMapEntry"/>
