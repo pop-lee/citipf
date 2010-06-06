@@ -90,6 +90,9 @@
 	<bean id="userAddDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.UserAddDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlMapClient" />
 	</bean>
+	<bean id="purcProgDaoImpl" class="com.citipf.liyunpeng.dao.iBatis.PurcProgDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlMapClient" />
+	</bean>
 	<!-- Service -->
 	<!-- 
 	<bean id="citiService" class="com.citipf.liyunpeng.CitiPFService">

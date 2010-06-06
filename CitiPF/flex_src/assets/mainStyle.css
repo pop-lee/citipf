@@ -173,6 +173,55 @@ RadioButton
 	disabledColor: #A3A3A3;
 }
 
+TabBar
+{
+	tabStyleName: "tabBarTab";
+	firstTabStyleName: "tabBarTab";
+	lastTabStyleName: "tabBarTab";
+
+	font-weight:normal;
+	selected-tab-text-style-name :selectedTab;
+
+	tabStyleName: "tabBarTab";
+	firstTabStyleName: "tabBarTab";
+	lastTabStyleName: "tabBarTab";
+	fontSize: 9;
+}
+
+TabNavigator{
+	border-style: solid;
+	background-color:#FFF;
+	border-color:#DDD;
+	selectedTabTextStyleName: "selectedTab";
+}
+
+.tabBarTab
+{
+	upSkin: Embed(source="assets/summerSkins/TabBar-tab_upSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+	overSkin: Embed(source="assets/summerSkins/TabBar-tab_overSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+	downSkin: Embed(source="assets/summerSkins/TabBar-tab_downSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+	disabledSkin: Embed(source="assets/summerSkins/TabBar-tab_disabledSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+	selectedDisabledSkin: Embed(source="assets/summerSkins/TabBar-tab_selectedDisabledSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+	selectedUpSkin: Embed(source="assets/summerSkins/TabBar-tab_selectedUpSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+	selectedOverSkin: Embed(source="assets/summerSkins/TabBar-tab_selectedUpSkin.png",scaleGridLeft="2",scaleGridTop="3",scaleGridRight="50",scaleGridBottom="20");
+
+	padding-left:5;
+	padding-right:5;
+	padding-top:4;
+	padding-bottom:3;
+
+	color: #00AFE1;
+	textRollOverColor: #FFFFFF;
+	text-selected-color:#F00;
+	disabledColor: #A3A3A3;
+}
+
+.selectedTab{
+	font-weight:normal;
+	color:#CCC;
+	textRollOverColor: #00ADE1;
+}
+
 TextArea
 {
 	borderSkin: Embed(source="assets/summerSkins/TextArea_borderSkin.png");
@@ -222,5 +271,9 @@ TextInput
 }
 
 .purcPlan {
+	fontSize : 13;
+}
+
+.planDetailStyle {
 	fontSize : 13;
 }

@@ -8,11 +8,13 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
 		<typeAlias alias="UserVO" type="com.citipf.liyunpeng.valueObject.UserVO"/>
 		<typeAlias alias="UInveVO" type="com.citipf.liyunpeng.valueObject.UInveVO"/>
 		<typeAlias alias="UserAddVO" type="com.citipf.liyunpeng.valueObject.UserAddVO"/>
+		<typeAlias alias="PurcProgVO" type="com.citipf.liyunpeng.valueObject.PurcProgVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/citipf/liyunpeng/valueObject/stockVO.xml"/>
 		<mapper resource="com/citipf/liyunpeng/valueObject/UserVO.xml"/>
 		<mapper resource="com/citipf/liyunpeng/valueObject/UInveVO.xml"/>
 		<mapper resource="com/citipf/liyunpeng/valueObject/UserAddVO.xml"/>
+		<mapper resource="com/citipf/liyunpeng/valueObject/PurcProgVO.xml"/>
 	</mappers>
 </configuration>

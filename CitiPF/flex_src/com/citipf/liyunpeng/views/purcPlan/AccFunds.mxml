@@ -164,7 +164,7 @@
 				purcProgVO.pp_purc_date = date;
 				purcProgVO.pp_squarym = a3;
 				purcProgVO.pp_mprice = a4;
-				purcProgVO.pp_funds = a8; 
+				purcProgVO.pp_funds = Number(a8.toFixed(2)); 
 				model.addPurcProgVO(purcProgVO);
 			}
 

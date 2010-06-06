@@ -10,6 +10,8 @@ package com.citipf.liyunpeng.models
 		
 		private var _numberFormatter : NumberFormatter = new NumberFormatter();
 		
+		private var _dateFormatter : DateFormatter = new DateFormatter();
+		
 		/**
 		 * @return 返回股指时间格式化器
 		 */		
@@ -19,10 +21,16 @@ package com.citipf.liyunpeng.models
 		 */
 		public function get numberFormatter() : NumberFormatter {return _numberFormatter}
 		
+		/**
+		 * @return 日期格式化器 
+		 */
+		public function get dateFormatter() : DateFormatter {return _dateFormatter}
+		
 		public function FormateModel()
 		{
 			_stockDateFormatter.formatString = "MM:SS";
 			_numberFormatter.precision = 4;
+			_dateFormatter.formatString = "YYYY年MM月DD日";
 		}
 
 	}

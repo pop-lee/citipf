@@ -37,4 +37,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 				#{pp_mprice},
 				#{pp_funds});
 	</insert>
+	
+	<select id="selectPurcProgList" resultType="list" resultMap="resultMap_purcProg">
+		select * from 
+			CITI_PURC_PROG
+		where PP_INFOID = #{pp_infoId};
+	</select>
+	
+	<delete id="deletePurcProg">
+		delete from CITI_PURC_PROG
+		where PP_SQUARYM = #{pp_squarym} and PP_MPRICE = #{pp_mprice};
+	</delete>
 </mapper>
