@@ -5,6 +5,8 @@ package com.citipf.liyunpeng.mdi
 
 	public class SuperWindow extends MDIWindow implements IWindow
 	{
+		public function initData() : void {}
+		
 		public function SuperWindow(title : String = null)
 		{
 			super();

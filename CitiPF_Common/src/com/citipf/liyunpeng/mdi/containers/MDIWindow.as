@@ -612,12 +612,12 @@ package com.citipf.liyunpeng.mdi.containers
 			{
 				this.headerHeight = 26;
 				this.roundedBottomCorners = true;
-				this.borderColor = 0xCCCCCC;
+				this.borderColor = 0xcccccc;
 				this.borderThicknessTop = 0;
 				this.borderThicknessRight = 3;
 				this.borderThicknessBottom = 3;
 				this.borderThicknessLeft = 3;
-				this.borderAlpha = 1;
+				this.borderAlpha = 0.5;
 				this.backgroundAlpha = 1;
 			}
 			StyleManager.setStyleDeclaration("." + styleNameFocus, winFocusSelector, false);
